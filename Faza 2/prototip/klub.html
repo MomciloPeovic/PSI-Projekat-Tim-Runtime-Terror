@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+    <title>Pocetna strana</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+  
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+			<i class='fas fa-home' style='font-size:36px'></i>
+		</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <form class="form-inline my-2 my-lg-0">
+		  	<ul class="navbar-nav nav-tabs">
+				<li class="nav-item mx-3 mt-1">
+				    <a href="#mojiIgraci" style='font-size:24px'>
+						<i class='fas fa-chess mr-1'></i>Moji igrači
+				    </a>
+				</li>
+				<li class="nav-item mx-3 mt-1">
+				  	<a href="#poruke" style='font-size:24px'>
+						<i class='fas fa-envelope mr-1' style='font-size:36px'></i>Poruke
+					</a> 
+				</li>
+				<li class="nav-item mx-3 mt-1 nav-link active">
+					<a href="#mojProfil" style='font-size:24px'>
+						<i class="fa fa-user-circle mr-1" style="font-size:36px"></i>Moj profil
+					</a>
+				</li>
+			</ul>
+          </form>
+        </div>
+      </nav>
+
+
+      <ul class="nav nav-tabs nav-fill mt-3" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Igrači</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Klubovi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Takmičenja</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+        </div>
+      </div>
+</body>
+
+
+</html>
