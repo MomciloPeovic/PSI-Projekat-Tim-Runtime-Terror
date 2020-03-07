@@ -235,16 +235,53 @@
       if (username == "igrac") {
         //Sakrij 
         document.getElementById("login-forma").style.display = "none";
+        let klub_tabla = document.getElementsByClassName("klub");
+        for (var i = 0; i < klub_tabla.length; i++) {
+          klub_tabla[i].style.display = "none";
+        }
+
+        let admin_tabla = document.getElementsByClassName("admin");
+        for (var i = 0; i < admin_tabla.length; i++) {
+          admin_tabla[i].style.display = "none";
+        }
+
+        let sudija_tabla = document.getElementsByClassName("sudija");
+        for (var i = 0; i < sudija_tabla.length; i++) {
+          sudija_tabla[i].style.display = "none";
+        }
+
+        document.getElementById("klub-div").style.display = "none";
+        document.getElementById("admin-div").style.display = "none";
+        document.getElementById("sudija-div").style.display = "none";
+
         //Prikazi
         document.getElementById("igrac-div").style.display = "";
         let igrac_tabla = document.getElementsByClassName("igrac");
         for (var i = 0; i < igrac_tabla.length; i++) {
           igrac_tabla[i].style.display = "";
         }
+
       }
       else if (username == "klub") {
         //Sakrij 
         document.getElementById("login-forma").style.display = "none";
+        let igrac_tabla = document.getElementsByClassName("igrac");
+        for (var i = 0; i < igrac_tabla.length; i++) {
+          igrac_tabla[i].style.display = "none";
+        }
+
+        let admin_tabla = document.getElementsByClassName("admin");
+        for (var i = 0; i < admin_tabla.length; i++) {
+          admin_tabla[i].style.display = "none";
+        }
+
+        let sudija_tabla = document.getElementsByClassName("sudija");
+        for (var i = 0; i < sudija_tabla.length; i++) {
+          sudija_tabla[i].style.display = "none";
+        }
+        document.getElementById("igrac-div").style.display = "none";
+        document.getElementById("admin-div").style.display = "none";
+        document.getElementById("sudija-div").style.display = "none";
         //Prikazi
         document.getElementById("klub-div").style.display = "";
         let klub_tabla = document.getElementsByClassName("klub");
@@ -255,6 +292,23 @@
       else if (username == "admin") {
         //Sakrij 
         document.getElementById("login-forma").style.display = "none";
+        let igrac_tabla = document.getElementsByClassName("igrac");
+        for (var i = 0; i < igrac_tabla.length; i++) {
+          igrac_tabla[i].style.display = "none";
+        }
+
+        let klub_tabla = document.getElementsByClassName("klub");
+        for (var i = 0; i < klub_tabla.length; i++) {
+          klub_tabla[i].style.display = "none";
+        }
+
+        let sudija_tabla = document.getElementsByClassName("sudija");
+        for (var i = 0; i < sudija_tabla.length; i++) {
+          sudija_tabla[i].style.display = "none";
+        }
+        document.getElementById("igrac-div").style.display = "none";
+        document.getElementById("klub-div").style.display = "none";
+        document.getElementById("sudija-div").style.display = "none";
         //Prikazi
         document.getElementById("admin-div").style.display = "";
         let admin_tabla = document.getElementsByClassName("admin");
@@ -266,6 +320,23 @@
       else if (username == "sudija") {
         //Sakrij 
         document.getElementById("login-forma").style.display = "none";
+        let igrac_tabla = document.getElementsByClassName("igrac");
+        for (var i = 0; i < igrac_tabla.length; i++) {
+          igrac_tabla[i].style.display = "none";
+        }
+
+        let klub_tabla = document.getElementsByClassName("klub");
+        for (var i = 0; i < klub_tabla.length; i++) {
+          klub_tabla[i].style.display = "none";
+        }
+
+        let admin_tabla = document.getElementsByClassName("admin");
+        for (var i = 0; i < admin_tabla.length; i++) {
+          admin_tabla[i].style.display = "none";
+        }
+        document.getElementById("igrac-div").style.display = "none";
+        document.getElementById("klub-div").style.display = "none";
+        document.getElementById("admin-div").style.display = "none";
         //Prikazi
         document.getElementById("sudija-div").style.display = "";
         let sudija_tabla = document.getElementsByClassName("sudija");
