@@ -13,7 +13,8 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/021abf950c.js" crossorigin="anonymous"></script>
 </head>
 
 <body onload="prikaz()">
@@ -25,24 +26,41 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse justify-content-end " id="navbarSupportedContent">
       <!-- GOST -->
       <form class="form-inline my-2 my-lg-0" id="login-forma">
         <input class="form-control mr-sm-2" type="text" id="korisnicko_ime" placeholder="Korisnicko ime"
           aria-label="Korisnicko ime">
         <input class="form-control mr-sm-2" type="password" id="lozinka" placeholder="Lozinka" aria-label="Lozinka">
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="login()">Uloguj se</button>
-        <button class="btn btn-primary my-2 my-sm-0" type="button" onclick="logout()">Registruj se</button>
+        <button class="btn btn-primary my-2 my-sm-0" type="button">Registruj se</button>
       </form>
 
       <!-- IGRAC -->
-
+      <div id="igrac-div" class="align-middle">
+        <a class="ml-1" href="#"><i class="fas fa-chess-pawn fa-3x"></i></a>
+        <a class="ml-1" href="#"><i class="fas fa-envelope fa-3x"></i></a>
+        <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+        <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
+      </div>
       <!-- KLUB -->
-
+      <div id="klub-div" class="align-middle">
+        <a class="ml-1" href="#"><i class="fas fa-chess-king fa-3x"></i></i></a>
+        <a class="ml-1" href="#"><i class="fas fa-envelope fa-3x"></i></a>
+        <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+        <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
+      </div>
       <!-- ADMIN -->
-
+      <div id="admin-div" class="align-middle">
+        <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+        <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
+      </div>
       <!-- SUDIJA -->
-
+      <div id="sudija-div" class="align-middle">
+        <a class="ml-1" href="#"><i class="fas fa-envelope fa-3x"></i></a>
+        <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+        <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
+      </div>
     </div>
   </nav>
 
@@ -62,14 +80,127 @@
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="igraci" role="tabpanel" aria-labelledby="igraci-tab">
 
+    <!-- IGRACI TAB -->
+    <div class="tab-pane fade show active p-5" id="igraci" role="tabpanel" aria-labelledby="igraci-tab">
+      <table class="table w-75 m-auto">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Prezime</th>
+            <th scope="col">Ranking</th>
+            <th scope="col" class="igrac">Vise</th>
+            <th scope="col" class="klub">Vise</th>
+            <th scope="col" class="admin">Vise</th>
+            <th scope="col" class="sudija">Vise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>1650</td>
+
+            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>700</td>
+
+            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>1500</td>
+
+            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="tab-pane fade" id="klubovi" role="tabpanel" aria-labelledby="klubovi-tab">
+    <!-- KLUBOVI TAB -->
+    <div class="tab-pane fade p-5" id="klubovi" role="tabpanel" aria-labelledby="klubovi-tab">
+      <table class="table w-75 m-auto">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Naziv</th>
+            <th scope="col">Broj clanova</th>
+            <th scope="col">Ranking</th>
+            <th scope="col" class="igrac">Vise</th>
+            <th scope="col" class="klub">Vise</th>
+            <th scope="col" class="admin">Vise</th>
+            <th scope="col" class="sudija">Vise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Neki</td>
+            <td>1</td>
+            <td>1650</td>
 
+            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Neki</td>
+            <td>2</td>
+            <td>16600</td>
+
+            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="tab-pane fade" id="takmicenja" role="tabpanel" aria-labelledby="takmicenja-tab">
+    <!-- TAKMICENJA TAB -->
+    <div class="tab-pane fade p-5" id="takmicenja" role="tabpanel" aria-labelledby="takmicenja-tab">
+      <table class="table w-50 m-auto">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Naziv</th>
+            <th scope="col">Datum pocetka</th>
+            <th scope="col" class="igrac">Vise</th>
+            <th scope="col" class="klub">Vise</th>
+            <th scope="col" class="admin">Vise</th>
+            <th scope="col" class="sudija">Vise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Takmicenje</td>
+            <td>07.03.2020.</td>
 
+            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -81,6 +212,8 @@
       if (username == "admin" || username == "igrac" || username == "klub" || username == "sudija") {
         localStorage.setItem("korisnicko_ime", username);
         localStorage.setItem("lozinka", password);
+        document.getElementById("korisnicko_ime").value = "";
+        document.getElementById("lozinka").value = "";
         prikaz();
       }
       else {
@@ -100,19 +233,76 @@
       let username = localStorage.getItem("korisnicko_ime");
 
       if (username == "igrac") {
+        //Sakrij 
         document.getElementById("login-forma").style.display = "none";
+        //Prikazi
+        document.getElementById("igrac-div").style.display = "";
+        let igrac_tabla = document.getElementsByClassName("igrac");
+        for (var i = 0; i < igrac_tabla.length; i++) {
+          igrac_tabla[i].style.display = "";
+        }
       }
       else if (username == "klub") {
+        //Sakrij 
         document.getElementById("login-forma").style.display = "none";
+        //Prikazi
+        document.getElementById("klub-div").style.display = "";
+        let klub_tabla = document.getElementsByClassName("klub");
+        for (var i = 0; i < klub_tabla.length; i++) {
+          klub_tabla[i].style.display = "";
+        }
       }
       else if (username == "admin") {
+        //Sakrij 
         document.getElementById("login-forma").style.display = "none";
+        //Prikazi
+        document.getElementById("admin-div").style.display = "";
+        let admin_tabla = document.getElementsByClassName("admin");
+        for (var i = 0; i < admin_tabla.length; i++) {
+          admin_tabla[i].style.display = "";
+        }
+
       }
       else if (username == "sudija") {
+        //Sakrij 
         document.getElementById("login-forma").style.display = "none";
+        //Prikazi
+        document.getElementById("sudija-div").style.display = "";
+        let sudija_tabla = document.getElementsByClassName("sudija");
+        for (var i = 0; i < sudija_tabla.length; i++) {
+          sudija_tabla[i].style.display = "";
+        }
       }
       else {
-        document.getElementById("login-forma").style.display = "block";
+        //Prikazi login
+        document.getElementById("login-forma").style.display = "";
+
+        //Sakrij sve ostalo
+        document.getElementById("igrac-div").style.display = "none";
+        document.getElementById("klub-div").style.display = "none";
+        document.getElementById("admin-div").style.display = "none";
+        document.getElementById("sudija-div").style.display = "none";
+
+        let igrac_tabla = document.getElementsByClassName("igrac");
+        for (var i = 0; i < igrac_tabla.length; i++) {
+          igrac_tabla[i].style.display = "none";
+        }
+
+        let klub_tabla = document.getElementsByClassName("klub");
+        for (var i = 0; i < klub_tabla.length; i++) {
+          klub_tabla[i].style.display = "none";
+        }
+
+        let admin_tabla = document.getElementsByClassName("admin");
+        for (var i = 0; i < admin_tabla.length; i++) {
+          admin_tabla[i].style.display = "none";
+        }
+
+        let sudija_tabla = document.getElementsByClassName("sudija");
+        for (var i = 0; i < sudija_tabla.length; i++) {
+          sudija_tabla[i].style.display = "none";
+        }
+
       }
     }
   </script>
