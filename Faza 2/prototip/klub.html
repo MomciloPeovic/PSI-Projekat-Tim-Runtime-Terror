@@ -32,7 +32,7 @@
       <div id="klub-div" class="align-middle">
         <a class="ml-1" href="#"><i class="fas fa-chess-king fa-3x"></i></i></a>
         <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-        <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+        <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
       </div>
     </div>
@@ -64,10 +64,7 @@
             <th scope="col">Ime</th>
             <th scope="col">Prezime</th>
             <th scope="col">Rejting</th>
-            <th scope="col" class="igrac">Vise</th>
             <th scope="col" class="klub">Vise</th>
-            <th scope="col" class="admin">Vise</th>
-            <th scope="col" class="sudija">Vise</th>
           </tr>
         </thead>
         <tbody>
@@ -107,10 +104,7 @@
             <th scope="col">Naziv</th>
             <th scope="col">Broj clanova</th>
             <th scope="col">Rejting</th>
-            <th scope="col" class="igrac">Vise</th>
             <th scope="col" class="klub">Vise</th>
-            <th scope="col" class="admin">Vise</th>
-            <th scope="col" class="sudija">Vise</th>
           </tr>
         </thead>
         <tbody>
@@ -165,7 +159,7 @@
         localStorage.removeItem("korisnicko_ime");
         localStorage.removeItem("lozinka");
       }
-	  
+	  location.href = 'index.html';
     }
 
     function prikaz() {

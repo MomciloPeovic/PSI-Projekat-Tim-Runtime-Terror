@@ -32,20 +32,26 @@
             <div id="igrac-div" class="align-middle" style="display: none;">
                 <a class="ml-1" href="#"><i class="fas fa-chess-pawn fa-3x"></i></a>
                 <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-                <a class="ml-1" href="#"><i class="fas fa-users-cog fa-3x"></i></a>
+                <a class="ml-1" href="profili.html"><i class="fas fa-users-cog fa-3x"></i></a>
                 <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
             </div>
             <!-- KLUB -->
             <div id="klub-div" class="align-middle" style="display: none;">
                 <a class="ml-1" href="#"><i class="fas fa-chess-king fa-3x"></i></i></a>
                 <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-                <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+                <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
                 <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
             </div>
             <!-- SUDIJA -->
             <div id="sudija-div" class="align-middle" style="display: none;">
                 <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-                <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+                <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
+                <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
+            </div>
+			<!-- ADMIN -->
+            <div id="admin-div" class="align-middle" style="display: none;">
+                <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
+                <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
                 <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
             </div>
         </div>
@@ -81,6 +87,12 @@
                 Trenutno nemate obavestenja!
             </div>
         </div>
+		
+		<div id="admin-obavestenja" style="display:none">
+            <div class="alert alert-info" role="alert">
+                Trenutno nemate obavestenja!
+            </div>
+        </div>
     </div>
 
     <script>
@@ -106,6 +118,11 @@
                 //Prikazi
                 document.getElementById("sudija-div").style.display = "";
                 document.getElementById("sudija-obavestenja").style.display = "";
+            }
+			else if (username == "admin") {
+                //Prikazi
+                document.getElementById("admin-div").style.display = "";
+                document.getElementById("admin-obavestenja").style.display = "";
             }
             else {
                 location.href = 'index.html';
