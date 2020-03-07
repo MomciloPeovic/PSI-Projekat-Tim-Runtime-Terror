@@ -32,7 +32,7 @@
         <input class="form-control mr-sm-2" type="text" id="korisnicko_ime" placeholder="Korisnicko ime"
           aria-label="Korisnicko ime">
         <input class="form-control mr-sm-2" type="password" id="lozinka" placeholder="Lozinka" aria-label="Lozinka">
-        <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="login()">Uloguj se</button>
+        <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" id = "loginBtn" onclick="login()">Uloguj se</button>
         <button class="btn btn-primary my-2 my-sm-0" type="button">Registruj se</button>
       </form>
 
@@ -40,25 +40,26 @@
       <div id="igrac-div" class="align-middle">
         <a class="ml-1" href="#"><i class="fas fa-chess-pawn fa-3x"></i></a>
         <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-        <a class="ml-1" href="#"><i class="fas fa-users-cog fa-3x"></i></a>
+        <a class="ml-1" href="profili.html"><i class="fas fa-users-cog fa-3x"></i></a>
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
       </div>
       <!-- KLUB -->
       <div id="klub-div" class="align-middle">
         <a class="ml-1" href="#"><i class="fas fa-chess-king fa-3x"></i></i></a>
         <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-        <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+        <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
       </div>
       <!-- ADMIN -->
       <div id="admin-div" class="align-middle">
-        <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+	  <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
+        <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
       </div>
       <!-- SUDIJA -->
       <div id="sudija-div" class="align-middle">
         <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-        <a class="ml-1" href="#"><i class="fa fa-cog fa-3x"></i></a>
+        <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
       </div>
     </div>
@@ -220,6 +221,15 @@
         alert("Pogresno korisnicko ime ili lozinka!");
       }
     }
+	
+	var input = document.getElementById("korisnicko_ime");
+	
+	input.addEventListener("keyup", function(event) {
+	if (event.keyCode === 13) {
+	event.preventDefault();
+	document.getElementById("loginBtn").click();
+	}
+	});
 
     function logout() {
       if (localStorage.getItem("korisnicko_ime") != null) {
@@ -231,6 +241,11 @@
 
     function prikaz() {
       let username = localStorage.getItem("korisnicko_ime");
+
+	  if (username == "klub") {
+		location.replace("klub.html")
+		return;
+	  }
 
       if (username == "igrac") {
         //Sakrij 
@@ -261,33 +276,6 @@
           igrac_tabla[i].style.display = "";
         }
 
-      }
-      else if (username == "klub") {
-        //Sakrij 
-        document.getElementById("login-forma").style.display = "none";
-        let igrac_tabla = document.getElementsByClassName("igrac");
-        for (var i = 0; i < igrac_tabla.length; i++) {
-          igrac_tabla[i].style.display = "none";
-        }
-
-        let admin_tabla = document.getElementsByClassName("admin");
-        for (var i = 0; i < admin_tabla.length; i++) {
-          admin_tabla[i].style.display = "none";
-        }
-
-        let sudija_tabla = document.getElementsByClassName("sudija");
-        for (var i = 0; i < sudija_tabla.length; i++) {
-          sudija_tabla[i].style.display = "none";
-        }
-        document.getElementById("igrac-div").style.display = "none";
-        document.getElementById("admin-div").style.display = "none";
-        document.getElementById("sudija-div").style.display = "none";
-        //Prikazi
-        document.getElementById("klub-div").style.display = "";
-        let klub_tabla = document.getElementsByClassName("klub");
-        for (var i = 0; i < klub_tabla.length; i++) {
-          klub_tabla[i].style.display = "";
-        }
       }
       else if (username == "admin") {
         //Sakrij 
