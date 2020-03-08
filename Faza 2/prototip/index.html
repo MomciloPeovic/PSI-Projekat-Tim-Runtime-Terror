@@ -104,10 +104,10 @@
             <td>Otto</td>
             <td>1650</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
           </tr>
           <tr>
             <th scope="row">2</th>
@@ -115,10 +115,10 @@
             <td>Thornton</td>
             <td>700</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
           </tr>
           <tr>
             <th scope="row">3</th>
@@ -126,10 +126,10 @@
             <td>the Bird</td>
             <td>1500</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
           </tr>
         </tbody>
       </table>
@@ -156,10 +156,10 @@
             <td>1</td>
             <td>1650</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
           </tr>
           <tr>
             <th scope="row">2</th>
@@ -167,10 +167,10 @@
             <td>2</td>
             <td>16600</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
           </tr>
         </tbody>
       </table>
@@ -195,10 +195,10 @@
             <td>Takmicenje</td>
             <td>07.03.2020.</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="#">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="#">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="#">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="#">+</a></td>
+            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
           </tr>
         </tbody>
       </table>
@@ -238,6 +238,14 @@
         prikaz();
       }
     }
+	
+	$(".igrac").click(function() {
+		localStorage.setItem("pregled", this.className);
+	});
+	
+	$(".klub").click(function() {
+		localStorage.setItem("pregled", this.className);
+	});
 
     function prikaz() {
       let username = localStorage.getItem("korisnicko_ime");
