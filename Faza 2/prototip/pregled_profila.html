@@ -558,30 +558,44 @@
 
 	<script>
 		function prikaz() {
-			let username = localStorage.getItem("pregled");
-			if (username == "igrac") {
+			let pregled = localStorage.getItem("pregled");
+			let username = localStorage.getItem("korisnicko_ime");
+			if (pregled == "igrac") {
 				//Prikazi profil igraca
-				document.getElementById("igrac-div").style.display = "";
 				document.getElementById("igrac-profil").style.display = "";
 			}
-			else if (username == "klub") {
+			else if (pregled == "klub") {
 				//Prikazi profil kluba
-				document.getElementById("klub-div").style.display = "";
 				document.getElementById("klub-profil").style.display = "";
 			}
-			else if (username == "sudija") {
+			else if (pregled == "sudija") {
 				//Prikazi profil sudije
-				document.getElementById("sudija-div").style.display = "";
 				document.getElementById("sudija-profil").style.display = "";
 			}
-			else if (username == "admin") {
+			else if (pregled == "admin") {
 				//Prikazi profil administratora
-				document.getElementById("admin-div").style.display = "";
 				document.getElementById("admin-profil").style.display = "";
 			}
 			else {
-				location.href = 'index.html';
+				document.getElementById("igrac-profil").style.display = "";
 			}
+			if (username == "igrac") {
+				//Prikazi div igraca
+				document.getElementById("igrac-div").style.display = "";
+			}
+			else if (username == "klub") {
+				//Prikazi div kluba
+				document.getElementById("klub-div").style.display = "";
+			}
+			else if (username == "sudija") {
+				//Prikazi div sudije
+				document.getElementById("sudija-div").style.display = "";
+			}
+			else if (username == "admin") {
+				//Prikazi div administratora
+				document.getElementById("admin-div").style.display = "";
+			}
+
 			//Sakrij text-boxove ostalo
 			var inputs = document.getElementsByTagName('input');
 
