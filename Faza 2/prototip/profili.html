@@ -32,20 +32,20 @@
             <div id="igrac-div" class="align-middle" style="display: none;">
                 <a class="ml-1" href="#"><i class="fas fa-chess-pawn fa-3x"></i></a>
                 <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-                <a class="ml-1" href="profili.html"><i class="fas fa-users-cog fa-3x"></i></a>
+                <a class="ml-1" href="profili.html"><i class="fas fa-user-cog fa-3x"></i></a>
                 <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
             </div>
             <!-- KLUB -->
             <div id="klub-div" class="align-middle" style="display: none;">
                 <a class="ml-1" href="#"><i class="fas fa-chess-king fa-3x"></i></i></a>
                 <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-                <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
+                <a class="ml-1" href="profili.html"><i class="fa fa-users-cog fa-3x"></i></a>
                 <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
             </div>
             <!-- SUDIJA -->
             <div id="sudija-div" class="align-middle" style="display: none;">
                 <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
-                <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
+                <a class="ml-1" href="profili.html"><i class="fa fa-user-cog fa-3x"></i></a>
                 <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
             </div>
 			<div id="admin-div" class="align-middle" style="display: none;">
@@ -57,37 +57,41 @@
     </nav>
 
     <!-- KONTENT -->
-    <div class="container mt-5 ml-5">
+    <div class="container-fluid mt-1 ml-5">
         <div id="igrac-profil" style="display:none">
 			
 			<div class="row">
 			
-				<div class="col-sm-5">
+				<div class="col-sm-3">
 
 					<div class="text-center">
 						<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style = "width: 500px" class="avatar img-circle img-thumbnail" alt="avatar">
 						<div class="col-sm-12"><h1>Radoje Domanovic</h1></div>
-						</hr><br>
+						<hr><br>
 						<h6 class="text-left offset-sm-2">Postavi novu sliku...</h6>
 						<input type="file" class="text-center center-block file-upload">
-					</div></hr><br>
+					</div><hr><br>
 				  
 				</div>
-				<div class="col-sm-7">
+				<div class="col-sm-4">
 					  
 					<div class="tab-content">
 						<div class="tab-pane active" id="home">
-							<hr>
+							
 							<form class="form" action="##" method="post" id="registrationForm">
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="first_name"><h4>Ime</h4></label>
+										<div class = "alert alert-info" for="first_name"><h5>Radoje</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_ime">Izmeni</button>
 										<input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="last_name"><h4>Prezime</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>Domanovic</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_prezime">Izmeni</button>
 										<input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
 									</div>
 								</div>
@@ -95,6 +99,8 @@
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="phone"><h4>Kucni telefon</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>011848560322</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_kucni">Izmeni</button>
 										<input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
 									</div>
 								</div>
@@ -102,44 +108,82 @@
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="mobile"><h4>Mobilni telefon</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>063406321</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_mobilni">Izmeni</button>
 										<input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
-									  <label for="email"><h4>E-mejl</h4></label>
-									  <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+									  <label for="email"><h4>E-mail</h4></label>
+									  <div class = "alert alert-info" for="last_name"><h5>radojedomanovic@gmail.com</h5></div>
+									  <button class="btn btn-lg btn-dark" type="submit" id = "izmeni_email">Izmeni</button>
+									  <input type="text" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
 								  </div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="email"><h4>Adresa</h4></label>
-										<input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+										<div class = "alert alert-info" for="last_name"><h5>Ulica u Beogradu 15b</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_adresu">Izmeni</button>
+										<input type="text" class="form-control" id="location" placeholder="somewhere" title="enter a location">
 									</div>
 								</div>
 								<div class="form-group">
 								  
 									<div class="col-xs-6">
-										<label for="password"><h4>Lozinka</h4></label>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_adresu">Izmeni lozinku</button>
+										<label for="password" name="password" id = "password"><h4>Lozinka</h4></label>
 										<input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
-										<label for="password2"><h4>Potvrdi lozinku</h4></label>
-										<input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+										<label for="password" name="password" id = "password"><h4>Potvrdi lozinku</h4></label>
+										<input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password2.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-12">
 										<br>
-										<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-										<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+										<button class="btn btn-lg btn-success" type="submit">Save</button>
+										<button class="btn btn-lg btn-danger" type="reset">Reset</button>
 									</div>
 								</div>
 							</form>
 							<hr>
 						</div>   
+					</div>
+				</div>
+				<div class="col-sm-4 ml-4">
+					<div class="tab-content">
+						<div class="tab-pane active" id="home">
+							
+							<form class="form" action="##" method="post" id="registrationForm">
+							
+								<div class="form-group">
+									<div class="col-xs-6">
+										<p><h4>Pol</h4></p>
+										<input type="radio" id="male" name="gender" value="male">
+										<label for="male"><h5>Musko</h5></label><br>
+										<input type="radio" id="female" name="gender" value="female">
+										<label for="female"><h5>Zensko</h5></label><br>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-xs-6">
+										  <label for="datum_rodjenja"><h4>Datum rodjenja</h4></label>
+										  <br>
+										  <input type="date" id="datum_rodjenja" name="datum_rodjenja">
+										  <br>
+										  <button class="btn btn-lg btn-dark mt-3" type="submit" id = "izmeni_kucni">Izmeni</button>
+									</div>
+								</div>
+								
+							</form>
+							
+						</div>
 					</div>
 				</div>
 
@@ -151,39 +195,47 @@
 
 			<div class="row">
 			
-				<div class="col-sm-5">
+				<div class="col-sm-3">
 
 					<div class="text-center">
 						<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style = "width: 500px" class="avatar img-circle img-thumbnail" alt="avatar">
 						<div class="col-sm-12"><h1>Big dick club</h1></div>
-						</hr><br>
+						<hr><br>
 						<h6 class="text-left offset-sm-2">Postavi novu sliku...</h6>
 						<input type="file" class="text-center center-block file-upload">
-					</div></hr><br>
+					</div><hr><br>
 				  
 				</div>
-				<div class="col-sm-7">
+				<div class="col-sm-4">
 					  
 					<div class="tab-content">
 						<div class="tab-pane active" id="home">
-							<hr>
+							
 							<form class="form" action="##" method="post" id="registrationForm">
-								<div class="form-group">
+																<div class="form-group">
 									<div class="col-xs-6">
-										<label for="first_name"><h4>Ime</h4></label>
-										<input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+										<label for="first_name"><h4>Naziv</h4></label>
+										<div class = "alert alert-info" for="first_name"><h5>Sahovski klub</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_ime">Izmeni</button>
+										<input type="text" class="form-control" name="name" id="name" placeholder="name">
 									</div>
 								</div>
+								
 								<div class="form-group">
 									<div class="col-xs-6">
-										<label for="last_name"><h4>Prezime</h4></label>
-										<input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+										  <label for="datum_rodjenja"><h4>Datum osnivanja</h4></label>
+										  <br>
+										  <input type="date" id="datum_osnivanja" name="datum_osnivanja">
+										  <br>
+										  <button class="btn btn-lg btn-dark mt-3" type="submit" id = "izmeni_kucni">Izmeni</button>
 									</div>
 								</div>
-				  
+								
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="phone"><h4>Kucni telefon</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>011848560322</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_kucni">Izmeni</button>
 										<input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
 									</div>
 								</div>
@@ -191,39 +243,46 @@
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="mobile"><h4>Mobilni telefon</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>063406321</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_mobilni">Izmeni</button>
 										<input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
-									  <label for="email"><h4>E-mejl</h4></label>
-									  <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+									  <label for="email"><h4>E-mail</h4></label>
+									  <div class = "alert alert-info" for="last_name"><h5>radojedomanovic@gmail.com</h5></div>
+									  <button class="btn btn-lg btn-dark" type="submit" id = "izmeni_email">Izmeni</button>
+									  <input type="text" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
 								  </div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="email"><h4>Adresa</h4></label>
-										<input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+										<div class = "alert alert-info" for="last_name"><h5>Ulica u Beogradu 15b</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_adresu">Izmeni</button>
+										<input type="text" class="form-control" id="location" placeholder="somewhere" title="enter a location">
 									</div>
 								</div>
 								<div class="form-group">
 								  
 									<div class="col-xs-6">
-										<label for="password"><h4>Lozinka</h4></label>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_adresu">Izmeni lozinku</button>
+										<label for="password" name="password" id="password"><h4>Lozinka</h4></label>
 										<input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
-										<label for="password2"><h4>Potvrdi lozinku</h4></label>
-										<input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+										<label for="password" name="password" id="password"><h4>Potvrdi lozinku</h4></label>
+										<input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password2.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-12">
 										<br>
-										<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-										<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+										<button class="btn btn-lg btn-success" type="submit">Save</button>
+										<button class="btn btn-lg btn-danger" type="reset">Reset</button>
 									</div>
 								</div>
 							</form>
@@ -237,35 +296,39 @@
         </div>
 
         <div id="sudija-profil" style="display:none">
-
+			
 			<div class="row">
 			
-				<div class="col-sm-5">
+				<div class="col-sm-3">
 
 					<div class="text-center">
 						<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style = "width: 500px" class="avatar img-circle img-thumbnail" alt="avatar">
 						<div class="col-sm-12"><h1>Radoje Domanovic</h1></div>
-						</hr><br>
+						<hr><br>
 						<h6 class="text-left offset-sm-2">Postavi novu sliku...</h6>
 						<input type="file" class="text-center center-block file-upload">
-					</div></hr><br>
+					</div><hr><br>
 				  
 				</div>
-				<div class="col-sm-7">
+				<div class="col-sm-4">
 					  
 					<div class="tab-content">
 						<div class="tab-pane active" id="home">
-							<hr>
+							
 							<form class="form" action="##" method="post" id="registrationForm">
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="first_name"><h4>Ime</h4></label>
+										<div class = "alert alert-info" for="first_name"><h5>Radoje</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_ime">Izmeni</button>
 										<input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="last_name"><h4>Prezime</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>Domanovic</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_prezime">Izmeni</button>
 										<input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
 									</div>
 								</div>
@@ -273,6 +336,8 @@
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="phone"><h4>Kucni telefon</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>011848560322</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_kucni">Izmeni</button>
 										<input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
 									</div>
 								</div>
@@ -280,39 +345,46 @@
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="mobile"><h4>Mobilni telefon</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>063406321</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_mobilni">Izmeni</button>
 										<input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
-									  <label for="email"><h4>E-mejl</h4></label>
-									  <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+									  <label for="email"><h4>E-mail</h4></label>
+									  <div class = "alert alert-info" for="last_name"><h5>radojedomanovic@gmail.com</h5></div>
+									  <button class="btn btn-lg btn-dark" type="submit" id = "izmeni_email">Izmeni</button>
+									  <input type="text" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
 								  </div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="email"><h4>Adresa</h4></label>
-										<input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+										<div class = "alert alert-info" for="last_name"><h5>Ulica u Beogradu 15b</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_adresu">Izmeni</button>
+										<input type="text" class="form-control" id="location" placeholder="somewhere" title="enter a location">
 									</div>
 								</div>
 								<div class="form-group">
 								  
 									<div class="col-xs-6">
-										<label for="password"><h4>Lozinka</h4></label>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_adresu">Izmeni lozinku</button>
+										<label for="password" name="password" id = "password"><h4>Lozinka</h4></label>
 										<input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
-										<label for="password2"><h4>Potvrdi lozinku</h4></label>
-										<input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+										<label for="password" name="password" id = "password"><h4>Potvrdi lozinku</h4></label>
+										<input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password2.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-12">
 										<br>
-										<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-										<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+										<button class="btn btn-lg btn-success" type="submit">Save</button>
+										<button class="btn btn-lg btn-danger" type="reset">Reset</button>
 									</div>
 								</div>
 							</form>
@@ -320,41 +392,76 @@
 						</div>   
 					</div>
 				</div>
+				<div class="col-sm-4 ml-4">
+					<div class="tab-content">
+						<div class="tab-pane active" id="home">
+							
+							<form class="form" action="##" method="post" id="registrationForm">
+							
+								<div class="form-group">
+									<div class="col-xs-6">
+										<p><h4>Pol</h4></p>
+										<input type="radio" id="male" name="gender" value="male">
+										<label for="male"><h5>Musko</h5></label><br>
+										<input type="radio" id="female" name="gender" value="female">
+										<label for="female"><h5>Zensko</h5></label><br>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-xs-6">
+										  <label for="datum_rodjenja"><h4>Datum rodjenja</h4></label>
+										  <br>
+										  <input type="date" id="datum_rodjenja" name="datum_rodjenja">
+										  <br>
+										  <button class="btn btn-lg btn-dark mt-3" type="submit" id = "izmeni_kucni">Izmeni</button>
+									</div>
+								</div>
+								
+							</form>
+							
+						</div>
+					</div>
+				</div>
 
 			</div>
-
+			
         </div>
 		
-		<div id="admin-profil" style="display:none">
-
+        <div id="admin-profil" style="display:none">
+			
 			<div class="row">
 			
-				<div class="col-sm-5">
+				<div class="col-sm-3">
 
 					<div class="text-center">
 						<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style = "width: 500px" class="avatar img-circle img-thumbnail" alt="avatar">
 						<div class="col-sm-12"><h1>Radoje Domanovic</h1></div>
-						</hr><br>
+						<hr><br>
 						<h6 class="text-left offset-sm-2">Postavi novu sliku...</h6>
 						<input type="file" class="text-center center-block file-upload">
-					</div></hr><br>
+					</div><hr><br>
 				  
 				</div>
-				<div class="col-sm-7">
+				<div class="col-sm-4">
 					  
 					<div class="tab-content">
 						<div class="tab-pane active" id="home">
-							<hr>
+							
 							<form class="form" action="##" method="post" id="registrationForm">
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="first_name"><h4>Ime</h4></label>
+										<div class = "alert alert-info" for="first_name"><h5>Radoje</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_ime">Izmeni</button>
 										<input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="last_name"><h4>Prezime</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>Domanovic</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_prezime">Izmeni</button>
 										<input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
 									</div>
 								</div>
@@ -362,6 +469,8 @@
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="phone"><h4>Kucni telefon</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>011848560322</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_kucni">Izmeni</button>
 										<input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
 									</div>
 								</div>
@@ -369,39 +478,46 @@
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="mobile"><h4>Mobilni telefon</h4></label>
+										<div class = "alert alert-info" for="last_name"><h5>063406321</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_mobilni">Izmeni</button>
 										<input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
-									  <label for="email"><h4>E-mejl</h4></label>
-									  <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+									  <label for="email"><h4>E-mail</h4></label>
+									  <div class = "alert alert-info" for="last_name"><h5>radojedomanovic@gmail.com</h5></div>
+									  <button class="btn btn-lg btn-dark" type="submit" id = "izmeni_email">Izmeni</button>
+									  <input type="text" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
 								  </div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
 										<label for="email"><h4>Adresa</h4></label>
-										<input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+										<div class = "alert alert-info" for="last_name"><h5>Ulica u Beogradu 15b</h5></div>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_adresu">Izmeni</button>
+										<input type="text" class="form-control" id="location" placeholder="somewhere" title="enter a location">
 									</div>
 								</div>
 								<div class="form-group">
 								  
 									<div class="col-xs-6">
-										<label for="password"><h4>Lozinka</h4></label>
+										<button class="btn btn-lg btn-dark" type="submit" id = "izmeni_adresu">Izmeni lozinku</button>
+										<label for="password" name="password" id = "password"><h4>Lozinka</h4></label>
 										<input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-6">
-										<label for="password2"><h4>Potvrdi lozinku</h4></label>
-										<input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+										<label for="password" name="password" id = "password"><h4>Potvrdi lozinku</h4></label>
+										<input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password2.">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-xs-12">
 										<br>
-										<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-										<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+										<button class="btn btn-lg btn-success" type="submit">Save</button>
+										<button class="btn btn-lg btn-danger" type="reset">Reset</button>
 									</div>
 								</div>
 							</form>
@@ -409,9 +525,40 @@
 						</div>   
 					</div>
 				</div>
+				<div class="col-sm-4 ml-4">
+					<div class="tab-content">
+						<div class="tab-pane active" id="home">
+							
+							<form class="form" action="##" method="post" id="registrationForm">
+							
+								<div class="form-group">
+									<div class="col-xs-6">
+										<p><h4>Pol</h4></p>
+										<input type="radio" id="male" name="gender" value="male">
+										<label for="male"><h5>Musko</h5></label><br>
+										<input type="radio" id="female" name="gender" value="female">
+										<label for="female"><h5>Zensko</h5></label><br>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-xs-6">
+										  <label for="datum_rodjenja"><h4>Datum rodjenja</h4></label>
+										  <br>
+										  <input type="date" id="datum_rodjenja" name="datum_rodjenja">
+										  <br>
+										  <button class="btn btn-lg btn-dark mt-3" type="submit" id = "izmeni_kucni">Izmeni</button>
+									</div>
+								</div>
+								
+							</form>
+							
+						</div>
+					</div>
+				</div>
 
 			</div>
-
+			
         </div>
     </div>
 
@@ -441,6 +588,19 @@
             else {
                 location.href = 'index.html';
             }
+			//Sakrij text-boxove ostalo
+			var inputs = document.getElementsByTagName('input');
+
+			for(var i = 0; i < inputs.length; i++) {
+				if(inputs[i].type.toLowerCase() == 'text' || inputs[i].type.toLowerCase() == 'password') {
+					inputs[i].style.display = "none";
+				}
+			}
+			var elements = document.getElementsByName('password');
+
+			for(var i = 0; i < elements.length; i++) {
+				elements[i].style.display = "none";
+			}
         }
 		
         function logout() {
