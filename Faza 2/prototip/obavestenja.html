@@ -19,8 +19,7 @@
 
 <body onload="prikaz()">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img
-                src="https://www.getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30"
+        <a class="navbar-brand" href="index.html"><img src="slike/logo.png" width="30" height="30"
                 class="d-inline-block align-top" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +47,7 @@
                 <a class="ml-1" href="profili.html"><i class="fas fa-user-cog fa-3x"></i></a>
                 <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
             </div>
-			<!-- ADMIN -->
+            <!-- ADMIN -->
             <div id="admin-div" class="align-middle" style="display: none;">
                 <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
                 <a class="ml-1" href="profili.html"><i class="fa fa-cog fa-3x"></i></a>
@@ -87,8 +86,8 @@
                 Trenutno nemate obavestenja!
             </div>
         </div>
-		
-		<div id="admin-obavestenja" style="display:none">
+
+        <div id="admin-obavestenja" style="display:none">
             <div class="alert alert-info" role="alert">
                 Trenutno nemate obavestenja!
             </div>
@@ -119,7 +118,7 @@
                 document.getElementById("sudija-div").style.display = "";
                 document.getElementById("sudija-obavestenja").style.display = "";
             }
-			else if (username == "admin") {
+            else if (username == "admin") {
                 //Prikazi
                 document.getElementById("admin-div").style.display = "";
                 document.getElementById("admin-obavestenja").style.display = "";

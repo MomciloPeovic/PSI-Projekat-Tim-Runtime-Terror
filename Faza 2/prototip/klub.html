@@ -19,8 +19,8 @@
 
 <body onload="prikaz()">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"><img src="https://www.getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg"
-        width="30" height="30" class="d-inline-block align-top" alt=""></a>
+    <a class="navbar-brand" href="index.html"><img src="slike/logo.png" width="30" height="30"
+        class="d-inline-block align-top" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
 
     <!-- IGRACI TAB -->
     <div class="tab-pane fade show active p-5" id="igraci" role="tabpanel" aria-labelledby="igraci-tab">
-      <table class="table w-75 m-auto">
+      <table class="table table-hover w-75 m-auto">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
@@ -97,7 +97,7 @@
     </div>
     <!-- KLUBOVI TAB -->
     <div class="tab-pane fade p-5" id="klubovi" role="tabpanel" aria-labelledby="klubovi-tab">
-      <table class="table w-75 m-auto">
+      <table class="table table-hover w-75 m-auto">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
@@ -129,7 +129,7 @@
     </div>
     <!-- TAKMICENJA TAB -->
     <div class="tab-pane fade p-5" id="takmicenja" role="tabpanel" aria-labelledby="takmicenja-tab">
-      <table class="table w-50 m-auto">
+      <table class="table table-hover w-50 m-auto">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
@@ -159,7 +159,7 @@
         localStorage.removeItem("korisnicko_ime");
         localStorage.removeItem("lozinka");
       }
-	  location.href = 'index.html';
+      location.href = 'index.html';
     }
 
     function prikaz() {
