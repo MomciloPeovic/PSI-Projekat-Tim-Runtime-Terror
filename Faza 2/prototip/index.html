@@ -32,7 +32,8 @@
         <input class="form-control mr-sm-2" type="text" id="korisnicko_ime" placeholder="Korisnicko ime"
           aria-label="Korisnicko ime">
         <input class="form-control mr-sm-2" type="password" id="lozinka" placeholder="Lozinka" aria-label="Lozinka">
-        <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" id = "loginBtn" onclick="login()">Uloguj se</button>
+        <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" id="loginBtn" onclick="login()">Uloguj
+          se</button>
         <button class="btn btn-primary my-2 my-sm-0" type="button">Registruj se</button>
       </form>
 
@@ -52,7 +53,7 @@
       </div>
       <!-- ADMIN -->
       <div id="admin-div" class="align-middle">
-	  <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
+        <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
         <a class="ml-1" href="profili.html"><i class="fas fa-cog fa-3x"></i></a>
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
       </div>
@@ -195,10 +196,10 @@
             <td>Takmicenje</td>
             <td>07.03.2020.</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
+            <td class="igrac"><a class="btn btn-primary" href="takmicenje.html">+</a></td>
+            <td class="klub"><a class="btn btn-success" href="takmicenje.html">+</a></td>
+            <td class="admin"><a class="btn btn-info" href="takmicenje.html">+</a></td>
+            <td class="sudija"><a class="btn btn-danger" href="takmicenje.html">+</a></td>
           </tr>
         </tbody>
       </table>
@@ -221,15 +222,15 @@
         alert("Pogresno korisnicko ime ili lozinka!");
       }
     }
-	
-	var input = document.getElementById("korisnicko_ime");
-	
-	input.addEventListener("keyup", function(event) {
-	if (event.keyCode === 13) {
-	event.preventDefault();
-	document.getElementById("loginBtn").click();
-	}
-	});
+
+    var input = document.getElementById("korisnicko_ime");
+
+    input.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("loginBtn").click();
+      }
+    });
 
     function logout() {
       if (localStorage.getItem("korisnicko_ime") != null) {
@@ -238,22 +239,22 @@
         prikaz();
       }
     }
-	
-	$(".igrac").click(function() {
-		localStorage.setItem("pregled", this.className);
-	});
-	
-	$(".klub").click(function() {
-		localStorage.setItem("pregled", this.className);
-	});
+
+    $(".igrac").click(function () {
+      localStorage.setItem("pregled", this.className);
+    });
+
+    $(".klub").click(function () {
+      localStorage.setItem("pregled", this.className);
+    });
 
     function prikaz() {
       let username = localStorage.getItem("korisnicko_ime");
 
-	  if (username == "klub") {
-		location.replace("klub.html")
-		return;
-	  }
+      if (username == "klub") {
+        location.replace("klub.html")
+        return;
+      }
 
       if (username == "igrac") {
         //Sakrij 
