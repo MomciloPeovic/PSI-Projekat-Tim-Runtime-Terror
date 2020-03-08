@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-	<title>Takmicenje</title>
+	<title>Pocetna strana</title>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>
@@ -19,7 +19,7 @@
 
 <body onload="prikaz()">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="index.html"><img src="slike/logo.png" width="30" height="30"
+		<a class="navbar-brand" href="index.html"><img src="slike/logo.png" width="50" height="50"
 				class="d-inline-block align-top" alt=""></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,6 +57,8 @@
 			<div id="admin-div" class="align-middle">
 				<a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
 				<a class="ml-1" href="profili.html"><i class="fas fa-cog fa-3x"></i></a>
+				<a class="ml-1" href="timeInterval.html"><i class="fas fa-clock fa-3x"></i></a>
+				<a class="ml-1" href="prihvatanjeRegistracija.html"><i class="fas fa-user fa-3x"></i></a>
 				<button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
 			</div>
 			<!-- SUDIJA -->
@@ -69,179 +71,151 @@
 	</nav>
 
 
-	<h1 class="h1">Takmicenje</h1>
-
 	<ul class="nav nav-tabs nav-fill mt-3" id="myTab" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active" id="tabela-tab" data-toggle="tab" href="#tabela" role="tab"
-				aria-controls="tabela" aria-selected="true">Tabela</a>
+			<a class="nav-link active" id="igraci-tab" data-toggle="tab" href="#igraci" role="tab" aria-controls="igraci"
+				aria-selected="true">Igraci</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="rezultati-id" data-toggle="tab" href="#rezultati" role="tab"
-				aria-controls="rezultati" aria-selected="false">Rezultati</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="spisak-tab" data-toggle="tab" href="#spisak" role="tab" aria-controls="spisak"
-				aria-selected="false">Spisak igraca</a>
+			<a class="nav-link" id="klubovi-id" data-toggle="tab" href="#klubovi" role="tab" aria-controls="klubovi"
+				aria-selected="false">Klubovi</a>
 		</li>
 	</ul>
 	<div class="tab-content" id="myTabContent">
-
-		<!-- Tabela TAB -->
-		<div class="tab-pane fade show active p-5" id="tabela" role="tabpanel" aria-labelledby="tabela-tab">
-			<div class="container-fluid mt-1 ml-5">
-				<h1 class="h1">Tabela</h1>
-				<table class="table table-hover w-75 text-center">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Ime i prezime</th>
-							<th scope="col">Rejting +/-</th>
-							<th scope="col">Poeni</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<tr>
-							<th scope="row">1.</th>
-							<td>Petar Petrovic</td>
-							<td>+3</td>
-							<td>10</td>
-						</tr>
-
-						<tr>
-							<th scope="row">2.</th>
-							<td>Marko Markovic</td>
-							<td>-2</td>
-							<td>8</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		<div class="tab-pane fade show active p-5 w-50" id="igraci" role="tabpanel" aria-labelledby="igraci-tab">
+			<h1 class="h1">Registracija igraca</h1>
+			<form>
+				<div class="form-group row">
+					<label for="inputIme3" class="col-sm-2 col-form-label">Ime</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputIme3" placeholder="Naziv">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPrezime3" class="col-sm-2 col-form-label">Prezime</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputPrezime3" placeholder="Prezime">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+					</div>
+				</div>
+		
+				<div class='form-group row' id='datetimepicker3'>
+					<label for="inputDate3" class="col-sm-2 col-form-label">Datum rodjenja</label>
+					<div class="col-sm-10">
+						<input type="date" class="form-control" id="inputDate3">
+					</div>
+				</div>
+				<fieldset class="form-group">
+					<div class="row">
+						<legend class="col-form-label col-sm-2 pt-0">Pol</legend>
+						<div class="col-sm-10">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
+									checked>
+								<label class="form-check-label" for="gridRadios1">
+									Musko
+								</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+								<label class="form-check-label" for="gridRadios2">
+									Zensko
+								</label>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+		
+				<div class="form-group row">
+					<label for="inputAdresa3" class="col-sm-2 col-form-label">Adresa</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputAdresa3" placeholder="Adresa">
+					</div>
+				</div>
+		
+				<div class="form-group row">
+					<label for="inputTelefon3" class="col-sm-2 col-form-label">Telefon</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputTelefon3" placeholder="Telefon">
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<button type="submit" class="btn btn-primary">Registracija</button>
+					</div>
+				</div>
+			</form>
 		</div>
 
-		<!-- Rezultati tab -->
-		<div class="tab-pane fade p-5" id="rezultati" role="tabpanel" aria-labelledby="rezultati-tab">
-			<div class="container-fluid mt-1 ml-5">
-				<h2 class="h2">Rezultati</h2>
-				<h3 class="h3">1. Kolo</h3>
-				<table class="table table-hover w-75 text-center">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th class="w-30" scope="col">Beli</th>
-							<th scope="col">Poeni</th>
-							<th scope="col">Rezultat</th>
-							<th class="w-30" scope="col">Crni</th>
-							<th scope="col">Poeni</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<tr>
-							<th scope="row">1.</th>
-							<td class="w-30">Petar Petrovic</td>
-							<td>7</td>
-							<td>1:0</td>
-							<td class="w-30">Marko Markovic</td>
-							<td>3</td>
-						</tr>
-
-						<tr>
-							<th scope="row">2.</th>
-							<td class="w-30">Nikola Nikolic</td>
-							<td>7</td>
-							<td>1:0</td>
-							<td class="w-30">Nemanja Nemanjic</td>
-							<td>3</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<h3 class="h3">2. Kolo</h3>
-				<table class="table table-hover w-75 text-center">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th class="w-30" scope="col">Beli</th>
-							<th scope="col">Poeni</th>
-							<th scope="col">Rezultat</th>
-							<th class="w-30" scope="col">Crni</th>
-							<th scope="col">Poeni</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<tr>
-							<th scope="row">1.</th>
-							<td class="w-30">Marko Markovic</td>
-							<td>3</td>
-							<td>1:0</td>
-							<td class="w-30">Petar Petrovic</td>
-							<td>8</td>
-						</tr>
-
-						<tr>
-							<th scope="row">2.</th>
-							<td class="w-30">Nemanja Nemanjic</td>
-							<td>2</td>
-							<td>0.5:0.5</td>
-							<td class="w-30">Nikola Nikolic</td>
-							<td>7</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		<div class="tab-pane fade p-5 w-50" id="klubovi" role="tabpanel" aria-labelledby="klubovi-tab">
+			<h1 class="h1">Registracija kluba</h1>
+			<form>
+				<div class="form-group row">
+					<label for="inputIme3" class="col-sm-2 col-form-label">Naziv</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputIme3" placeholder="Ime">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputVlasnik3" class="col-sm-2 col-form-label">Ime vlasnika</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputVlasnik3" placeholder="Ime vlasnika">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+					</div>
+				</div>
+		
+				<div class='form-group row' id='datetimepicker3'>
+					<label for="inputDate3" class="col-sm-2 col-form-label">Datum osnivanja</label>
+					<div class="col-sm-10">
+						<input type="date" class="form-control" id="inputDate3">
+					</div>
+				</div>
+		
+				<div class="form-group row">
+					<label for="inputAdresa3" class="col-sm-2 col-form-label">Adresa</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputAdresa3" placeholder="Adresa">
+					</div>
+				</div>
+		
+				<div class="form-group row">
+					<label for="inputTelefon3" class="col-sm-2 col-form-label">Telefon</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputTelefon3" placeholder="Telefon">
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<button type="submit" class="btn btn-primary">Registracija</button>
+					</div>
+				</div>
+			</form>
 		</div>
-
-		<!-- Spisak igraca tab-->
-		<div class="tab-pane fade p-5" id="spisak" role="tabpanel" aria-labelledby="spisak-tab">
-			<div class="container-fluid mt-1 ml-5">
-				<h1 class="h1">Spisak</h1>
-				<table class="table table-hover w-75">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Ime i prezime</th>
-							<th scope="col">Drzava</th>
-							<th scope="col">Rejting</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<tr>
-							<th scope="row">1.</th>
-							<td>Petar Petrovic</td>
-							<td>SRB</td>
-							<td>2100</td>
-						</tr>
-
-						<tr>
-							<th scope="row">2.</th>
-							<td>Marko Markovic</td>
-							<td>SRB</td>
-							<td>2050</td>
-						</tr>
-
-						<tr>
-							<th scope="row">3.</th>
-							<td>Nikola Nikolic</td>
-							<td>SRB</td>
-							<td>2000</td>
-						</tr>
-
-						<tr>
-							<th scope="row">4.</th>
-							<td>Nemenja Nemanjic</td>
-							<td>SRB</td>
-							<td>1700</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+		
 	</div>
-
+	
 
 	<script>
 		function login() {
