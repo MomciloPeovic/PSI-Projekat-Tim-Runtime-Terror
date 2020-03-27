@@ -234,6 +234,15 @@
         document.getElementById("loginBtn").click();
       }
     });
+	
+	var inp = document.getElementById("lozinka");
+
+    inp.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("loginBtn").click();
+      }
+    });
 
     function logout() {
       if (localStorage.getItem("korisnicko_ime") != null) {
