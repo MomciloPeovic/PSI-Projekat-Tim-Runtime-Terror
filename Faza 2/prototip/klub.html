@@ -45,7 +45,7 @@
         aria-selected="true">Igraci</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="klubovi-id" data-toggle="tab" href="#klubovi" role="tab" aria-controls="klubovi"
+      <a class="nav-link" id="klubovi-tab" data-toggle="tab" href="#klubovi" role="tab" aria-controls="klubovi"
         aria-selected="false">Klubovi</a>
     </li>
     <li class="nav-item">
@@ -162,7 +162,20 @@
       location.href = 'index.html';
     }
 
+	var igraci = document.getElementById("igraci-tab");
+
+    igraci.addEventListener("click", function (event) {
+		localStorage.setItem("pregled", "igrac");
+    });
+	
+	var klubovi = document.getElementById("klubovi-tab");
+
+    klubovi.addEventListener("click", function (event) {
+		localStorage.setItem("pregled", "klub");
+    });
+
     function prikaz() {
+	localStorage.setItem("pregled", "igrac");
       let username = localStorage.getItem("korisnicko_ime");
       //Sakrij 
       document.getElementById("login-forma").style.display = "none";
