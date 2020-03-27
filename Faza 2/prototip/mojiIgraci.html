@@ -101,6 +101,7 @@
     }
 
     function prikaz() {
+	  localStorage.setItem("pregled", "moj_igrac");
       let username = localStorage.getItem("korisnicko_ime");
       //Sakrij 
       document.getElementById("login-forma").style.display = "none";

@@ -145,7 +145,7 @@
 								<div class="form-group">
 									<div class="col-xs-6 mt-5 offset-sm-4">
 										<button class="btn btn-lg btn-dark" type="submit"
-										id="otpusti_igraca" style="display:none">Otpusti igraca</button>
+										id="otpusti_igraca" style="display:none">Posalji zahtev</button>
 									</div>
 								</div>
 							</form>
@@ -288,6 +288,12 @@
 										<div class="alert alert-info" for="last_name">
 											<h5>Ulica u Beogradu 15b</h5>
 										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-6 mt-5 offset-sm-4">
+										<button class="btn btn-lg btn-dark" type="submit"
+										id="posalji_zahtev" style="display:none">Posalji zahtev</button>
 									</div>
 								</div>
 							</form>
@@ -570,6 +576,11 @@
 				//Prikazi profil igraca
 				document.getElementById("igrac-profil").style.display = "";	
 			}
+			else if (pregled == "moj_igrac") {
+				//Prikazi profil igraca
+				document.getElementById("otpusti_igraca").innerHTML = "Otpusti igraca";
+				document.getElementById("igrac-profil").style.display = "";	
+			}
 			else if (pregled == "klub") {
 				//Prikazi profil kluba
 				document.getElementById("klub-profil").style.display = "";
@@ -587,6 +598,7 @@
 			}
 			if (username == "igrac") {
 				//Prikazi div igraca
+				document.getElementById("posalji_zahtev").style.display = "";
 				document.getElementById("igrac-div").style.display = "";
 			}
 			else if (username == "klub") {
