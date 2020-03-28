@@ -11,7 +11,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-	<script src="jquery-3.4.1.min.js"></script>
+  <script src="jquery-3.4.1.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,7 +35,8 @@
         <input class="form-control mr-sm-2" type="password" id="lozinka" placeholder="Lozinka" aria-label="Lozinka">
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" id="loginBtn" onclick="login()">Uloguj
           se</button>
-        <button class="btn btn-primary my-2 my-sm-0" type="button" onclick="window.location.href='registracija.html'">Registruj se</button>
+        <button class="btn btn-primary my-2 my-sm-0" type="button"
+          onclick="window.location.href='registracija.html'">Registruj se</button>
       </form>
 
       <!-- IGRAC -->
@@ -56,8 +57,8 @@
       <div id="admin-div" class="align-middle">
         <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
         <a class="ml-1" href="profili.html"><i class="fas fa-cog fa-3x"></i></a>
-		<a class="ml-1" href="timeInterval.html"><i class="fas fa-clock fa-3x"></i></a>
-		<a class="ml-1" href="prihvatanjeRegistracija.html"><i class="fas fa-user fa-3x"></i></a>
+        <a class="ml-1" href="timeInterval.html"><i class="fas fa-clock fa-3x"></i></a>
+        <a class="ml-1" href="prihvatanjeRegistracija.html"><i class="fas fa-user fa-3x"></i></a>
         <button class="btn btn-success my-2 my-sm-0 mr-2" type="button" onclick="logout()">izloguj se</button>
       </div>
       <!-- SUDIJA -->
@@ -72,12 +73,12 @@
 
   <ul class="nav nav-tabs nav-fill mt-3" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="igraci-tab" data-toggle="tab" href="#igraci" role="tab" aria-controls="igraci" onclick = "pregled('igraci')"
-        aria-selected="true">Igraci</a>
+      <a class="nav-link active" id="igraci-tab" data-toggle="tab" href="#igraci" role="tab" aria-controls="igraci"
+        onclick="pregled('igraci')" aria-selected="true">Igraci</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="klubovi-tab" data-toggle="tab" href="#klubovi" role="tab" aria-controls="klubovi" onclick = "pregled('klubovi')"
-        aria-selected="false">Klubovi</a>
+      <a class="nav-link" id="klubovi-tab" data-toggle="tab" href="#klubovi" role="tab" aria-controls="klubovi"
+        onclick="pregled('klubovi')" aria-selected="false">Klubovi</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="takmicenja-tab" data-toggle="tab" href="#takmicenja" role="tab" aria-controls="takmicenja"
@@ -88,129 +89,321 @@
 
     <!-- IGRACI TAB -->
     <div class="tab-pane fade show active p-5" id="igraci" role="tabpanel" aria-labelledby="igraci-tab">
-      <table class="table table-hover w-75 m-auto">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Ime</th>
-            <th scope="col">Prezime</th>
-            <th scope="col">Rejting</th>
-            <th scope="col" class="igrac">Vise</th>
-            <th scope="col" class="igrac">Prijava</th>
-            <th scope="col" class="klub">Vise</th>
-            <th scope="col" class="admin">Vise</th>
-			<th scope="col" class="admin"><a class="btn btn-info" href="statusSudije.html">Izmeni status sudije</a></th>
-            <th scope="col" class="sudija">Vise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr onclick="window.location.href = 'pregled_profila.html'">
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>1650</td>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
 
-            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
-            <td class="igrac"><a class="btn btn-primary" href="">+</a></td> 
-            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
-          </tr>
-          <tr onclick="window.location.href = 'pregled_profila.html'">
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>700</td>
+            <p>Filter</p>
 
-            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
-            <td class="igrac"><a class="btn btn-primary" href="">+</a></td> 
-            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
-          </tr>
-          <tr onclick="window.location.href = 'pregled_profila.html'">
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>1500</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
-            <td class="igrac"><a class="btn btn-primary" href="">+</a></td> 
-            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
-          </tr>
-        </tbody>
-      </table>
+            <div class="card">
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Ime </h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <input type="text" class="form-control">
+
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Pol </h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <label class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadio" value="">
+                      <span class="form-check-label">
+                        Musko
+                      </span>
+                    </label>
+                    <label class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadio" value="">
+                      <span class="form-check-label">
+                        Zensko
+                      </span>
+                    </label>
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Rejting</h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Min</label>
+                        <input type="number" class="form-control" id="inputEmail4" placeholder="0">
+                      </div>
+                      <div class="form-group col-md-6 text-right">
+                        <label>Max</label>
+                        <input type="number" class="form-control" placeholder="3000">
+                      </div>
+                    </div>
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+            </div>
+          </div>
+
+
+
+          <table class="table table-hover m-auto col-sm-9">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ime</th>
+                <th scope="col">Prezime</th>
+                <th scope="col">Rejting</th>
+                <th scope="col" class="igrac">Vise</th>
+                <th scope="col" class="igrac">Prijava</th>
+                <th scope="col" class="klub">Vise</th>
+                <th scope="col" class="admin">Vise</th>
+                <th scope="col" class="admin"><a class="btn btn-info" href="statusSudije.html">Izmeni status
+                    sudije</a></th>
+                <th scope="col" class="sudija">Vise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr onclick="window.location.href = 'pregled_profila.html'">
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>1650</td>
+
+                <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+                <td class="igrac"><a class="btn btn-primary" href="">+</a></td>
+                <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+                <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+                <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
+              </tr>
+              <tr onclick="window.location.href = 'pregled_profila.html'">
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>700</td>
+
+                <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+                <td class="igrac"><a class="btn btn-primary" href="">+</a></td>
+                <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+                <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+                <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
+              </tr>
+              <tr onclick="window.location.href = 'pregled_profila.html'">
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>1500</td>
+
+                <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+                <td class="igrac"><a class="btn btn-primary" href="">+</a></td>
+                <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+                <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+                <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <!-- KLUBOVI TAB -->
     <div class="tab-pane fade p-5" id="klubovi" role="tabpanel" aria-labelledby="klubovi-tab">
-      <table class="table table-hover w-75 m-auto">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Naziv</th>
-            <th scope="col">Broj clanova</th>
-            <th scope="col">Rejting</th>
-            <th scope="col" class="igrac">Vise</th>
-            <th scope="col" class="klub">Vise</th>
-            <th scope="col" class="admin">Vise</th>
-            <th scope="col" class="sudija">Vise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr onclick="window.location.href = 'pregled_profila.html'">
-            <th scope="row">1</th>
-            <td>Neki</td>
-            <td>1</td>
-            <td>1650</td>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <p>Filter</p>
 
-            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
-          </tr>
-          <tr onclick="window.location.href = 'pregled_profila.html'">
-            <th scope="row">2</th>
-            <td>Neki</td>
-            <td>2</td>
-            <td>16600</td>
 
-            <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
-          </tr>
-        </tbody>
-      </table>
+            <div class="card">
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Naziv </h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <input type="text" class="form-control">
+
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Opstina </h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <input type="text" class="form-control">
+
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Datum osnivanja</h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Od</label>
+                        <input type="date" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6 text-right">
+                        <label>Do</label>
+                        <input type="date" class="form-control">
+                      </div>
+                    </div>
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+            </div>
+          </div>
+
+          <table class="table table-hover col-sm-9 m-auto">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Naziv</th>
+                <th scope="col">Broj clanova</th>
+                <th scope="col">Rejting</th>
+                <th scope="col" class="igrac">Vise</th>
+                <th scope="col" class="klub">Vise</th>
+                <th scope="col" class="admin">Vise</th>
+                <th scope="col" class="sudija">Vise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr onclick="window.location.href = 'pregled_profila.html'">
+                <th scope="row">1</th>
+                <td>Neki</td>
+                <td>1</td>
+                <td>1650</td>
+
+                <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+                <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+                <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+                <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
+              </tr>
+              <tr onclick="window.location.href = 'pregled_profila.html'">
+                <th scope="row">2</th>
+                <td>Neki</td>
+                <td>2</td>
+                <td>16600</td>
+
+                <td class="igrac"><a class="btn btn-primary" href="pregled_profila.html">+</a></td>
+                <td class="klub"><a class="btn btn-success" href="pregled_profila.html">+</a></td>
+                <td class="admin"><a class="btn btn-info" href="pregled_profila.html">+</a></td>
+                <td class="sudija"><a class="btn btn-danger" href="pregled_profila.html">+</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <!-- TAKMICENJA TAB -->
     <div class="tab-pane fade p-5" id="takmicenja" role="tabpanel" aria-labelledby="takmicenja-tab">
-      <table class="table table-hover w-50 m-auto">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Naziv</th>
-            <th scope="col">Datum pocetka</th>
-            <th scope="col" class="igrac">Vise</th>
-            <th scope="col" class="klub">Vise</th>
-            <th scope="col" class="admin">Vise</th>
-            <th scope="col" class="sudija">Vise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr onclick="window.location.href = 'takmicenje.html'">
-            <th scope="row">1</th>
-            <td>Takmicenje</td>
-            <td>07.03.2020.</td>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <p>Filter</p>
 
-            <td class="igrac"><a class="btn btn-primary" href="takmicenje.html">+</a></td>
-            <td class="klub"><a class="btn btn-success" href="takmicenje.html">+</a></td>
-            <td class="admin"><a class="btn btn-info" href="takmicenje.html">+</a></td>
-            <td class="sudija"><a class="btn btn-danger" href="takmicenje.html">+</a></td>
-          </tr>
-        </tbody>
-      </table>
+
+            <div class="card">
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Naziv </h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <input type="text" class="form-control">
+
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Mesto odrzavanja </h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <input type="text" class="form-control">
+
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Broj kola</h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <input type="number" class="form-control">
+
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+
+              <article class="card-group-item">
+                <header class="card-header">
+                  <h6 class="title">Vreme odrzavanja</h6>
+                </header>
+                <div class="filter-content">
+                  <div class="card-body">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Od</label>
+                        <input type="date" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6 text-right">
+                        <label>Do</label>
+                        <input type="date" class="form-control">
+                      </div>
+                    </div>
+                  </div> <!-- card-body.// -->
+                </div>
+              </article> <!-- card-group-item.// -->
+            </div>
+          </div>
+
+
+          <table class="table table-hover col-sm-9 m-auto">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Naziv</th>
+                <th scope="col">Datum pocetka</th>
+                <th scope="col" class="igrac">Vise</th>
+                <th scope="col" class="klub">Vise</th>
+                <th scope="col" class="admin">Vise</th>
+                <th scope="col" class="sudija">Vise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr onclick="window.location.href = 'takmicenje.html'">
+                <th scope="row">1</th>
+                <td>Takmicenje</td>
+                <td>07.03.2020.</td>
+
+                <td class="igrac"><a class="btn btn-primary" href="takmicenje.html">+</a></td>
+                <td class="klub"><a class="btn btn-success" href="takmicenje.html">+</a></td>
+                <td class="admin"><a class="btn btn-info" href="takmicenje.html">+</a></td>
+                <td class="sudija"><a class="btn btn-danger" href="takmicenje.html">+</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -239,8 +432,8 @@
         document.getElementById("loginBtn").click();
       }
     });
-	
-	var inp = document.getElementById("lozinka");
+
+    var inp = document.getElementById("lozinka");
 
     inp.addEventListener("keyup", function (event) {
       if (event.keyCode === 13) {
@@ -248,17 +441,17 @@
         document.getElementById("loginBtn").click();
       }
     });
-	
-	var igraci = document.getElementById("igraci-tab");
+
+    var igraci = document.getElementById("igraci-tab");
 
     igraci.addEventListener("click", function (event) {
-		localStorage.setItem("pregled", "igrac");
+      localStorage.setItem("pregled", "igrac");
     });
-	
-	var klubovi = document.getElementById("klubovi-tab");
+
+    var klubovi = document.getElementById("klubovi-tab");
 
     klubovi.addEventListener("click", function (event) {
-		localStorage.setItem("pregled", "klub");
+      localStorage.setItem("pregled", "klub");
     });
 
     function logout() {
@@ -270,7 +463,7 @@
     }
 
     function prikaz() {
-	localStorage.setItem("pregled", "igrac");
+      localStorage.setItem("pregled", "igrac");
       let username = localStorage.getItem("korisnicko_ime");
 
       if (username == "klub") {
