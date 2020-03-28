@@ -15,9 +15,16 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://kit.fontawesome.com/021abf950c.js" crossorigin="anonymous"></script>
+  <style>
+  p {
+    text-align: center;
+    font-size: 60px;
+    margin-top: 0px;
+  }
+  </style>
 </head>
 
-<body>
+<body onload = "load()">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.html"><img src="slike/logo.png" width="50" height="50"
         class="d-inline-block align-top" alt=""></a>
@@ -25,7 +32,9 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+    
+	<p id = "vreme">Prelazni rok je:</p>
+	
     <div class="collapse navbar-collapse justify-content-end " id="navbarSupportedContent">
 	  <div id="admin-div" class="align-middle">
         <a class="ml-1" href="obavestenja.html"><i class="fas fa-envelope fa-3x"></i></a>
@@ -45,17 +54,81 @@
 	  </tr>
 	  <tr>
 	    <td>
-		  <input type="date">
+		  <input type="date" id = "_od">
 		</td>
 		<td>
-		  <input type="date">
+		  <input type="date" id = "_do">
 		</td>
 		<td>
-		  <a class="btn btn-success">Zadaj interval prelaznog roka!</a>
+		  <a onclick = "timeInterval()" class="btn btn-success">Zadaj interval prelaznog roka!</a>
 		</td>
 	  </tr>
 	</tbody>
   </table>
+  <script>
+    function logout() {
+        localStorage.removeItem("korisnicko_ime");
+        localStorage.removeItem("lozinka");
+        location.href = 'index.html';
+    }
+	
+	function timeInterval() {
+	  var d = localStorage.getItem("distance");
+	  if (d == null) {
+	    var _od = new Date(document.getElementById("_od").value).getTime();
+	    localStorage.setItem("_od", _od);
+	    var _do = new Date(document.getElementById("_do").value).getTime();
+	    localStorage.setItem("_do", _do);
+	    var _now = new Date().getTime();
+	    localStorage.setItem("_now", _now);
+	    if (_now > _od) {
+	     var x = setInterval(function() {
+		  var now = new Date().getTime();
+	      var distance = _do - now;
+		  localStorage.setItem("distance", distance);
+		  
+		  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		  
+		  document.getElementById("vreme").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+		  
+		  if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("vreme").innerHTML = "EXPIRED";
+          }
+         }, 1000);
+        }
+	  }
+	  else {
+	    var x = setInterval(function() {
+		  var now = new Date().getTime();
+		  var _do = localStorage.getItem("_do");
+	      var distance = _do - now;
+		  localStorage.setItem("distance", distance);
+		  
+		  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		  
+		  document.getElementById("vreme").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+		  
+		  if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("vreme").innerHTML = "EXPIRED";
+          }
+         }, 1000);
+	  }
+	}
+	
+	function load() {
+	  var d = localStorage.getItem("distance");
+	  if (d > 0) timeInterval();
+	  else localStorage.removeItem("distance");
+	}
+  </script>
 </body>
 		
   

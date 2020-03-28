@@ -49,21 +49,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr onclick="window.location.href = 'pregled_profila.html'">
+          <tr>
             <th scope="row">1</th>
             <td>Mark</td>
             <td>Otto</td>
             <td>1650</td>
 			<td><a class="btn btn-success">Unapredi u sudiju</a></td>
           </tr>
-          <tr onclick="window.location.href = 'pregled_profila.html'">
+          <tr>
             <th scope="row">2</th>
             <td>Jacob</td>
             <td>Thornton</td>
             <td>700</td>
-            <td><a class="btn btn-success">Unapredi u sudiju</a></td>
+            <td ><a class="btn btn-success">Unapredi u sudiju</a></td>
           </tr>
-          <tr onclick="window.location.href = 'pregled_profila.html'">
+          <tr>
             <th scope="row">3</th>
             <td>Larry</td>
             <td>the Bird</td>
@@ -73,4 +73,11 @@
         </tbody>
       </table>
     </div>
+	<script>
+	  function logout(){
+	    localStorage.removeItem("korisnicko_ime");
+        localStorage.removeItem("lozinka");
+        location.href = 'index.html';
+	  }
+	</script>
 </body>
