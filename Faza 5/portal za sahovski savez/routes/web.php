@@ -1,5 +1,6 @@
 <?php
 
+use App\Tournament;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','HomeController@index');
-Route::get('home','HomeController@index');
-Route::get('player','PlayerController@show');
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/turnir', 'TournamentController@index');
+Route::get('/player', 'PlayerController@show');
