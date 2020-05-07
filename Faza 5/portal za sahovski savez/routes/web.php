@@ -26,10 +26,10 @@ Route::post('/igrac/izmeni/{id}', 'PlayerController@show');
 Route::post('/igrac/obrisi/{id}', 'PlayerController@show');
 Route::post('/igrac/prijavaNaTurnir', 'PlayerController@show');
 
-Route::get('/turnir', 'TournamentController@show');
-Route::get('/turnir/{id}', 'TournamentController@show');
-Route::get('/turnir/dodaj', 'TournamentController@show');
-Route::post('/turnir/dodaj', 'TournamentController@show');
+Route::get('/turnir', 'TournamentController@index');
+Route::get('/turnir/{id}', 'TournamentController@getTournament')->where('id', '[0-9]+');
+Route::get('/turnir/dodaj', 'TournamentController@addTournament');
+Route::post('/turnir/dodaj', 'TournamentController@addTournamentPost');
 Route::post('/turnir/izmeni/{id}', 'TournamentController@show');
 Route::post('/turnir/obrisi/{id}', 'TournamentController@show');
 Route::post('/turnir/dodajSudiju', 'TournamentController@show');

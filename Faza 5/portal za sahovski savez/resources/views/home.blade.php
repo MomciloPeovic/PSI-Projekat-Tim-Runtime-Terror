@@ -4,5 +4,5 @@
 
     <h1>Doborodosli</h1>
     <br>
-    <a href="{{action('PlayerController@show')}}">Igraci</a>
+    <a href="/igraci">Igraci</a>
 @endsection
