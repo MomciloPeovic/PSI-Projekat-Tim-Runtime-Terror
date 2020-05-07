@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Player;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
 {
+    public function __construct()
+    {
+    }
+
     public function show()
     {
-        return view('players');        
+        $players = Player::all();
+        return view('players', [
+            'players' => $players
+        ]);
     }
 }
