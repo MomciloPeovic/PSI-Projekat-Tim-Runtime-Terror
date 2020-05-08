@@ -4,6 +4,8 @@
 
 @section('content')
 
+<div class="container">
+	<h1>Login</h1>
 <div class="row">
 	<form class="col-6" action="/korisnici/login" method="POST">
 		@csrf
@@ -18,9 +20,10 @@
 		</div>
 
 		<div class="form-group">
-			<input type="submit" value="Log in">
+			<input type="submit" class="btn btn-primary" value="Log in">
 		</div>
 	</form>
+</div>
 </div>
 
 @endsection

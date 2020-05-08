@@ -7,6 +7,11 @@ use App\Tournament;
 
 class TournamentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['addTournament']);
+    }
+
     public function index()
     {
         return view('tournaments', [

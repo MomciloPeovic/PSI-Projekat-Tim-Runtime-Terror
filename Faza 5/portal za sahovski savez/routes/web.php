@@ -23,7 +23,7 @@ Route::get('/igrac', 'PlayerController@getPlayers');
 Route::get('/igrac/{id}', 'PlayerController@getPlayer')->where('id', '[0-9]+');
 Route::get('/igrac/dodaj', 'PlayerController@addPlayer');
 Route::post('/igrac/dodaj', 'PlayerController@addOrEditPlayerPost');
-Route::get('/igrac/izmeni/{id}','PlayerController@editPlayer')->where('id', '[0-9]+');
+Route::get('/igrac/izmeni/{id}', 'PlayerController@editPlayer')->where('id', '[0-9]+');
 Route::get('/igrac/obrisi/{id}', 'PlayerController@deletePlayer')->where('id', '[0-9]+');
 Route::post('/igrac/prijavaNaTurnir', 'PlayerController@');
 
@@ -52,7 +52,8 @@ Route::get('/rokovi', 'AdminController@show'); // prikazuje trenutne rokove
 Route::post('/dodajRok', 'AdminController@show'); // dodaje rok
 Route::get('/korisnici', 'AdminController@show'); //dohvata korisnike koji cekaju da im se odobri registacija
 
-Route::get('/korisnici/login', 'UsersController@login');
+Route::get('/korisnici/login', 'UsersController@login')->name("login");
 Route::post('/korisnici/login', 'UsersController@verifyLogin');
-
-Route::get('/korisnici/register', 'UsersController@register');
+Route::get('/korisnici/logout', 'UsersController@logout');
+Route::get('/korisnici/registracija', 'UsersController@register');
+Route::post('/korisnici/registracija', 'UsersController@registerPost');

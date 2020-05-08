@@ -17,32 +17,40 @@ class UsersController extends Controller
 	{
 		$credentials = $request->only('email', 'password');
 
-		if (Auth::attempt($credentials))
-			echo "success";
-		else
-			echo "failed";
-	}
-
-	public function authenticate(Request $request)
-	{
-		$credentials = $request->only('email', 'password');
 		if (Auth::attempt($credentials)) {
-			// Authentication passed...
-			return redirect()->intended('dashboard');
+			return redirect('/');
 		}
+
+		return view('users.login');
 	}
 
 	public function register()
 	{
-		$player = new Player();
+		return view('users.register');
+	}
 
-		$player->email = "momcilo.peovic@gmail.com";
-		$player->name = "neko";
-		$player->surname = "neko";
-		$player->birth_date = "2020-03-03";
-		$player->password = bcrypt("asd");
-		$player->save();
+	public function registerPost(Request $request)
+	{
+		if ($request->password == $request->confirmPassword) {
+			$player = new Player();
+			$player->name = $request->name;
+			$player->surname = $request->surname;
+			$player->email = $request->email;
+			$player->birth_date = $request->birth_date;
+			$player->password = bcrypt($request->password);
 
-		//return view('register');
+			$player->save();
+
+			return redirect('/');
+		}
+
+		return redirect('/korisnici/register');
+	}
+
+	public function logout()
+	{
+		Auth::logout();
+
+		return redirect('/');
 	}
 }

@@ -11,14 +11,9 @@ class Player extends User
 	use Notifiable;
 
 	protected $fillable = [
-		'name', 'email', 'password',
+		'name', 'surname', 'email', 'password', 'rating', 'birth_date'
 	];
 
-	/**
-	 * The attributes that should be hidden for arrays.
-	 *
-	 * @var array
-	 */
 	protected $hidden = [
 		'password', 'remember_token',
 	];
