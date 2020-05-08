@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'player',
+        'passwords' => 'player',
     ],
 
     /*
@@ -36,15 +36,19 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'player' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'player',
         ],
 
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
+        'club' => [
+            'driver' => 'session',
+            'provider' => 'club',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
         ],
     ],
 
@@ -66,15 +70,20 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'player' => [
             'driver' => 'eloquent',
             'model' => App\Player::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'club' => [
+            'driver' => 'eloquent',
+            'model' => App\Club::class,
+        ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
     ],
 
     /*
@@ -93,8 +102,20 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'player' => [
+            'provider' => 'player',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'club' => [
+            'provider' => 'club',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admin' => [
+            'provider' => 'admin',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

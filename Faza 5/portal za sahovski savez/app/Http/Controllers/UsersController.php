@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Player;
+use App\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,11 +18,14 @@ class UsersController extends Controller
 	{
 		$credentials = $request->only('email', 'password');
 
-		if (Auth::attempt($credentials)) {
+		if (Auth::guard('player')->attempt($credentials)) {
 			return redirect('/');
-		}
-
-		return view('users.login');
+		} else if (Auth::guard('club')->attempt($credentials))
+			return redirect('/');
+		else if (Auth::guard('admin')->attempt($credentials))
+			return redirect('/');
+		else
+			return view('users.login');
 	}
 
 	public function register()
@@ -31,6 +35,7 @@ class UsersController extends Controller
 
 	public function registerPost(Request $request)
 	{
+
 		if ($request->password == $request->confirmPassword) {
 			$player = new Player();
 			$player->name = $request->name;

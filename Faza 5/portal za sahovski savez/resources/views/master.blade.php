@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title>@yield('title')</title>
     </head>
+    
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/"><img src="/images/logo.png" width="50" height="50" class="d-inline-block align-top" alt=""></a>
@@ -16,7 +17,7 @@
 
             <div class="collapse navbar-collapse justify-content-end " id="navbarSupportedContent">
     
-                @auth
+                @auth('player')
                     <h4>{{ Auth::user()->name. " ". Auth::user()->surname }}</h4>
 
                     <form action="/korisnici/logout" method="GET">
@@ -24,8 +25,16 @@
                     <form>
                 @endauth
 
+                @auth('admin')
+                    <h4>Admin</h4>
 
-                @guest
+                    <form action="/korisnici/logout" method="GET">
+                        <input type="submit" class="btn btn-danger ml-2" value="Odjava"/>
+                    <form>
+                @endauth
+
+
+                @guest('admin', 'club', 'player')
 
                 <form class="form-inline my-2 my-lg-0" action="/korisnici/login" method="POST">
                     @csrf
