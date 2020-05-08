@@ -15,12 +15,15 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->string("name");
             $table->string("surname");
-            $table->string("email");
-            $table->string("password");
             $table->date("birth_date");
-            $table->integer("rating");
+            $table->integer("rating")->nullable();
+            $table->timestamps();
         });
     }
 

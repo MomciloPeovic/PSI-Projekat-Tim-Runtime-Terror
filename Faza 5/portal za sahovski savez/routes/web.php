@@ -51,3 +51,8 @@ Route::post('/igrac/sudija/{id}', 'PlayerController@show'); // dodeljuje igracu 
 Route::get('/rokovi', 'AdminController@show'); // prikazuje trenutne rokove
 Route::post('/dodajRok', 'AdminController@show'); // dodaje rok
 Route::get('/korisnici', 'AdminController@show'); //dohvata korisnike koji cekaju da im se odobri registacija
+
+Route::get('/korisnici/login', 'UsersController@login');
+Route::post('/korisnici/login', 'UsersController@verifyLogin');
+
+Route::get('/korisnici/register', 'UsersController@register');
