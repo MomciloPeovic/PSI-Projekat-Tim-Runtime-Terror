@@ -24,7 +24,7 @@ Route::get('/igrac/{id}', 'PlayerController@getPlayer')->where('id', '[0-9]+');
 Route::get('/igrac/dodaj', 'PlayerController@addPlayer');
 Route::post('/igrac/dodaj', 'PlayerController@addOrEditPlayerPost');
 Route::get('/igrac/izmeni/{id}','PlayerController@editPlayer')->where('id', '[0-9]+');
-Route::post('/igrac/obrisi/{id}', 'PlayerController@')->where('id', '[0-9]+');
+Route::get('/igrac/obrisi/{id}', 'PlayerController@deletePlayer')->where('id', '[0-9]+');
 Route::post('/igrac/prijavaNaTurnir', 'PlayerController@');
 
 Route::get('/turnir', 'TournamentController@index');

@@ -14,9 +14,9 @@ class PlayerController extends Controller
     public function getPlayers()
     {
         $players = Player::all();
-        return view('players', [
-            'players' => $players
-        ]);
+            return view('players', [
+                'players' => $players
+            ]);
     }
 
     public function getPlayer($id)
@@ -65,6 +65,14 @@ class PlayerController extends Controller
     {
         $player = Player::where('id', $id)->first();
         return view('addPlayer')->with('player', $player);
+    }
+
+    public function deletePlayer($id)
+    {
+        if(Player::where('id',"=", $id)->first() != null)
+            Player::where('id','=',$id)->delete();
+
+        return view('home');
     }
 }
 
