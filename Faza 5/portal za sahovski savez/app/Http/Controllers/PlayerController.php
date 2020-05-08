@@ -11,11 +11,19 @@ class PlayerController extends Controller
     {
     }
 
-    public function show()
+    public function getPlayers()
     {
         $players = Player::all();
         return view('players', [
             'players' => $players
+        ]);
+    }
+
+    public function getPlayer($id)
+    {
+        $player = Player::where('id', $id)->get();
+        return view('players', [
+            'players' => $player
         ]);
     }
 
@@ -24,17 +32,39 @@ class PlayerController extends Controller
         return view('addPlayer');
     }
 
-    public function addPlayerPost(Request $request)
+    public function addOrEditPlayerPost(Request $request)
     {
-        Player::insert([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'email' => $request->email,
-            'password' => $request->password,
-            'birth_date' => $request->birth_date,
-            'rating' => $request->rating
-        ]);
+        $player = Player::where('id',"=", $request->id)->first();
+        if($player == null)
+        {
+            Player::insert([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'password' => $request->password,
+                'birth_date' => $request->birth_date,
+                'rating' => $request->rating
+            ]);
+        }
+        else
+        {
+            Player::where('id',$request->id)->update([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'password' => $request->password,
+                'birth_date' => $request->birth_date,
+                'rating' => $request->rating
+            ]);
+        }
 
         return view('home');
     }
+
+    public function editPlayer($id)
+    {
+        $player = Player::where('id', $id)->first();
+        return view('addPlayer')->with('player', $player);
+    }
 }
+
