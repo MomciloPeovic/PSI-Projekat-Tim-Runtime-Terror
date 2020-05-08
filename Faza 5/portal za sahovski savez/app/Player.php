@@ -23,6 +23,9 @@ class Player extends User
 		'password', 'remember_token',
 	];
 
+
+	public $timestamps = false;
+
 	public function tournaments()
 	{
 		return $this->belongsToMany('App\Tournament');
