@@ -4,5 +4,5 @@
 
     <h1>Doborodosli</h1>
     <br>
-    <a href="/igraci">Igraci</a>
+    <a href="/igrac">Igraci</a>
 @endsection

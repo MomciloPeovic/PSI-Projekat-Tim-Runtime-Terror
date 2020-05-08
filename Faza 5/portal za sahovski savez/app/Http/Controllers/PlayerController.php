@@ -18,4 +18,23 @@ class PlayerController extends Controller
             'players' => $players
         ]);
     }
+
+    public function addPlayer()
+    {
+        return view('addPlayer');
+    }
+
+    public function addPlayerPost(Request $request)
+    {
+        Player::insert([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'password' => $request->password,
+            'birth_date' => $request->birth_date,
+            'rating' => $request->rating
+        ]);
+
+        return view('home');
+    }
 }

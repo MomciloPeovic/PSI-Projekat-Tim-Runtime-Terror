@@ -20,11 +20,12 @@ Route::get('/home', 'HomeController@index');
 
 
 Route::get('/igrac', 'PlayerController@show');
-Route::get('/igrac/{id}', 'PlayerController@show');
-Route::post('/igrac/dodaj', 'PlayerController@show');
-Route::post('/igrac/izmeni/{id}', 'PlayerController@show');
-Route::post('/igrac/obrisi/{id}', 'PlayerController@show');
-Route::post('/igrac/prijavaNaTurnir', 'PlayerController@show');
+Route::get('/igrac/{id}', 'PlayerController@getPlayer')->where('id', '[0-9]+');;
+Route::get('/igrac/dodaj', 'PlayerController@addPlayer');
+Route::post('/igrac/dodaj', 'PlayerController@addPlayerPost');
+Route::post('/igrac/izmeni/{id}', 'PlayerController@');
+Route::post('/igrac/obrisi/{id}', 'PlayerController@');
+Route::post('/igrac/prijavaNaTurnir', 'PlayerController@');
 
 Route::get('/turnir', 'TournamentController@index');
 Route::get('/turnir/{id}', 'TournamentController@getTournament')->where('id', '[0-9]+');
