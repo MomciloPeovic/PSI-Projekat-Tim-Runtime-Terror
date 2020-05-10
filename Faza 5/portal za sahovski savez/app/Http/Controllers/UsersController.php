@@ -54,7 +54,12 @@ class UsersController extends Controller
 
 	public function logout()
 	{
-		Auth::logout();
+		if (Auth::guard('admin')->check())
+			Auth::guard('admin')->logout();
+		else if (Auth::guard('player')->check())
+			Auth::guard('player')->logout();
+		else if (Auth::guard('club')->check())
+			Auth::guard('club')->logout();
 
 		return redirect('/');
 	}

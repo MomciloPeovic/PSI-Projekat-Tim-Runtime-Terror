@@ -34,7 +34,7 @@
                 @endauth
 
 
-                @guest('admin', 'club', 'player')
+                @guest('admin') @guest('player') @guest('club')
 
                 <form class="form-inline my-2 my-lg-0" action="/korisnici/login" method="POST">
                     @csrf
@@ -44,10 +44,12 @@
                 </form>
                 
                 <a href="/korisnici/registracija"><button class="btn btn-primary my-2 my-sm-0">Registruj se</button></a>
-                @endguest
+                @endguest @endguest @endguest
             </div>
         </nav>
 
+        <div class="container">
         @yield('content')
+        </div>
     </body>
 </html>
