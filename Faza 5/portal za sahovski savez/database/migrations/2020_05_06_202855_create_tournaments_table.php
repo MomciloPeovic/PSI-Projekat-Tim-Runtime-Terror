@@ -23,6 +23,7 @@ class CreateTournamentsTable extends Migration
             $table->string("phone");
             $table->string("email");
             $table->integer("rounds");
+            $table->string("type");
         });
     }
 

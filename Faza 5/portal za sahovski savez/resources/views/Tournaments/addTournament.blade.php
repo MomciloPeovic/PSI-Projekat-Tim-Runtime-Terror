@@ -6,11 +6,20 @@
 
 <h1>Dodavanje takmicenja</h1>
 <div class="row">
-	<form class="col-4" action='/turnir/dodaj' method="POST">
+	<form class="col-xl-8" action='/turnir/dodaj' method="POST">
+		
 		@csrf
 		<div class="form-group">
 			<label class="label-form">Naziv</label>
 			<input type="text" class="form-control" name='name'>
+		</div>
+
+		<div class="form-group">
+			<label class="label-form">Tip turnira:</label>
+			<select class="form-control" name="type">
+				<option value="club">Ekipno</option>
+				<option value="player">Pojedinacni</option>
+			</select>
 		</div>
 
 		<div class="form-group">
@@ -44,7 +53,7 @@
 		</div>
 
 		<div class="form-group">
-			<input type="submit" class="btn btn-primary">
+			<input type="submit" class="btn btn-primary" value="Potvrdi">
 		</div>
 	</form>
 </div>

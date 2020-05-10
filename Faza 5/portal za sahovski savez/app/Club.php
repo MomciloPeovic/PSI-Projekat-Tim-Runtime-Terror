@@ -14,4 +14,9 @@ class Club extends User
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function tournaments()
+    {
+        return $this->belongsToMany('App\Tournament');
+    }
 }
