@@ -51,10 +51,10 @@
                     @csrf
                     <input class="form-control mr-sm-2" type="email" name="email" placeholder="Email" aria-label="Email">
                     <input class="form-control mr-sm-2" type="password" placeholder="Lozinka" aria-label="Lozinka" name="password">
-                    <input type="submit" class="btn btn-success my-2 my-sm-0 mr-2" value="Uloguj se"/>
+                    <input type="submit" class="btn btn-success my-2 my-sm-0 mr-2" value="Prijavite se"/>
                 </form>
                 
-                <a href="/korisnici/registracija"><button class="btn btn-primary my-2 my-sm-0">Registruj se</button></a>
+                <a href="/korisnici/registracija"><button class="btn btn-primary my-2 my-sm-0">Registrujte se</button></a>
                 @endguest @endguest @endguest
             </div>
         </nav>

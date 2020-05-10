@@ -37,7 +37,6 @@ Route::post('/turnir/dodajRezultat', 'TournamentController@show');
 Route::post('turnir/{idTurnir}/prijavaIgraca/{idIgrac}', 'TournamentController@playerRegistration')->where('idTurnir', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaKluba/{idKlub}', 'TournamentController@clubRegistration')->where('idTurnir', '[0-9]+')->where('idKlub', '[0-9]+');
 
-
 Route::get('/klub', 'ClubController@show');
 Route::get('/klub/{id}', 'ClubController@show');
 Route::post('/klub/dodaj', 'ClubController@show');

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Tournament extends Model
 {
@@ -15,5 +16,21 @@ class Tournament extends Model
 
 		else
 			return null;
+	}
+
+	public function isPlayerParticipating($id)
+	{
+		if ($this->participants()->where('id', Auth::guard('player')->user()->id)->first() != null)
+			return true;
+
+		return false;
+	}
+
+	public function isClubParticipating($id)
+	{
+		if ($this->participants()->where('id', Auth::guard('club')->user()->id)->first() != null)
+			return true;
+
+		return false;
 	}
 }

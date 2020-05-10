@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
 use App\Player;
 use Illuminate\Http\Request;
 use App\Tournament;
+use Illuminate\Support\Facades\Auth;
 
 class TournamentController extends Controller
 {
@@ -48,7 +50,7 @@ class TournamentController extends Controller
             'type' => $request->type
         ]);
 
-        return view('home');
+        return redirect()->action('TournamentController@index');
     }
 
     public function playerRegistration(Request $request)
@@ -57,19 +59,20 @@ class TournamentController extends Controller
 
         $tournament = Tournament::where('id', $request->idTurnir)->first();
 
-        $tournament->participants()->sync($player);
+        $tournament->participants()->toggle($player);
 
-        return redirect('TournamentsController@index');
+        return redirect()->action('TournamentController@index');
     }
 
     public function clubRegistration(Request $request)
     {
-        $player = Player::where('id', $request->idKlub)->get();
+        $club = Club::where('id', $request->idKlub)->get();
 
         $tournament = Tournament::where('id', $request->idTurnir)->first();
 
-        $tournament->participants()->sync($player);
 
-        return redirect('TournamentsController@index');
+        $tournament->participants()->toggle($club);
+
+        return redirect()->action('TournamentController@index');
     }
 }
