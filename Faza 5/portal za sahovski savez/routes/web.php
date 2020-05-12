@@ -37,12 +37,15 @@ Route::post('/turnir/dodajRezultat', 'TournamentController@show');
 Route::post('turnir/{idTurnir}/prijavaIgraca/{idIgrac}', 'TournamentController@playerRegistration')->where('idTurnir', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaKluba/{idKlub}', 'TournamentController@clubRegistration')->where('idTurnir', '[0-9]+')->where('idKlub', '[0-9]+');
 
-Route::get('/klub', 'ClubController@show');
-Route::get('/klub/{id}', 'ClubController@show');
-Route::post('/klub/dodaj', 'ClubController@show');
-Route::post('/klub/izmeni/{id}', 'ClubController@show');
-Route::post('/klub/obrisi/{id}', 'ClubController@show');
-Route::post('/klub/prijavaNaTurnir', 'ClubController@show');
+Route::get('/klub', 'ClubController@getClubs');
+Route::get('/klub/{id}', 'ClubController@getClub')->where('id', '[0-9]+');
+Route::get('/klub/dodaj', 'ClubController@addClub');
+Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+');
+Route::get('/klub/obrisi/{id}', 'ClubController@deleteClub')->where('id', '[0-9]+');
+Route::post('/klub/dodaj', 'ClubController@addClubPost');
+Route::post('/klub/izmeni/{id}', 'ClubController@editClubPost')->where('id', '[0-9]+');
+Route::post('/klub/{idKlub}/prijavaNaTurnir/{idTurnir}', 'ClubController@tournamentRegistration')->where('idKlub', '[0-9]+')->where('idTurnir', '[0-9]+');
+Route::post('/klub/{idKlub}/dajOtkazIgracu/{idIgrac}', 'ClubController@firePlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 
 Route::get('/sudija', 'PlayerController@show'); // prikazuje sve sudije
 Route::get('/sudija/{id}', 'PlayerController@show'); // prikazuje detalje sudije
