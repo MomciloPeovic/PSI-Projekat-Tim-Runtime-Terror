@@ -23,6 +23,9 @@
                      <li class="nav-item">
                        <a class="nav-link text-dark" href="/turnir"> Turniri</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/igrac"> Igraci</a>
+                     </li>
                 </ul>
             </div>
 
