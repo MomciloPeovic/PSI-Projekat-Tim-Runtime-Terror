@@ -25,4 +25,9 @@ class Player extends User
 	{
 		return $this->belongsToMany('App\Tournament');
 	}
+
+	public function club()
+	{
+		return $this->belongsTo('App\Club');
+	}
 }

@@ -19,4 +19,9 @@ class Club extends User
     {
         return $this->belongsToMany('App\Tournament');
     }
+
+    public function players()
+    {
+        return $this->hasMany('App\Player');
+    }
 }
