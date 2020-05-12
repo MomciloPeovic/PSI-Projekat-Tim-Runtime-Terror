@@ -72,7 +72,7 @@
                 <th scope="col">Ime</th>
                 <th scope="col">Prezime</th>
                 <th scope="col">Rejting</th>
-                <th scope="col" class="sudija">Vise</th>
+                <th scope="col" class="sudija">Vise Info</th>
               </tr>
             </thead>
             <tbody>
