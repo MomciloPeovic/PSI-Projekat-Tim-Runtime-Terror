@@ -70,22 +70,14 @@
               </tr>
             </thead>
           <tbody>
-                        
-            @php
-            $i = 1
-            @endphp
 
             @foreach($clubs as $club)
             <tr>
-            <th scope="row">{{ i + 1 }}</th>
-                <td>{{ $i }}</td>                
+                <td>{{ $loop->index + 1 }}</td>                
                 <td>{{ $club->name }}</td>
-                <td>{{ $club->players()->count() }}</td>
+                <td> {{ 0 }} </td>         
                 <td>{{ $club->rating }}</td>
                 <td><a class="btn btn-primary" href="klub/{{ $club->id }}">+</a></td>
-                @php
-                $i++;
-                @endphp
             </tr>
             @endforeach
 
