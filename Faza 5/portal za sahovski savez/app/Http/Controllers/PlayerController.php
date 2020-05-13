@@ -24,7 +24,7 @@ class PlayerController extends Controller
         $player = Player::where('id', $id)->first();
         return view('player_info')->with('player',$player);
     }
-
+    
     public function addPlayer()
     {
         return view('addPlayer');
@@ -46,7 +46,7 @@ class PlayerController extends Controller
         }
         else
         {
-            Player::where('id',$request->id)->update([
+            Player::where('id', $request->id)->update([
                 'name' => $request->name,
                 'surname' => $request->surname,
                 'email' => $request->email,

@@ -8,8 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Club extends User
 {
-
-use Notifiable;
+    use Notifiable;
 
     protected $fillable = [
         'name', 'email', 'password', 'founded', 'address', 'phone'
@@ -18,6 +17,8 @@ use Notifiable;
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+	public $timestamps = false;
 
     public function tournaments()
     {
