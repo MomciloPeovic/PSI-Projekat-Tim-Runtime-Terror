@@ -30,4 +30,21 @@ class Player extends User
 	{
 		return $this->belongsTo('App\Club');
 	}
+
+	public function isArbiter()
+	{
+		if ($this->belongsTo('App\ArbiterRank', 'arbiter_rank_id')->first() != null)
+			return true;
+
+		return false;
+	}
+
+	public function getArbiterRank()
+	{
+		if ($this->isArbiter()) {
+			return $this->belongsTo('App\ArbiterRank', 'arbiter_rank_id')->first()->name;
+		}
+
+		return null;
+	}
 }
