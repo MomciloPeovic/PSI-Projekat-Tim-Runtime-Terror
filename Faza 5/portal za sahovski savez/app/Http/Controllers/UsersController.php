@@ -76,7 +76,7 @@ class UsersController extends Controller
 			'name' => 'required',
 			'surname' => 'required',
 			'email' => 'required|unique:players|email',
-			'birt_date' => 'required|date',
+			'birth_date' => 'required|date',
 			'password' => 'required',
 			'confirmPassword' => 'required|same:password',
 		], $errorMessages);

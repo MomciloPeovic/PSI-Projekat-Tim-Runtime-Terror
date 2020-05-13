@@ -23,6 +23,7 @@ class CreatePlayersTable extends Migration
             $table->string("surname");
             $table->date("birth_date");
             $table->integer("rating")->nullable();
+            $table->integer('arbiter_rank_id')->nullable();
             $table->timestamps();
         });
     }
