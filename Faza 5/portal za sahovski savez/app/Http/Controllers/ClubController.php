@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\Player;
+use App\Tournament;
 use Illuminate\Http\Request;
 
 class ClubController extends Controller
@@ -14,9 +16,9 @@ class ClubController extends Controller
     public function getClubs()
     {
         $clubs = Club::all();
-            return view('clubs.clubs', [
-                'clubs' => $clubs
-            ]);
+        return view('clubs.clubs', [
+            'clubs' => $clubs
+        ]);
     }
 
     public function getClub($id)
@@ -37,13 +39,13 @@ class ClubController extends Controller
         Club::insert([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
             'founded' => $request->founded,
             'address' => $request->address,
             'phone' => $request->phone
         ]);
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('HomeController@index');
     }
 
     public function editClub($id)
@@ -54,8 +56,8 @@ class ClubController extends Controller
 
     public function editClubPost(Request $request)
     {
-        $club = Club::where('id',"=", $request->id)->first();
-        Club::where('id',$request->id)->update([
+        $club = Club::where('id', "=", $request->id)->first();
+        Club::where('id', $request->id)->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
@@ -69,8 +71,8 @@ class ClubController extends Controller
 
     public function deleteClub($id)
     {
-        if(Club::where('id',"=", $id)->first() != null)
-            Club::where('id','=',$id)->delete();
+        if (Club::where('id', "=", $id)->first() != null)
+            Club::where('id', '=', $id)->delete();
 
         return view('home');
     }
@@ -92,12 +94,12 @@ class ClubController extends Controller
 
         $player = Player::where('id', $request->idIgrac)->get();
 
-        
+
 
         return redirect()->action('ClubController@index');
     }
 
-    public function answerPlayer(Request $request) 
+    public function answerPlayer(Request $request)
     {
         $club = Club::where('id', $request->idKlub)->first();
 

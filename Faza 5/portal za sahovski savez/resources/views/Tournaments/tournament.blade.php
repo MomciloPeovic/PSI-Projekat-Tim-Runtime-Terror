@@ -39,7 +39,7 @@
 						@foreach($tournament->participants as $participant)
 						<tr>
 							<th scope="row">1.</th>
-							<td>{{ $participant->name }}</td>
+							<td>{{ $participant->name }} @if($tournament->type='player') {{$participant->surname }} @endif</td>
 							<td>0</td>
 						</tr>
 						@endforeach
@@ -131,39 +131,24 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Ime i prezime</th>
-							<th scope="col">Drzava</th>
+							<th scope="col">Datum rodjenja</th>
 							<th scope="col">Rejting</th>
 						</tr>
 					</thead>
 
 					<tbody>
+						@foreach($tournament->participants as $participant)
 						<tr>
-							<th scope="row">1.</th>
-							<td>Petar Petrovic</td>
-							<td>SRB</td>
-							<td>2100</td>
+							@if($tournament->type='player')
+							<th scope="row">{{ $loop->index }}</th>
+							<td>{{ $participant->name }}  {{$participant->surname }}</td>
+							<td>{{ date('d.m.Y.', strtotime($participant->birth_date)) }}</td>
+							<td>{{ $participant->rating }}</td>
+							 @endif
 						</tr>
+						@endforeach
 
-						<tr>
-							<th scope="row">2.</th>
-							<td>Marko Markovic</td>
-							<td>SRB</td>
-							<td>2050</td>
-						</tr>
-
-						<tr>
-							<th scope="row">3.</th>
-							<td>Nikola Nikolic</td>
-							<td>SRB</td>
-							<td>2000</td>
-						</tr>
-
-						<tr>
-							<th scope="row">4.</th>
-							<td>Nemenja Nemanjic</td>
-							<td>SRB</td>
-							<td>1700</td>
-						</tr>
+						
 					</tbody>
 				</table>
 			</div>

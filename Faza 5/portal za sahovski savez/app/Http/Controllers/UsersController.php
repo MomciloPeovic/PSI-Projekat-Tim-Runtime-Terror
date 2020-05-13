@@ -38,7 +38,7 @@ class UsersController extends Controller
 		], $errorMessages);
 
 		if ($validator->fails()) {
-			return redirect()->back()
+			return redirect()->action('UsersController@login')
 				->withErrors($validator)
 				->withInput($request->all());
 		}
@@ -67,7 +67,7 @@ class UsersController extends Controller
 		$errorMessages = [
 			'required' => 'Unesite :attribute',
 			'email.email' => 'Unesite ispravan email!',
-			'email.unique' => 'Postoji igrac sa ovim email-om!',
+			'email.unique' => 'Postoji korisnik sa ovim email-om!',
 			'confirmPassword.same' => 'Lozinke se ne poklapaju',
 			'birth_date.date' => 'Datum rodjenja mora biti u formi datuma'
 		];
@@ -75,15 +75,16 @@ class UsersController extends Controller
 		$validator = Validator::make($request->all(), [
 			'name' => 'required',
 			'surname' => 'required',
-			'email' => 'required|unique:players|email',
+			'email' => 'required|email|unique:players|unique:clubs|unique:admins',
 			'birth_date' => 'required|date',
 			'password' => 'required',
 			'confirmPassword' => 'required|same:password',
+			'gender' => 'required'
 		], $errorMessages);
 
 
 		if ($validator->fails()) {
-			return redirect()->back()
+			return redirect()->action('UsersController@register')
 				->withErrors($validator)
 				->withInput($request->all());
 		}
@@ -93,8 +94,10 @@ class UsersController extends Controller
 			$player->name = $request->name;
 			$player->surname = $request->surname;
 			$player->email = $request->email;
+			$player->gender = $request->gender;
 			$player->birth_date = $request->birth_date;
 			$player->password = bcrypt($request->password);
+			$player->confirmed = false;
 
 			$player->save();
 
