@@ -15,7 +15,7 @@ class ClubController extends Controller
     {
         $clubs = Club::all();
             return view('clubs.clubs', [
-                'clubs' => $clubs
+                'clubs' => Club::orderByDesc('founded')->get()
             ]);
     }
 
@@ -43,7 +43,11 @@ class ClubController extends Controller
             'phone' => $request->phone
         ]);
 
-        return redirect()->action('ClubController@index');
+        $data = array("name" => $name,"email" => $email,"password" => $password,"founded" => $founded, "address" => $address, "phone" => $phone);
+        DB::table('clubs')->insert($data);
+        echo "Uspeno ste uneli klub.<br/>";
+
+        return redirect()->action('ClubController@getClubs');
     }
 
     public function editClub($id)
@@ -64,7 +68,7 @@ class ClubController extends Controller
             'phone' => $request->phone
         ]);
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('ClubController@getClubs');
     }
 
     public function deleteClub($id)
@@ -83,7 +87,7 @@ class ClubController extends Controller
 
 
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('ClubController@getClubs');
     }
 
     public function firePlayer(Request $request)
@@ -94,7 +98,7 @@ class ClubController extends Controller
 
         
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('ClubController@getClubs');
     }
 
     public function answerPlayer(Request $request) 
@@ -105,6 +109,6 @@ class ClubController extends Controller
 
 
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('ClubController@getClubs');
     }
 }
