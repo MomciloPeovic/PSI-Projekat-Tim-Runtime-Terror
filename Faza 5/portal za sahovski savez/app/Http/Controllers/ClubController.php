@@ -6,6 +6,7 @@ use App\Club;
 use App\Player;
 use App\Tournament;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClubController extends Controller
 {
@@ -17,7 +18,7 @@ class ClubController extends Controller
     {
         $clubs = Club::all();
         return view('clubs.clubs', [
-            'clubs' => $clubs
+            'clubs' => Club::orderByDesc('founded')->get()
         ]);
     }
 
@@ -45,7 +46,11 @@ class ClubController extends Controller
             'phone' => $request->phone
         ]);
 
-        return redirect()->action('HomeController@index');
+        $data = array("name" => $request->name, "email" => $request->email, "password" => $request->password, "founded" => $request->founded, "address" => $request->address, "phone" => $request->phone);
+        DB::table('clubs')->insert($data);
+        echo "Uspeno ste uneli klub.<br/>";
+
+        return redirect()->action('ClubController@getClubs');
     }
 
     public function editClub($id)
@@ -66,7 +71,7 @@ class ClubController extends Controller
             'phone' => $request->phone
         ]);
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('ClubController@getClubs');
     }
 
     public function deleteClub($id)
@@ -85,7 +90,7 @@ class ClubController extends Controller
 
 
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('ClubController@getClubs');
     }
 
     public function firePlayer(Request $request)
@@ -96,7 +101,7 @@ class ClubController extends Controller
 
 
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('ClubController@getClubs');
     }
 
     public function answerPlayer(Request $request)
@@ -107,6 +112,6 @@ class ClubController extends Controller
 
 
 
-        return redirect()->action('ClubController@index');
+        return redirect()->action('ClubController@getClubs');
     }
 }
