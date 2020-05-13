@@ -15,7 +15,7 @@ class ClubController extends Controller
     {
         $clubs = Club::all();
             return view('clubs.clubs', [
-                'clubs' => $club
+                'clubs' => Club::orderByDesc('founded')->get()
             ]);
     }
 
