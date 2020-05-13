@@ -5,7 +5,7 @@
 <div class="container-fluid mt-1 ml-5">
 <div id="igrac-profil">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3 mt-4">
 
             <div class="text-center">
                 <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="width: 500px"
@@ -17,7 +17,7 @@
             <hr>
             <a href="/igrac" class="badge badge-primary"> < Nazad</a>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 mt-4">
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
 
@@ -100,7 +100,7 @@
                             </p>
 
                             <div class="alert alert-info" for="last_name"><label for="male">
-                                    <h5>??</h5>
+                                    <h5>{{$player->gender}}</h5>
                                 </label><br></div>
                         </div>
                     </div>

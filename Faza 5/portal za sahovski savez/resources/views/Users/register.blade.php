@@ -40,8 +40,8 @@
 						<div class="form-group">
 							<label for="gender" class="label-form">Pol</label>
 							<select type="text" class="form-control" name="gender" required>
-								<option value="male">Musko</option>
-								<option value="female">Zensko</option>
+								<option value="Musko">Musko</option>
+								<option value="Zensko">Zensko</option>
 							</select>
 							@error('gender')
 							<span class="text-danger">{{ $message }}</span>
@@ -96,31 +96,56 @@
 						<div class="form-group">
 							<label class="label-form">Naziv</label>
 							<input type="text" class="form-control" name='name'>
+							@error('name')
+							<span class="text-danger">{{ $message }}</span>
+							@enderror
 						</div>
 
 						<div class="form-group">
 							<label class="label-form">Email</label>
 							<input type="email" class="form-control" name='email'>
-						</div>
-
-						<div class="form-group">
-							<label class="label-form">Lozinka</label>
-							<input type="password" class="form-control" name='password'>
-						</div>
+							@error('email')
+							<span class="text-danger">{{ $message }}</span>
+							@enderror
+						</div>						
 
 						<div class="form-group">
 							<label class="label-form">Founded</label>
 							<input type="date" class="form-control" name='founded'>
+							@error('date')
+							<span class="text-danger">{{ $message }}</span>
+							@enderror
 						</div>
 
 						<div class="form-group">
 							<label class="label-form">Adresa</label>
 							<input type="text" class="form-control" name='address'>
+							@error('address')
+							<span class="text-danger">{{ $message }}</span>
+							@enderror
 						</div>
 
 						<div class="form-group">
 							<label class="label-form">Telefon</label>
 							<input type="phone" class="form-control" name='phone'>
+							@error('phone')
+							<span class="text-danger">{{ $message }}</span>
+							@enderror
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="label-form">Lozinka</label>
+							<input type="password" class="form-control" name="password" required/>
+							@error('password')
+							<span class="text-danger">{{ $message }}</span>
+							@enderror
+						</div>
+						<div class="form-group">
+							<label for="confirmPassword" class="label-form">Potvrda lozinke</label>
+							<input type="password" class="form-control" name="confirmPassword" required/>
+							@error('confirmPassword')
+							<span class="text-danger">{{ $message }}</span>
+							@enderror
 						</div>
 
 						<div class="form-group">

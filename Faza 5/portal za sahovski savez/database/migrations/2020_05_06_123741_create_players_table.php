@@ -20,8 +20,8 @@ class CreatePlayersTable extends Migration
             $table->rememberToken();
             $table->string("name");
             $table->string("surname");
-            $table->string('gender');
-            $table->boolean('confirmed');
+            $table->string("gender");
+            $table->boolean('confirmed')->default(false);
             $table->date("birth_date");
             $table->integer("rating")->nullable();
             $table->integer('arbiter_rank_id')->nullable();

@@ -93,7 +93,7 @@ class ClubController extends Controller
 
         $player = Player::where('id', $request->idIgrac)->get();
 
-
+        
 
         return view('home');
     }

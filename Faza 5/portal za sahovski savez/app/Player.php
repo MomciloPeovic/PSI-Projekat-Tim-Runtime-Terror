@@ -11,7 +11,7 @@ class Player extends User
 	use Notifiable;
 
 	protected $fillable = [
-		'name', 'surname', 'email', 'password', 'rating', 'birth_date'
+		'name', 'surname', 'gender', 'email', 'password', 'rating', 'birth_date'
 	];
 
 	protected $hidden = [

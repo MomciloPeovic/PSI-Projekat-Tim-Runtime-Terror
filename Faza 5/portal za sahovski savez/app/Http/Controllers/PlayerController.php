@@ -38,6 +38,7 @@ class PlayerController extends Controller
             Player::insert([
                 'name' => $request->name,
                 'surname' => $request->surname,
+                'gender' => $request->gender,
                 'email' => $request->email,
                 'password' => $request->password,
                 'birth_date' => $request->birth_date,
@@ -49,6 +50,7 @@ class PlayerController extends Controller
             Player::where('id', $request->id)->update([
                 'name' => $request->name,
                 'surname' => $request->surname,
+                'gender' => $request->gender,
                 'email' => $request->email,
                 'password' => $request->password,
                 'birth_date' => $request->birth_date,
