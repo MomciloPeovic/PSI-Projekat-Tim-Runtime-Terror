@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Notifications\Notifiable;
 
 class Club extends User
 {
+
+use Notifiable;
+
     protected $fillable = [
         'name', 'email', 'password', 'founded', 'address', 'phone'
     ];

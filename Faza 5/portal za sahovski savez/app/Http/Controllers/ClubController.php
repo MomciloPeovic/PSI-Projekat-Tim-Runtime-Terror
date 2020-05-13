@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
 use Illuminate\Http\Request;
 
 class ClubController extends Controller
@@ -10,17 +11,10 @@ class ClubController extends Controller
     {
     }
 
-    public function index()
-    {
-        return view('clubs.clubs', [
-            'clubs' => Club::orderByDesc('founded')->orderByAsc('name')->get()
-        ]);
-    }
-
     public function getClubs()
     {
         $clubs = Club::all();
-            return view('clubs', [
+            return view('clubs.clubs', [
                 'clubs' => $clubs
             ]);
     }
@@ -28,7 +22,7 @@ class ClubController extends Controller
     public function getClub($id)
     {
         $club = Club::where('id', $id)->get();
-        return view('club', [
+        return view('clubs.club', [
             'club' => $club
         ]);
     }
@@ -99,6 +93,17 @@ class ClubController extends Controller
         $player = Player::where('id', $request->idIgrac)->get();
 
         
+
+        return redirect()->action('ClubController@index');
+    }
+
+    public function answerPlayer(Request $request) 
+    {
+        $club = Club::where('id', $request->idKlub)->first();
+
+        $player = Player::where('id', $request->idIgrac)->get();
+
+
 
         return redirect()->action('ClubController@index');
     }

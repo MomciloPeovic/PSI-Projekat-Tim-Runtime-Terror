@@ -46,6 +46,7 @@ Route::post('/klub/dodaj', 'ClubController@addClubPost');
 Route::post('/klub/izmeni/{id}', 'ClubController@editClubPost')->where('id', '[0-9]+');
 Route::post('/klub/{idKlub}/prijavaNaTurnir/{idTurnir}', 'ClubController@tournamentRegistration')->where('idKlub', '[0-9]+')->where('idTurnir', '[0-9]+');
 Route::post('/klub/{idKlub}/dajOtkazIgracu/{idIgrac}', 'ClubController@firePlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
+Route::post('/klub/{idKlub}/odgovoriNaZahtev/{idIgrac}', 'ClubController@answerPlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 
 Route::get('/sudija', 'PlayerController@show'); // prikazuje sve sudije
 Route::get('/sudija/{id}', 'PlayerController@show'); // prikazuje detalje sudije
