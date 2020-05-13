@@ -41,7 +41,6 @@ Route::get('/klub/dodaj', 'ClubController@addClub');
 Route::get('/klub/obrisi/{id}', 'ClubController@deleteClub')->where('id', '[0-9]+');
 Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+');
 Route::post('/klub/dodaj', 'ClubController@addOrEditClubPost');
-Route::post('/klub/{idKlub}/prijavaNaTurnir/{idTurnir}', 'ClubController@tournamentRegistration')->where('idKlub', '[0-9]+')->where('idTurnir', '[0-9]+');
 Route::post('/klub/{idKlub}/dajOtkazIgracu/{idIgrac}', 'ClubController@firePlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('/klub/{idKlub}/odgovoriNaZahtev/{idIgrac}', 'ClubController@answerPlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 

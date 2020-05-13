@@ -76,24 +76,13 @@ class ClubController extends Controller
         return view('home');
     }
 
-    public function tournamentRegistration(Request $request)
-    {
-        $club = Club::where('id', $request->idKlub)->first();
-
-        $tournament = Tournament::where('id', $request->idTurnir)->get();
-
-
-
-        return view('home');
-    }
-
     public function firePlayer(Request $request)
     {
         $club = Club::where('id', $request->idKlub)->first();
 
         $player = Player::where('id', $request->idIgrac)->get();
 
-
+        $club->players()->toggle($player);
 
         return view('home');
     }
