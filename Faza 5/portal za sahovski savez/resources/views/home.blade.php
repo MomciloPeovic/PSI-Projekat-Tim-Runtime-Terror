@@ -3,13 +3,17 @@
 @section('content-no-container')
 
 <script>
-    function prikazi_igrace() {
+    function prikazi_igrace(strana_ = 1) {
       let ime_filter = document.getElementById("ime_filter").value;
+      let pol_filter = document.getElementById("pol_filter").value;
+      let min_rejting_filter = document.getElementById("min_rejting_filter").value;
+      let max_rejting_filter = document.getElementById("max_rejting_filter").value;
+      let strana = strana_;
 
       $.ajax({
         type: "POST",
         url: "/igrac",
-        data: {_token:'<?php echo csrf_token();?>',ime_filter:ime_filter},
+        data: {_token:'<?php echo csrf_token();?>',ime_filter:ime_filter,pol_filter,pol_filter,min_rejting_filter:min_rejting_filter,max_rejting_filter:max_rejting_filter,strana:strana},
         success: function (data) {
           document.getElementById("igraci_tabla").innerHTML = data;
           return;
@@ -21,6 +25,9 @@
     }
     window.onload = function(){prikazi_igrace();}
     $(document).on('keyup','#ime_filter',function(){prikazi_igrace();});
+    $(document).on('keyup','#min_rejting_filter',function(){prikazi_igrace();});
+    $(document).on('keyup','#max_rejting_filter',function(){prikazi_igrace();});
+    $(document).on('change','#pol_filter',function(){prikazi_igrace();});
 
 </script>
 
@@ -67,18 +74,11 @@
                 </header>
                 <div class="filter-content">
                   <div class="card-body">
-                    <label class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadio" value="">
-                      <span class="form-check-label">
-                        Musko
-                      </span>
-                    </label>
-                    <label class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadio" value="">
-                      <span class="form-check-label">
-                        Zensko
-                      </span>
-                    </label>
+                      <select class="form-control" id = "pol_filter">
+                        <option value="Svi" selected>Svi</option>
+                        <option value="Muski">Muski</option>
+                        <option value="Zenski">Zenski</option>
+                      </select>
                   </div> <!-- card-body.// -->
                 </div>
               </article> <!-- card-group-item.// -->
@@ -92,11 +92,11 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label>Min</label>
-                        <input type="number" class="form-control" id="inputEmail4" placeholder="0">
+                        <input type="number" class="form-control" placeholder="0" id="min_rejting_filter">
                       </div>
                       <div class="form-group col-md-6 text-right">
                         <label>Max</label>
-                        <input type="number" class="form-control" placeholder="3000">
+                        <input type="number" class="form-control" placeholder="3000" id="max_rejting_filter">
                       </div>
                     </div>
                   </div> <!-- card-body.// -->
@@ -107,7 +107,7 @@
           <!-- /FILERI IGRACI -->
 
           <!-- TABELA IGRACI -->
-          <table class="table table-hover col-sm-9">
+          <table class="table col-sm-9">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
