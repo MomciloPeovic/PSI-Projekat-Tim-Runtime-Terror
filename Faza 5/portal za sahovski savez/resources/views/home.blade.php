@@ -107,7 +107,7 @@
           <!-- /FILERI IGRACI -->
 
           <!-- TABELA IGRACI -->
-          <table class="table table-hover col-sm-9">
+          <table class="table col-sm-9">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
