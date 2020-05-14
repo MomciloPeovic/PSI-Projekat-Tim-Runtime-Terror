@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Player;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlayerController extends Controller
 {
     public function __construct()
     {
+        
     }
 
     public function getPlayers()
@@ -17,6 +19,11 @@ class PlayerController extends Controller
             return view('players.players', [
                 'players' => $players
             ]);
+    }
+
+    public function getPlayersPost(Request $data)
+    {
+        return view('players.players_table')->with('data',$data);
     }
 
     public function getPlayer($id)
@@ -76,7 +83,7 @@ class PlayerController extends Controller
 
     public function sendRequestToClub(Request $request)
     {  
-        \DB::table('player_club_request')->insert([
+        DB::table('player_club_request')->insert([
             'player_id' => $request->player_id,
             'club_id' => $request->club_id,
             'club' => false
@@ -93,11 +100,10 @@ class PlayerController extends Controller
     
     public function leaveClub($id)
     {
-        
-        $veza = \DB::table('club_player')->where('player_id','=',$id)->first();
+        $veza = DB::table('club_player')->where('player_id','=', $id)->first();
         if($veza != null)
         {
-            \DB::table('club_player')->where('player_id','=',$id)->delete();
+            DB::table('club_player')->where('player_id','=',$id)->delete();
         }
         return view('home');
     }
