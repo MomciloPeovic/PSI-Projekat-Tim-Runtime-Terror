@@ -2,6 +2,8 @@
 @section('title','Informacije o igracu')
 @section('content')
 
+<form action="/igrac/dodaj" method="POST">
+@csrf
 <div class="container-fluid mt-1 ml-5">
 <div id="igrac-profil">
     <div class="row">
@@ -19,16 +21,30 @@
         </div>
         <div class="col-sm-4 mt-4">
             <div class="tab-content">
+                @auth('player')
+                @if(Auth::user()->id == $player->id)
+                    <input type="hidden" name="id" value="{{Auth::user()->id}}">
+                @endif
+                @endauth
                 <div class="tab-pane active" id="home">
 
-                
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="first_name">
                                     <h4>Ime</h4>
                                 </label>
                                 <div class="alert alert-info" for="first_name">
-                                    <h5>{{$player->name}}</h5>
+                                    @auth('player')
+                                    @if(Auth::user()->id == $player->id)
+                                        <input type="text" class="form-control" value="{{$player->name}}" name="name" required>
+                                    @else
+                                        <h5>{{$player->name}}</h5>
+                                    @endif
+                                    @endauth
+                                    
+                                    @guest('admin') @guest('player') @guest('club')
+                                        <h5>{{$player->name}}</h5>
+                                    @endguest @endguest @endguest
                                 </div>
                             </div>
                         </div>
@@ -38,7 +54,17 @@
                                     <h4>Prezime</h4>
                                 </label>
                                 <div class="alert alert-info" for="last_name">
-                                    <h5>{{$player->surname}}</h5>
+                                    @auth('player')
+                                    @if(Auth::user()->id == $player->id)
+                                        <input type="text" class="form-control" value="{{$player->surname}}" name="surname" required>
+                                    @else
+                                        <h5>{{$player->surname}}</h5>
+                                    @endif
+                                    @endauth
+
+                                    @guest('admin') @guest('player') @guest('club')
+                                        <h5>{{$player->surname}}</h5>
+                                    @endguest @endguest @endguest
                                 </div>
                             </div>
                         </div>
@@ -49,6 +75,8 @@
                                     <h4>Kucni telefon</h4>
                                 </label>
                                 <div class="alert alert-info" for="last_name">
+
+
                                     <h5>??</h5>
                                 </div>
                             </div>
@@ -71,7 +99,17 @@
                                     <h4>E-mail</h4>
                                 </label>
                                 <div class="alert alert-info" for="last_name">
-                                    <h5>{{$player->email}}</h5>
+                                    @auth('player')
+                                    @if(Auth::user()->id == $player->id)
+                                        <input type="text" class="form-control" value="{{$player->email}}" name="email" required>
+                                    @else
+                                        <h5>{{$player->email}}</h5>
+                                    @endif
+                                    @endauth
+
+                                    @guest('admin') @guest('player') @guest('club')
+                                        <h5>{{$player->email}}</h5>
+                                    @endguest @endguest @endguest
                                 </div>
                             </div>
                         </div>
@@ -99,9 +137,24 @@
                                 <h4>Pol</h4>
                             </p>
 
-                            <div class="alert alert-info" for="last_name"><label for="male">
+                            <div class="alert alert-info" for="last_name">
+                                @auth('player')
+                                @if(Auth::user()->id == $player->id)
+                                    <select class="form-control" name="gender" required>
+                                        <option value="{{$player->gender}}" selected>{{$player->gender}}</option>
+                                        <option value="Musko">Musko</option>
+                                        <option value="Zensko">Zensko</option>
+                                    </select>
+                                @else
                                     <h5>{{$player->gender}}</h5>
-                                </label><br></div>
+                                @endif
+                                @endauth
+
+                                @guest('admin') @guest('player') @guest('club')
+                                    <h5>{{$player->gender}}</h5>
+                                @endguest @endguest @endguest
+
+                            </div>
                         </div>
                     </div>
 
@@ -111,10 +164,19 @@
                                 <h4>Datum rodjenja</h4>
                             </label>
                             <br>
-                            <div class="alert alert-info" for="last_name"><label id="datum_rodjenja"
-                                    name="datum_rodjenja">
-                                <h5>{{$player->birth_date}}</h5>
-                                </label></div>
+                            <div class="alert alert-info" for="last_name">
+                                @auth('player')
+                                @if(Auth::user()->id == $player->id)
+                                    <input type="date" class="form-control" value="{{$player->birth_date}}" name="birth_date" required>
+                                @else
+                                    <h5>{{$player->birth_date}}</h5>
+                                @endif
+                                @endauth
+
+                                @guest('admin') @guest('player') @guest('club')
+                                    <h5>{{$player->birth_date}}</h5>
+                                @endguest @endguest @endguest
+                            </div>
                         </div>
                     </div>
 
@@ -126,11 +188,23 @@
                             <div class="alert alert-info"> <h5>??</h5></label></div>
                         </div>
                     </div>
-                  
+                    
+                    @auth('player')
+                    @if(Auth::user()->id == $player->id)
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <input type="submit" class="btn btn-primary" value="Azuriraj podatke">
+                        </div>
+                    </div>
+                    @endif
+                    @endauth
                 </div>
+
             </div>
         </div>
+   
     </div>
 </div>
+</form>
 
 @endsection

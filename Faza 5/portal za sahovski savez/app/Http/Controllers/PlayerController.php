@@ -52,7 +52,6 @@ class PlayerController extends Controller
                 'surname' => $request->surname,
                 'gender' => $request->gender,
                 'email' => $request->email,
-                'password' => $request->password,
                 'birth_date' => $request->birth_date,
                 'rating' => $request->rating
             ]);
