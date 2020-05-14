@@ -14,7 +14,7 @@ class PlayerController extends Controller
     public function getPlayers()
     {
         $players = Player::all();
-            return view('players', [
+            return view('players.players', [
                 'players' => $players
             ]);
     }
@@ -22,12 +22,12 @@ class PlayerController extends Controller
     public function getPlayer($id)
     {
         $player = Player::where('id', $id)->first();
-        return view('player_info')->with('player',$player);
+        return view('players.player_info')->with('player',$player);
     }
-
+    
     public function addPlayer()
     {
-        return view('addPlayer');
+        return view('players.addPlayer');
     }
 
     public function addOrEditPlayerPost(Request $request)
@@ -38,6 +38,7 @@ class PlayerController extends Controller
             Player::insert([
                 'name' => $request->name,
                 'surname' => $request->surname,
+                'gender' => $request->gender,
                 'email' => $request->email,
                 'password' => $request->password,
                 'birth_date' => $request->birth_date,
@@ -46,11 +47,11 @@ class PlayerController extends Controller
         }
         else
         {
-            Player::where('id',$request->id)->update([
+            Player::where('id', $request->id)->update([
                 'name' => $request->name,
                 'surname' => $request->surname,
+                'gender' => $request->gender,
                 'email' => $request->email,
-                'password' => $request->password,
                 'birth_date' => $request->birth_date,
                 'rating' => $request->rating
             ]);
@@ -62,7 +63,7 @@ class PlayerController extends Controller
     public function editPlayer($id)
     {
         $player = Player::where('id', $id)->first();
-        return view('addPlayer')->with('player', $player);
+        return view('players.addPlayer')->with('player', $player);
     }
 
     public function deletePlayer($id)
@@ -70,6 +71,34 @@ class PlayerController extends Controller
         if(Player::where('id',"=", $id)->first() != null)
             Player::where('id','=',$id)->delete();
 
+        return view('home');
+    }
+
+    public function sendRequestToClub(Request $request)
+    {  
+        \DB::table('player_club_request')->insert([
+            'player_id' => $request->player_id,
+            'club_id' => $request->club_id,
+            'club' => false
+        ]);
+
+        return view('home');
+    }
+
+    public function myClub($id)
+    {
+        $player = Player::where('id', $id)->first();
+        return view('players.player_club_info')->with('player', $player);        
+    }
+    
+    public function leaveClub($id)
+    {
+        
+        $veza = \DB::table('club_player')->where('player_id','=',$id)->first();
+        if($veza != null)
+        {
+            \DB::table('club_player')->where('player_id','=',$id)->delete();
+        }
         return view('home');
     }
 }

@@ -7,6 +7,7 @@
 	<form class="col-xl-8" action='/klub/dodaj' method="POST">
 		
 		@csrf
+		<input type="hidden" value="@if(isset($club)){{ $club->id }}@endif" name='id'>
 		<div class="form-group">
 			<label class="label-form">Naziv</label>
 			<input type="text" class="form-control" name='name' value="@if(isset($club)){{ $club->name }} @endif" required>
@@ -38,7 +39,7 @@
 		</div>
 
 		<div class="form-group">
-			<input type="submit" class="btn btn-primary" value="Dodaj">
+			<input type="submit" class="btn btn-primary" value="@if(!isset($club)) {{'Dodaj'}} @else {{'Izmeni'}} @endif">
 		</div>
 	</form>
 </div>

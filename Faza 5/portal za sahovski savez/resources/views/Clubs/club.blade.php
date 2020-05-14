@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="/klub" class="badge badge-primary"> <Nazad</a>
+                <a href="/klub" class="badge badge-primary"> < Nazad</a>
             </div>
             <div class="col-sm-4">
                 <div class="tab-content">
@@ -37,7 +37,7 @@
                                     <label for="email">
                                         <h4>E-mail</h4>
                                     </label>
-                                    <div class="alert alert-info" for="last_name">
+                                    <div class="alert alert-info" for="email">
                                         <h5>{{$club->email}}</h5>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                         <h4>Adresa</h4>
                                     </label>
                                     <div class="alert alert-info" for="address">
-                                        <h5>$club->address</h5>
+                                        <h5>{{$club->address}}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         <h4>Telefon</h4>
                                     </label>
                                     <div class="alert alert-info" for="phone">
-                                        <h5>$club->phone</h5>
+                                        <h5>{{$club->phone}}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -80,6 +80,5 @@
             </div>
         </div>
     </div>
-</div>
 
 @endsection

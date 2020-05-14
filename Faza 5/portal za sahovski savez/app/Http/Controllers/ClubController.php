@@ -24,10 +24,8 @@ class ClubController extends Controller
 
     public function getClub($id)
     {
-        $club = Club::where('id', $id)->get();
-        return view('clubs.club', [
-            'club' => $club
-        ]);
+        $club = Club::where('id', $id)->first();
+        return view('clubs.club')->with('club', $club);
     }
 
     public function addClub()
@@ -35,43 +33,39 @@ class ClubController extends Controller
         return view('clubs.addClub');
     }
 
-    public function addClubPost(Request $request)
+    public function addOrEditClubPost(Request $request)
     {
-        Club::insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'founded' => $request->founded,
-            'address' => $request->address,
-            'phone' => $request->phone
-        ]);
+        $club = Club::where('id', "=", $request->id)->first();
+        if($club == null)
+        {
+            Club::insert([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'founded' => $request->founded,
+                'address' => $request->address,
+                'phone' => $request->phone
+            ]);
+        }
+        else
+        {
+            Club::where('id', $request->id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'founded' => $request->founded,
+                'address' => $request->address,
+                'phone' => $request->phone
+            ]);
+        }
 
-        $data = array("name" => $request->name, "email" => $request->email, "password" => $request->password, "founded" => $request->founded, "address" => $request->address, "phone" => $request->phone);
-        DB::table('clubs')->insert($data);
-        echo "Uspeno ste uneli klub.<br/>";
-
-        return redirect()->action('ClubController@getClubs');
+        return view('home');
     }
 
     public function editClub($id)
     {
         $club = Club::where('id', $id)->first();
         return view('clubs.addClub')->with('club', $club);
-    }
-
-    public function editClubPost(Request $request)
-    {
-        $club = Club::where('id', "=", $request->id)->first();
-        Club::where('id', $request->id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'founded' => $request->founded,
-            'address' => $request->address,
-            'phone' => $request->phone
-        ]);
-
-        return redirect()->action('ClubController@getClubs');
     }
 
     public function deleteClub($id)
@@ -82,26 +76,15 @@ class ClubController extends Controller
         return view('home');
     }
 
-    public function tournamentRegistration(Request $request)
-    {
-        $club = Club::where('id', $request->idKlub)->first();
-
-        $tournament = Tournament::where('id', $request->idTurnir)->get();
-
-
-
-        return redirect()->action('ClubController@getClubs');
-    }
-
     public function firePlayer(Request $request)
     {
         $club = Club::where('id', $request->idKlub)->first();
 
         $player = Player::where('id', $request->idIgrac)->get();
 
+        $club->players()->toggle($player);
 
-
-        return redirect()->action('ClubController@getClubs');
+        return view('home');
     }
 
     public function answerPlayer(Request $request)
@@ -110,8 +93,8 @@ class ClubController extends Controller
 
         $player = Player::where('id', $request->idIgrac)->get();
 
+        
 
-
-        return redirect()->action('ClubController@getClubs');
+        return view('home');
     }
 }

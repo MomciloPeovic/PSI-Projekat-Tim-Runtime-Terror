@@ -17,14 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
-
-
 Route::get('/igrac', 'PlayerController@getPlayers');
 Route::get('/igrac/{id}', 'PlayerController@getPlayer')->where('id', '[0-9]+');
 Route::get('/igrac/dodaj', 'PlayerController@addPlayer');
 Route::post('/igrac/dodaj', 'PlayerController@addOrEditPlayerPost');
 Route::get('/igrac/izmeni/{id}', 'PlayerController@editPlayer')->where('id', '[0-9]+');
 Route::get('/igrac/obrisi/{id}', 'PlayerController@deletePlayer')->where('id', '[0-9]+');
+Route::post('/igrac/zahtev_za_klub', 'PlayerController@sendRequestToClub');
+Route::get('/igrac/moj_klub/{id}','PlayerController@myClub')->where('id', '[0-9]+');
+Route::get('/igrac/napusti_klub/{id}' , 'PlayerController@leaveClub')->where('id', '[0-9]+');
 
 Route::get('/turnir', 'TournamentController@index');
 Route::get('/turnir/{id}', 'TournamentController@getTournament')->where('id', '[0-9]+');
@@ -40,11 +41,9 @@ Route::post('turnir/{idTurnir}/prijavaKluba/{idKlub}', 'TournamentController@clu
 Route::get('/klub', 'ClubController@getClubs');
 Route::get('/klub/{id}', 'ClubController@getClub')->where('id', '[0-9]+');
 Route::get('/klub/dodaj', 'ClubController@addClub');
-Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+');
 Route::get('/klub/obrisi/{id}', 'ClubController@deleteClub')->where('id', '[0-9]+');
-Route::post('/klub/dodaj', 'ClubController@addClubPost');
-Route::post('/klub/izmeni/{id}', 'ClubController@editClubPost')->where('id', '[0-9]+');
-Route::post('/klub/{idKlub}/prijavaNaTurnir/{idTurnir}', 'ClubController@tournamentRegistration')->where('idKlub', '[0-9]+')->where('idTurnir', '[0-9]+');
+Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+');
+Route::post('/klub/dodaj', 'ClubController@addOrEditClubPost');
 Route::post('/klub/{idKlub}/dajOtkazIgracu/{idIgrac}', 'ClubController@firePlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('/klub/{idKlub}/odgovoriNaZahtev/{idIgrac}', 'ClubController@answerPlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 

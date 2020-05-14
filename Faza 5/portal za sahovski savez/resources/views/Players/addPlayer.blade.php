@@ -15,21 +15,28 @@
 			<label class="label-form">Prezime</label>
 			<input type="text" class="form-control" name='surname' value="@if(isset($player)){{ $player->surname }}@endif" required>
         </div>
-        <div class="form-group">
-			<label class="label-form">Email</label>
-			<input type="email" class="form-control" name='email' value="@if(isset($player)){{ $player->email }}@endif" required>
+		<div class="form-group">
+			<label for="gender" class="label-form">Pol</label>
+			<select type="text" class="form-control" name="gender" required>
+				<option value="Musko">Musko</option>
+				<option value="Zensko">Zensko</option>
+			</select>
         </div>
-        <div class="form-group">
-			<label class="label-form">Lozinka</label>
-			<input type="password" class="form-control" name='password' value="@if(isset($player)){{ $player->password }}@endif" required>
-        </div>
-        <div class="form-group">
+		<div class="form-group">
 			<label class="label-form">Datum rodjenja</label>
 			<input type="date" class="form-control" name='birth_date' value="@if(isset($player)){{ $player->birth_date }}@endif" required>
         </div>
         <div class="form-group">
+			<label class="label-form">Email</label>
+			<input type="email" class="form-control" name='email' value="@if(isset($player)){{ $player->email }}@endif" required>
+        </div>
+		<div class="form-group">
 			<label class="label-form">Rejting</label>
 			<input type="text" class="form-control" name='rating' value="@if(isset($player)){{ $player->rating }}@endif" required>
+        </div>
+        <div class="form-group">
+			<label class="label-form">Lozinka</label>
+			<input type="password" class="form-control" name='password' value="@if(isset($player)){{ $player->password }}@endif" required>
         </div>
 
         <div class="form-group">

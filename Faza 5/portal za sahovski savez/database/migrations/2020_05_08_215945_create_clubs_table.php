@@ -17,9 +17,9 @@ class CreateClubsTable extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('password');
-            $table->string('email', 50);
-            $table->string('address', 50);
-            $table->string('phone', 20);
+            $table->string('email', 50)->unique();
+            $table->string('address', 100);
+            $table->string('phone', 20)->unique();
             $table->date('founded');
             $table->rememberToken();
             $table->timestamps();

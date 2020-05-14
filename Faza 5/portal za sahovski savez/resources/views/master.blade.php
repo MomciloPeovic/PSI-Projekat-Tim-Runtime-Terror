@@ -8,6 +8,8 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <title>@yield('title')</title>
+
+        <script src="https://kit.fontawesome.com/021abf950c.js" crossorigin="anonymous"></script>
     </head>
     
     <body>
@@ -40,6 +42,10 @@
                 @auth('player')
                     <h4>{{ Auth::user()->name. " ". Auth::user()->surname }}</h4>
 
+                    <a class="ml-1" href="/igrac/moj_klub/{{Auth::user()->id}}"><i class="fas fa-chess-pawn fa-3x"></i></a>
+                    <a class="ml-1" href="/igrac/obavestenja/{{Auth::user()->id}}"><i class="fas fa-envelope fa-3x"></i></a>
+                    <a class="ml-1" href="/igrac/{{Auth::user()->id}}"><i class="fas fa-user-cog fa-3x"></i></a>
+
                     <form action="/korisnici/logout" method="GET">
                         <input type="submit" class="btn btn-danger ml-2" value="Odjava"/>
                     </form>
@@ -48,6 +54,11 @@
                 @auth('admin')
                     <h4>Admin</h4>
 
+                    <a class="ml-1" href="/admin/obavestenja"><i class="fas fa-envelope fa-3x"></i></a>
+                    <a class="ml-1" href="/admin/profil"><i class="fas fa-cog fa-3x"></i></a>
+                    <a class="ml-1" href="/admin/time_interval"><i class="fas fa-clock fa-3x"></i></a>
+                    <a class="ml-1" href="/admin/prihvatanje_registracije"><i class="fas fa-user fa-3x"></i></a>
+
                     <form action="/korisnici/logout" method="GET">
                         <input type="submit" class="btn btn-danger ml-2" value="Odjava"/>
                     <form>
@@ -55,6 +66,10 @@
 
                 @auth('club')
                     <h4>Klub</h4>
+
+                    <a class="ml-1" href="/klub/igraci"><i class="fas fa-chess-king fa-3x"></i></i></a>
+                    <a class="ml-1" href="/klub/obavestenja"><i class="fas fa-envelope fa-3x"></i></a>
+                    <a class="ml-1" href="/klub/profil"><i class="fas fa-users-cog fa-3x"></i></a>
 
                     <form action="/korisnici/logout" method="GET">
                         <input type="submit" class="btn btn-danger ml-2" value="Odjava"/>
