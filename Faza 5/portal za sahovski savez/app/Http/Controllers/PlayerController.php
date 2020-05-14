@@ -84,5 +84,11 @@ class PlayerController extends Controller
 
         return view('home');
     }
+
+    public function myClub($id)
+    {
+        $player = Player::where('id', $id)->first();
+        return view('players.player_club_info')->with('player', $player);        
+    }
 }
 
