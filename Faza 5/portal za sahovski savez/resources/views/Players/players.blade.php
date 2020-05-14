@@ -1,7 +1,6 @@
 @extends('master')
 @section('title','Igraci')
 @section('content')
-
     <h1>Igraci</h1>
     <div class="container">
         <div class="row">
@@ -75,21 +74,15 @@
               </tr>
             </thead>
             <tbody>
-                        
-            @php
-            $i = 1
-            @endphp
+                      
 
             @foreach($players as $player)
             <tr>
-                <td>{{ $i }}</td>                
+                <td>{{ $loop->index + 1 }}</td>                
                 <td>{{ $player->name }}</td>
                 <td>{{ $player->surname }}</td>
                 <td>{{ $player->rating }}</td>
                 <td><a class="btn btn-primary" href="igrac/{{ $player->id }}">+</a></td>
-                @php
-                $i++;
-                @endphp
             </tr>
             @endforeach
 

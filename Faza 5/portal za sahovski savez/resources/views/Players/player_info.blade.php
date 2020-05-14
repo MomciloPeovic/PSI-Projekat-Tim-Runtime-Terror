@@ -22,7 +22,7 @@
         <div class="col-sm-4 mt-4">
             <div class="tab-content">
                 @auth('player')
-                @if(Auth::user()->id == $player->id)
+                @if(Auth::guard('player')->user()->id == $player->id)
                     <input type="hidden" name="id" value="{{Auth::user()->id}}">
                 @endif
                 @endauth
@@ -122,7 +122,6 @@
                                 </div>
                             </div>
                         </div>
-            
                 </div>
             </div>
         </div>
