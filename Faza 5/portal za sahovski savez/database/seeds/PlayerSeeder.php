@@ -48,7 +48,7 @@ class PlayerSeeder extends Seeder
             'rating' => '900',
             'password' => bcrypt('ja123')
         ]);
-    
+
         DB::table('players')->insert([
             'email' => 'david' . '@gmail.com',
             'name' => 'David',
@@ -58,7 +58,7 @@ class PlayerSeeder extends Seeder
             'rating' => '1500',
             'password' => bcrypt('ja123')
         ]);
-          
+
         DB::table('players')->insert([
             'email' => 'momcilo' . '@gmail.com',
             'name' => 'Momcilo',
@@ -68,6 +68,5 @@ class PlayerSeeder extends Seeder
             'rating' => '1450',
             'password' => bcrypt('ja123')
         ]);
-    
     }
 }

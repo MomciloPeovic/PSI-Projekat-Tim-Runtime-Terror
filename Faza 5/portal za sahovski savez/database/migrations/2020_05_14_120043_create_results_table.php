@@ -15,12 +15,13 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tournament_id')->constrained('tournaments');
-            $table->foreignId('white_id')->constrained('players');
-            $table->foreignId('black_id')->constrained('players');
+            $table->foreignId('tournament_id')->constrained('tournaments')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('white_id')->constrained('players')->onDelete('no action')->onUpdate('no action');
+            $table->foreignId('black_id')->constrained('players')->onDelete('no action')->onUpdate('no action');
             $table->integer('result');
             $table->integer('table');
-            $table->foreignId('arbiter_id')->constrained('players');
+            $table->integer('round');
+            $table->foreignId('arbiter_id')->constrained('players')->onDelete('no action')->onUpdate('no action');
         });
     }
 

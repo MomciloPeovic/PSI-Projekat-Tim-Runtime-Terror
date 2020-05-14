@@ -10,8 +10,6 @@ class HomeController extends Controller
     public function index()
     {
         $tournaments = Tournament::all();
-        return view('home', [
-            'tournaments' => $tournaments
-        ]);
+        return view('home');
     }
 }

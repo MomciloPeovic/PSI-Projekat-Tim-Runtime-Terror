@@ -17,7 +17,7 @@ class CreateDeadlinesTable extends Migration
             $table->id();
             $table->date('start');
             $table->date('end');
-            $table->foreignId('deadline_type_id')->constrained('deadline_types');
+            $table->foreignId('deadline_type_id')->constrained('deadline_types')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 

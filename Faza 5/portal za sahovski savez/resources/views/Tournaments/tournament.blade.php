@@ -20,6 +20,7 @@
 				aria-selected="false">Spisak igraca</a>
 		</li>
 	</ul>
+	
 	<div class="tab-content" id="myTabContent">
 
 		<!-- Tabela TAB -->
@@ -52,7 +53,15 @@
 		<div class="tab-pane fade p-5" id="rezultati" role="tabpanel" aria-labelledby="rezultati-tab">
 			<div class="container-fluid mt-1 ml-5">
 				<h2 class="h2">Rezultati</h2>
-				<h3 class="h3">1. Kolo</h3>
+
+				@auth('player')
+				@if(Auth::guard('player')->user()->isArbiter())
+				<a href="/turnir/{{$tournament->id}}/dodajRezultat" class="btn btn-primary mb-1">Dodavanje rezultata</a>
+				@endif
+				@endauth
+
+				@for($i = 1; $i <= $rounds; $i++)
+				<h3 class="h3">{{$i}}. Kolo</h3>
 				<table class="table table-hover w-75 text-center">
 					<thead class="thead-dark">
 						<tr>
@@ -66,59 +75,24 @@
 					</thead>
 
 					<tbody>
-						<tr>
-							<th scope="row">1.</th>
-							<td class="w-30">Petar Petrovic</td>
-							<td>7</td>
-							<td>1:0</td>
-							<td class="w-30">Marko Markovic</td>
-							<td>3</td>
-						</tr>
+						@php
+						$results = App\Result::where('tournament_id', $tournament->id)->where('round', $i)->orderBy('table')->get();
+						@endphp
 
+						@foreach($results as $result)
 						<tr>
-							<th scope="row">2.</th>
-							<td class="w-30">Nikola Nikolic</td>
+							<th scope="row">{{$loop->index + 1}}.</th>
+							<td class="w-30">{{$result->white()->name}} {{$result->white()->surname}}</td>
 							<td>7</td>
-							<td>1:0</td>
-							<td class="w-30">Nemanja Nemanjic</td>
+							<td>{{$result->result}}</td>
+							<td class="w-30">{{$result->black()->name}} {{$result->black()->surname}}</td>
 							<td>3</td>
 						</tr>
+						@endforeach
 					</tbody>
 				</table>
-
-				<h3 class="h3">2. Kolo</h3>
-				<table class="table table-hover w-75 text-center">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th class="w-30" scope="col">Beli</th>
-							<th scope="col">Poeni</th>
-							<th scope="col">Rezultat</th>
-							<th class="w-30" scope="col">Crni</th>
-							<th scope="col">Poeni</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<tr>
-							<th scope="row">1.</th>
-							<td class="w-30">Marko Markovic</td>
-							<td>3</td>
-							<td>1:0</td>
-							<td class="w-30">Petar Petrovic</td>
-							<td>8</td>
-						</tr>
-
-						<tr>
-							<th scope="row">2.</th>
-							<td class="w-30">Nemanja Nemanjic</td>
-							<td>2</td>
-							<td>0.5:0.5</td>
-							<td class="w-30">Nikola Nikolic</td>
-							<td>7</td>
-						</tr>
-					</tbody>
-				</table>
+				@endfor
+				
 			</div>
 		</div>
 

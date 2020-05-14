@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Club;
 use App\Player;
+use App\Result;
 use Illuminate\Http\Request;
 use App\Tournament;
 use Illuminate\Support\Facades\Auth;
@@ -25,8 +26,10 @@ class TournamentController extends Controller
     public function getTournament($id)
     {
         $tournament = Tournament::where('id', $id)->first();
+        $rounds = Result::where('tournament_id', $tournament->id)->distinct('round')->count();
         return view('tournaments.tournament', [
-            'tournament' => $tournament
+            'tournament' => $tournament,
+            'rounds' => $rounds
         ]);
     }
 

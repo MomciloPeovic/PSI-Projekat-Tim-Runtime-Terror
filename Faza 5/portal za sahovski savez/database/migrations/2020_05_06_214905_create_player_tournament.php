@@ -14,8 +14,8 @@ class CreatePlayerTournament extends Migration
     public function up()
     {
         Schema::create('player_tournament', function (Blueprint $table) {
-            $table->foreignId('player_id')->constrained('players');
-            $table->foreignId('tournament_id')->constrained('tournaments');
+            $table->foreignId('player_id')->constrained('players')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('tournament_id')->constrained('tournaments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamp('time');
             $table->primary(['player_id', 'tournament_id']);
         });
