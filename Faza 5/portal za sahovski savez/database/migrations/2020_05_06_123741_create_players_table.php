@@ -15,16 +15,16 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
+            $table->string('email', 50)->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->string("name");
-            $table->string("surname");
-            $table->string('gender');
+            $table->string("name", 30);
+            $table->string("surname", 30);
+            $table->string('gender', 6);
             $table->boolean('confirmed');
             $table->date("birth_date");
-            $table->integer("rating")->nullable();
-            $table->integer('arbiter_rank_id')->nullable();
+            $table->unsignedSmallInteger("rating")->nullable();
+            $table->foreignId('arbiter_rank_id')->nullable()->constrained('arbiter_ranks');
             $table->timestamps();
         });
     }

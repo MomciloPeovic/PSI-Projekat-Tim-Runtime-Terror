@@ -14,12 +14,12 @@ class CreateClubsTable extends Migration
     public function up()
     {
         Schema::create('clubs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
+            $table->id();
+            $table->string('name', 50);
             $table->string('password');
-            $table->string('email');
-            $table->string('address');
-            $table->string('phone');
+            $table->string('email', 50);
+            $table->string('address', 50);
+            $table->string('phone', 20);
             $table->date('founded');
             $table->rememberToken();
             $table->timestamps();

@@ -14,8 +14,8 @@ class CreateClubTournament extends Migration
     public function up()
     {
         Schema::create('club_tournament', function (Blueprint $table) {
-            $table->integer('club_id');
-            $table->integer('tournament_id');
+            $table->foreignId('club_id')->constrained('clubs');
+            $table->foreignId('tournament_id')->constrained('tournaments');
             $table->timestamp('time');
             $table->primary(['club_id', 'tournament_id']);
         });

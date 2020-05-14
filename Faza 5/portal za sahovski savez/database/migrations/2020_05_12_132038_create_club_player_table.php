@@ -14,8 +14,8 @@ class CreateClubPlayerTable extends Migration
     public function up()
     {
         Schema::create('club_player', function (Blueprint $table) {
-            $table->integer('club_id');
-            $table->integer('player_id');
+            $table->foreignId('club_id')->constrained('clubs');
+            $table->foreignId('player_id')->constrained('players');
             $table->timestamp('time');
             $table->primary(['club_id', 'player_id']);
         });
