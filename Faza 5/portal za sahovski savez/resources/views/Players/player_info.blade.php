@@ -75,8 +75,6 @@
                                     <h4>Kucni telefon</h4>
                                 </label>
                                 <div class="alert alert-info" for="last_name">
-
-
                                     <h5>??</h5>
                                 </div>
                             </div>
@@ -185,7 +183,30 @@
                             <label for="datum_rodjenja">
                                 <h4>Klub</h4>
                             </label>
-                            <div class="alert alert-info"> <h5>??</h5></label></div>
+                            <div class="alert alert-info"> 
+                                @php
+                                $ime_kluba = "";
+                                $veza = DB::table('club_player')->where('player_id','=',$player->id)->first();
+                                if($veza == null)
+                                {
+                                    $ime_kluba = "Igrac nije uclanjen ni u jedan klub.";
+                                } 
+                                else 
+                                {
+                                  $klub = DB::table('clubs')->where('id','=',$veza->club_id)->first();
+                                  if($klub == null)
+                                  {
+                                      $ime_kluba = "Greska!";
+                                  }
+                                  else 
+                                  {
+                                    $ime_kluba = $klub->name;    
+                                  }
+                                }
+
+                                @endphp
+                                <h5>{{$ime_kluba}}</h5>
+                            </div>
                         </div>
                     </div>
                     
