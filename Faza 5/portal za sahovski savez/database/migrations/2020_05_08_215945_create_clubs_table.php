@@ -15,11 +15,11 @@ class CreateClubsTable extends Migration
     {
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 50);
             $table->string('password');
-            $table->string('email')->unique();
-            $table->string('address');
-            $table->string('phone')->unique();
+            $table->string('email', 50)->unique();
+            $table->string('address', 100);
+            $table->string('phone', 20)->unique();
             $table->date('founded');
             $table->rememberToken();
             $table->timestamps();

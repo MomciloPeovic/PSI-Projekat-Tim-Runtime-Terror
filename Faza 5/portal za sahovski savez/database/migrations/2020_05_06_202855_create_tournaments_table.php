@@ -16,14 +16,14 @@ class CreateTournamentsTable extends Migration
     {
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("name", 100);
             $table->date("date");
             $table->time("time");
-            $table->string("place");
-            $table->string("phone");
-            $table->string("email");
-            $table->integer("rounds");
-            $table->string("type");
+            $table->string("place", 100);
+            $table->string("phone", 20);
+            $table->string("email", 50);
+            $table->unsignedSmallInteger("rounds");
+            $table->string("type", 20);
         });
     }
 
