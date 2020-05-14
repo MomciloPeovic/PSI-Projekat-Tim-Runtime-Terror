@@ -108,5 +108,16 @@ class PlayerController extends Controller
         }
         return view('home');
     }
+
+    public function referees()
+    {
+        $players = Player::all();
+        return view('admin.referees', ['players' => $players]);
+    }
+
+    public function promote()
+    {
+        
+    }
 }
 
