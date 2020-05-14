@@ -1,5 +1,5 @@
 @extends('master')
-@section('title','HomePage')
+@section('title','Portal sahovskog saveza')
 @section('content-no-container')
 
 <ul class="nav nav-tabs nav-fill mt-3" id="myTab" role="tablist">
@@ -13,7 +13,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" id="takmicenja-tab" data-toggle="tab" href="#takmicenja" role="tab" aria-controls="takmicenja"
-        aria-selected="false">Turnirir</a>
+        aria-selected="false">Turniri</a>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
@@ -250,9 +250,72 @@
                 <th scope="col">#</th>
                 <th scope="col">Naziv</th>
                 <th scope="col">Datum pocetka</th>
+                <th scope="col" class="igrac">Vise</th>
+
+                @auth('player') 
+                  <th scope="col" class="igrac">Prijava</th>
+                @endauth 
+
+                @auth('club')
+                  <th scope="col" class="igrac">Prijava</th>
+                @endauth
+                
               </tr>
             </thead>
             <tbody>
+              @foreach($tournaments as $tournament)
+                <tr>
+                  <th scope="row">{{ $loop->index + 1 }}</th>
+                  <td>{{ $tournament->name }}</td>
+
+                  @php
+                  $date = strtotime($tournament->date); 
+                  $new_date = date('d.m.Y.', $date);
+                  @endphp
+                  <td>{{ $new_date }}</td>
+
+                  <td class="igrac"><a class="btn btn-primary" href="/turnir/{{ $tournament->id }}">+</a></td>
+
+                  @if(Auth::guard('player')->check() && $tournament->type == 'player' && 
+                    !$tournament->isPlayerParticipating(Auth::guard('player')->user()->id))
+                  <td>
+                    <form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('player')->user()->id}}" method="POST">
+                      @csrf
+                      <input type="submit" value="+" class="btn btn-primary"/>
+                    </form>
+                  </td>
+                  @elseif(Auth::guard('club')->check() && $tournament->type == 'club' &&
+                      !$tournament->isClubParticipating(Auth::guard('club')->user()->id))
+                  <td>
+                    <form action="/turnir/{{$tournament->id}}/prijavaKluba/{{Auth::guard('club')->user()->id}}" method="POST">
+                      @csrf
+                      <input type="submit" value="+" class="btn btn-primary"/>
+                    </form>
+                  </td>
+                  @elseif(Auth::guard('club')->check() && $tournament->type == 'player' ||
+                      Auth::guard('player')->check() && $tournament->type == 'club')
+                  <td>
+                    <button class="btn btn-primary disabled">+</button>
+                  </td>
+                  @elseif(Auth::guard('club')->check() && $tournament->type == 'club' &&
+                      $tournament->isClubParticipating(Auth::guard('club')->user()->id))
+                  <td>
+                    <form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('club')->user()->id}}" method="POST">
+                      @csrf
+                      <input type="submit" value="-" class="btn btn-danger"/>
+                    </form>
+                  </td>
+                  @elseif(Auth::guard('player')->check() && $tournament->type == 'player' &&
+                      $tournament->isPlayerParticipating(Auth::guard('player')->user()->id))
+                  <td>
+                    <form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('player')->user()->id}}" method="POST">
+                      @csrf
+                      <input type="submit" value="-" class="btn btn-danger"/>
+                    </form>
+                  </td>
+                  @endif
+                </tr>
+                @endforeach
             </tbody>
             <!-- /TABLA TURNIRI -->
           </table>

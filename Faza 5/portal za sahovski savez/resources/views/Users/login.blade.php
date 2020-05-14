@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'naslov')
+@section('title', 'Prijava')
 
 @section('content')
 

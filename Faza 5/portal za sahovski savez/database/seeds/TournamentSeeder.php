@@ -20,7 +20,19 @@ class TournamentSeeder extends Seeder
             'date' => date("Y-m-d"),
             'time' => date("H:i:s"),
             'place' => 'beograd',
-            'rounds' => 5
+            'rounds' => 5,
+            'type' => 'player'
+        ]);
+
+        DB::table('tournaments')->insert([
+            'name' => 'turnir2',
+            'email' => 'email2' . '@gmail.com',
+            'phone' => '12345678',
+            'date' => date("Y-m-d"),
+            'time' => date("H:i:s"),
+            'place' => 'novi sad',
+            'rounds' => 7,
+            'type' => 'club'
         ]);
     }
 }

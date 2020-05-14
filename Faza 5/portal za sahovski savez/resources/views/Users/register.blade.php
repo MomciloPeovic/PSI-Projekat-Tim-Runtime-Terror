@@ -110,7 +110,7 @@
 						</div>						
 
 						<div class="form-group">
-							<label class="label-form">Founded</label>
+							<label class="label-form">Datum osnivanja</label>
 							<input type="date" class="form-control" name='founded'>
 							@error('date')
 							<span class="text-danger">{{ $message }}</span>

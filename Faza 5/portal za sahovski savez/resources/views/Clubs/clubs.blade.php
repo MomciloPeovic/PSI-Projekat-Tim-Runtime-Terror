@@ -5,8 +5,7 @@
 <h1> Klubovi </h1>
     
         <div class="row">
-          <div class="col-xl-4 mt-2">
-            <p>Filter</p>
+          <div class="col-xl-4">
             <div class="card">
               <article class="card-group-item">
                 <header class="card-header">
@@ -54,7 +53,7 @@
             </div>
           </div>
 
-          <table class="table table-hover col-xl-8 mt-5">
+          <table class="table table-hover col-xl-8">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>

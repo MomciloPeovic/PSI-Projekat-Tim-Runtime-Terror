@@ -83,61 +83,61 @@
 				
 				</tr>
 			</thead>
-		<tbody>
-			@foreach($tournaments as $tournament)
-			<tr>
-				<th scope="row">{{ $loop->index + 1 }}</th>
-				<td>{{ $tournament->name }}</td>
+			<tbody>
+				@foreach($tournaments as $tournament)
+				<tr>
+					<th scope="row">{{ $loop->index + 1 }}</th>
+					<td>{{ $tournament->name }}</td>
 
-				@php
-				$date = strtotime($tournament->date); 
-				$new_date = date('d.m.Y.', $date);
-				@endphp
-				<td>{{ $new_date }}</td>
+					@php
+					$date = strtotime($tournament->date); 
+					$new_date = date('d.m.Y.', $date);
+					@endphp
+					<td>{{ $new_date }}</td>
 
-				<td class="igrac"><a class="btn btn-primary" href="/turnir/{{ $tournament->id }}">+</a></td>
+					<td class="igrac"><a class="btn btn-primary" href="/turnir/{{ $tournament->id }}">+</a></td>
 
-				@if(Auth::guard('player')->check() && $tournament->type == 'player' && 
-					!$tournament->isPlayerParticipating(Auth::guard('player')->user()->id))
-				<td>
-					<form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('player')->user()->id}}" method="POST">
-						@csrf
-						<input type="submit" value="+" class="btn btn-primary"/>
-					</form>
-				</td>
-				@elseif(Auth::guard('club')->check() && $tournament->type == 'club' &&
-						!$tournament->isClubParticipating(Auth::guard('club')->user()->id))
-				<td>
-					<form action="/turnir/{{$tournament->id}}/prijavaKluba/{{Auth::guard('club')->user()->id}}" method="POST">
-						@csrf
-						<input type="submit" value="+" class="btn btn-primary"/>
-					</form>
-				</td>
-				@elseif(Auth::guard('club')->check() && $tournament->type == 'player' ||
-						Auth::guard('player')->check() && $tournament->type == 'club')
-				<td>
-					<button class="btn btn-primary disabled">+</button>
-				</td>
-				@elseif(Auth::guard('club')->check() && $tournament->type == 'club' &&
-						$tournament->isClubParticipating(Auth::guard('club')->user()->id))
-				<td>
-					<form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('club')->user()->id}}" method="POST">
-						@csrf
-						<input type="submit" value="-" class="btn btn-danger"/>
-					</form>
-				</td>
-				@elseif(Auth::guard('player')->check() && $tournament->type == 'player' &&
-						$tournament->isPlayerParticipating(Auth::guard('player')->user()->id))
-				<td>
-					<form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('player')->user()->id}}" method="POST">
-						@csrf
-						<input type="submit" value="-" class="btn btn-danger"/>
-					</form>
-				</td>
-				@endif
-			</tr>
-			@endforeach
-		</tbody>
+					@if(Auth::guard('player')->check() && $tournament->type == 'player' && 
+						!$tournament->isPlayerParticipating(Auth::guard('player')->user()->id))
+					<td>
+						<form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('player')->user()->id}}" method="POST">
+							@csrf
+							<input type="submit" value="+" class="btn btn-primary"/>
+						</form>
+					</td>
+					@elseif(Auth::guard('club')->check() && $tournament->type == 'club' &&
+							!$tournament->isClubParticipating(Auth::guard('club')->user()->id))
+					<td>
+						<form action="/turnir/{{$tournament->id}}/prijavaKluba/{{Auth::guard('club')->user()->id}}" method="POST">
+							@csrf
+							<input type="submit" value="+" class="btn btn-primary"/>
+						</form>
+					</td>
+					@elseif(Auth::guard('club')->check() && $tournament->type == 'player' ||
+							Auth::guard('player')->check() && $tournament->type == 'club')
+					<td>
+						<button class="btn btn-primary disabled">+</button>
+					</td>
+					@elseif(Auth::guard('club')->check() && $tournament->type == 'club' &&
+							$tournament->isClubParticipating(Auth::guard('club')->user()->id))
+					<td>
+						<form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('club')->user()->id}}" method="POST">
+							@csrf
+							<input type="submit" value="-" class="btn btn-danger"/>
+						</form>
+					</td>
+					@elseif(Auth::guard('player')->check() && $tournament->type == 'player' &&
+							$tournament->isPlayerParticipating(Auth::guard('player')->user()->id))
+					<td>
+						<form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('player')->user()->id}}" method="POST">
+							@csrf
+							<input type="submit" value="-" class="btn btn-danger"/>
+						</form>
+					</td>
+					@endif
+				</tr>
+				@endforeach
+			</tbody>
 		</table>
 	</div>
 @endsection
