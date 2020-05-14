@@ -17,6 +17,7 @@ class CreatePlayerClubRequestTable extends Migration
             $table->integer('player_id');
             $table->integer('club_id');
             $table->boolean('club')->nullable();
+            $table->primary(['player_id', 'club_id']);
            // $table->timestamps('time');
         });
     }
