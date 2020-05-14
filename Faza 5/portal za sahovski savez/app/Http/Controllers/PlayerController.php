@@ -14,7 +14,7 @@ class PlayerController extends Controller
     public function getPlayers()
     {
         $players = Player::all();
-            return view('players', [
+            return view('players.players', [
                 'players' => $players
             ]);
     }
@@ -22,12 +22,12 @@ class PlayerController extends Controller
     public function getPlayer($id)
     {
         $player = Player::where('id', $id)->first();
-        return view('player_info')->with('player',$player);
+        return view('players.player_info')->with('player',$player);
     }
     
     public function addPlayer()
     {
-        return view('addPlayer');
+        return view('players.addPlayer');
     }
 
     public function addOrEditPlayerPost(Request $request)
@@ -64,7 +64,7 @@ class PlayerController extends Controller
     public function editPlayer($id)
     {
         $player = Player::where('id', $id)->first();
-        return view('addPlayer')->with('player', $player);
+        return view('players.addPlayer')->with('player', $player);
     }
 
     public function deletePlayer($id)

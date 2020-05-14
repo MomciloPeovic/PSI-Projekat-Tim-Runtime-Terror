@@ -64,7 +64,19 @@
                 <th scope="col" class="igrac">Vise</th>
                 
                 @auth('player') 
-				        	<th scope="col" class="igrac">Posalji zahtev</th>
+                  @php
+                  $in_club = false;
+                  $id = Auth::user()->id;
+
+                  if(DB::table('club_player')->where('player_id',"=", $id)->first() == null)
+                    $in_club = false;
+                  else $in_club = true;
+
+                  @endphp
+                  @if ($in_club == false)
+                  <th scope="col" class="igrac">Posalji zahtev</th>
+                  @endif
+
 			        	@endauth 
 
               </tr>
@@ -78,6 +90,14 @@
                 <td> {{ 0 }} </td>         
                 <td>{{ $club->rating }}</td>
                 <td><a class="btn btn-primary" href="klub/{{ $club->id }}">+</a></td>
+                @auth('player') 
+                @php
+                $id =  Auth::user()->id;
+                @endphp
+                @if($in_club == false)
+                  <td><a class="btn btn-primary" href="igrac/zahtev_za_klub/{{ $id }}">+</a></td>
+                @endif
+                @endauth 
             </tr>
             @endforeach
 
