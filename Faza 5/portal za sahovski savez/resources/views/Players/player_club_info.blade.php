@@ -58,7 +58,7 @@ if($veza == null)
           
     
           <div class="row justify-content-end">
-            <button type="button" class="btn btn-danger">Napusti klub</button>        
+          <a  href="/igrac/napusti_klub/{{$player->id}}" class="btn btn-danger">Napusti klub</a>        
         </div>
 @endif
 

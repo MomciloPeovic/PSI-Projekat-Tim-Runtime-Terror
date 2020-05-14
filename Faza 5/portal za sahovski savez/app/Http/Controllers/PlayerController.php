@@ -90,5 +90,16 @@ class PlayerController extends Controller
         $player = Player::where('id', $id)->first();
         return view('players.player_club_info')->with('player', $player);        
     }
+    
+    public function leaveClub($id)
+    {
+        
+        $veza = \DB::table('club_player')->where('player_id','=',$id)->first();
+        if($veza != null)
+        {
+            \DB::table('club_player')->where('player_id','=',$id)->delete();
+        }
+        return view('home');
+    }
 }
 
