@@ -87,14 +87,27 @@ class PlayerController extends Controller
         }
         else
         {
-            Player::where('id', $request->id)->update([
-                'name' => $request->name,
-                'surname' => $request->surname,
-                'gender' => $request->gender,
-                'email' => $request->email,
-                'birth_date' => $request->birth_date,
-                'rating' => $request->rating
-            ]);
+            if($request->rating !=null)
+            {
+                Player::where('id', $request->id)->update([
+                    'name' => $request->name,
+                    'surname' => $request->surname,
+                    'gender' => $request->gender,
+                    'email' => $request->email,
+                    'birth_date' => $request->birth_date,
+                    'rating' => $request->rating
+                ]);
+            }
+            else
+            {
+                Player::where('id', $request->id)->update([
+                    'name' => $request->name,
+                    'surname' => $request->surname,
+                    'gender' => $request->gender,
+                    'email' => $request->email,
+                    'birth_date' => $request->birth_date,
+                ]);
+            }
         }
 
         return view('home');
