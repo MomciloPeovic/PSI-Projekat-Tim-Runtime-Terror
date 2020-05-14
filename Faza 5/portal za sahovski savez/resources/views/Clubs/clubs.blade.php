@@ -95,7 +95,14 @@
                 $id =  Auth::user()->id;
                 @endphp
                 @if($in_club == false)
-                  <td><a class="btn btn-primary" href="igrac/zahtev_za_klub/{{ $id }}">+</a></td>
+                <td>
+                  <form action='/igrac/zahtev_za_klub' method="POST">
+                    @csrf
+                    <input type="hidden" name="club_id" value="{{$club->id}}">
+                    <input type="hidden" name="player_id" value="{{$id}}">
+                    <input type="submit" class="btn btn-primary" value="+">
+                  </form>
+                </td>
                 @endif
                 @endauth 
             </tr>

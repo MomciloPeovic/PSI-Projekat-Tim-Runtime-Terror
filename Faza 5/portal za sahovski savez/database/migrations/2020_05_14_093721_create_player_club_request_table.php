@@ -14,8 +14,10 @@ class CreatePlayerClubRequestTable extends Migration
     public function up()
     {
         Schema::create('player_club_request', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps('time');
+            $table->integer('player_id');
+            $table->integer('club_id');
+            $table->boolean('club')->nullable();
+           // $table->timestamps('time');
         });
     }
 

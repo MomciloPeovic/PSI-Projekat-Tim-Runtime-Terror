@@ -74,5 +74,16 @@ class PlayerController extends Controller
 
         return view('home');
     }
+
+    public function sendRequestToClub(Request $request)
+    {  
+        \DB::table('player_club_request')->insert([
+            'player_id' => $request->player_id,
+            'club_id' => $request->club_id,
+            'club' => false
+        ]);
+
+        return view('home');
+    }
 }
 
