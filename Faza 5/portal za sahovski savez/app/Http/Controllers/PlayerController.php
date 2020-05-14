@@ -23,8 +23,40 @@ class PlayerController extends Controller
 
     public function getPlayersPost(Request $data)
     {
-        $players = Player::where('name','like',"%".$data->ime_filter."%")->get();
-        return view('players.players_table')->with('players',$players);
+
+        $limit = 3;
+        $strana = $data->strana;
+        $start = ($strana-1)*$limit;
+
+
+        $min_rejting_filter = $data->min_rejting_filter; 
+        if($min_rejting_filter == "") $min_rejting_filter = 0;
+        $max_rejting_filter = $data->max_rejting_filter; 
+        if($max_rejting_filter == "") $max_rejting_filter = 3000;
+        
+        $players = "";
+
+        if($data->pol_filter == "Svi")
+            $players = Player::where('name','like',"%".$data->ime_filter."%")->whereBetween('rating',[$min_rejting_filter,$max_rejting_filter])->offset($start)
+            ->limit($limit)->get();
+        else  
+        $players = Player::where('name','like',"%".$data->ime_filter."%")
+                ->whereBetween('rating',[$min_rejting_filter,$max_rejting_filter])
+                ->where('gender',$data->pol_filter)
+                ->offset($start)
+                ->limit($limit)
+                ->get();
+
+        $broj = 0;
+        if($data->pol_filter == "Svi")
+        $broj =  Player::where('name','like',"%".$data->ime_filter."%")->whereBetween('rating',[$min_rejting_filter,$max_rejting_filter])->count();
+        else $broj = Player::where('name','like',"%".$data->ime_filter."%")
+        ->whereBetween('rating',[$min_rejting_filter,$max_rejting_filter])
+        ->where('gender',$data->pol_filter)->count();
+        $stranice = ceil($broj/$limit);
+        
+
+        return view('players.players_table')->with('players',$players)->with('broj_stranica',$stranice);
     }
 
     public function getPlayer($id)

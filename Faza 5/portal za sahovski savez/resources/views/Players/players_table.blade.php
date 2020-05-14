@@ -8,3 +8,13 @@
     <td><a class="btn btn-primary" href="igrac/{{ $player->id }}">+</a></td> 
 </tr>
 @endforeach
+
+<tr>
+    <td colspan="5">
+    <ul class="pagination">
+    @for($i = 1; $i< $broj_stranica + 1;$i++)
+        <li class="page-item"><button class="page-link"  onclick="prikazi_igrace({{$i}})">{{$i}}</button></li>
+    @endfor
+    </ul>
+    </td>
+</tr>

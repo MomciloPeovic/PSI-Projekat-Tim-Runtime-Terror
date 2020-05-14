@@ -40,8 +40,8 @@
 						<div class="form-group">
 							<label for="gender" class="label-form">Pol</label>
 							<select type="text" class="form-control" name="gender" required>
-								<option value="Musko">Musko</option>
-								<option value="Zensko">Zensko</option>
+								<option value="Muski">Muski</option>
+								<option value="Zenski">Zenski</option>
 							</select>
 							@error('gender')
 							<span class="text-danger">{{ $message }}</span>
