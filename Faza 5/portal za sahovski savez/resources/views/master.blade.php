@@ -94,5 +94,6 @@
         <div class="container">
         @yield('content')
         </div>
+        @yield('content-no-container')
     </body>
 </html>
