@@ -14,6 +14,7 @@
         <tr>
             <td>{{ $deadline->start }}</td>
             <td>{{ $deadline->end }}</td>
+            <td>{{ $deadline->deadlineTypes()->first()->tip }}
         </tr>
         @endforeach
     </tbody>

@@ -19,6 +19,15 @@
             <input type="date" class="form-control" name='end'>
         </div>
 
+        <div>
+            <label class="label-form">Tip roka:</label>
+			<select class="form-control" name="tip">
+                @foreach($deadlineTypes as $dT)
+                    <option value="{{ $dT->id }}">{{ $dT->tip }}</option>
+                @endforeach
+		    </select>
+        </div>
+
         <div class="form-group">
 			<input type="submit" class="btn btn-primary" value="Potvrdi">
 		</div>
