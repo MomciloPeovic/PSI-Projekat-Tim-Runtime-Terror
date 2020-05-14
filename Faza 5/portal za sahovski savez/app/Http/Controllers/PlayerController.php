@@ -23,7 +23,8 @@ class PlayerController extends Controller
 
     public function getPlayersPost(Request $data)
     {
-        return view('players.players_table')->with('data',$data);
+        $players = Player::where('name','like',"%".$data->ime_filter."%")->get();
+        return view('players.players_table')->with('players',$players);
     }
 
     public function getPlayer($id)

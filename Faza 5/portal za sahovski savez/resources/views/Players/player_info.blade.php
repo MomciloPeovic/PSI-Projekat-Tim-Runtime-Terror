@@ -42,14 +42,9 @@
                                     @endif
                                     @endauth
 
-                    
                                     @guest('player')
                                         <h5>{{$player->name}}</h5>
                                     @endguest
-
-                                    @guest('admin') @guest('player') @guest('club')
-                                        <h5>{{$player->name}}</h5>
-                                    @endguest @endguest @endguest
                                 </div>
                             </div>
                         </div>
@@ -67,31 +62,9 @@
                                     @endif
                                     @endauth
 
-                                    @guest('admin') @guest('player') @guest('club')
+                                    @guest('player') 
                                         <h5>{{$player->surname}}</h5>
-                                    @endguest @endguest @endguest
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="phone">
-                                    <h4>Kucni telefon</h4>
-                                </label>
-                                <div class="alert alert-info" for="last_name">
-                                    <h5>??</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="mobile">
-                                    <h4>Mobilni telefon</h4>
-                                </label>
-                                <div class="alert alert-info" for="last_name">
-                                    <h5>??</h5>
+                                    @endguest
                                 </div>
                             </div>
                         </div>
@@ -110,20 +83,9 @@
                                     @endif
                                     @endauth
 
-                                    @guest('admin') @guest('player') @guest('club')
+                                    @guest('player')
                                         <h5>{{$player->email}}</h5>
-                                    @endguest @endguest @endguest
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Adresa</h4>
-                                </label>
-                                <div class="alert alert-info" for="last_name">
-                                    <h5>??</h5>
+                                    @endguest
                                 </div>
                             </div>
                         </div>
@@ -152,9 +114,9 @@
                                 @endif
                                 @endauth
 
-                                @guest('admin') @guest('player') @guest('club')
+                                @guest('player')
                                     <h5>{{$player->gender}}</h5>
-                                @endguest @endguest @endguest
+                                @endguest
 
                             </div>
                         </div>
@@ -175,9 +137,9 @@
                                 @endif
                                 @endauth
 
-                                @guest('admin') @guest('player') @guest('club')
+                                @guest('player')
                                     <h5>{{$player->birth_date}}</h5>
-                                @endguest @endguest @endguest
+                                @endguest
                             </div>
                         </div>
                     </div>

@@ -4,22 +4,24 @@
 
 <script>
     function prikazi_igrace() {
+      let ime_filter = document.getElementById("ime_filter").value;
+
       $.ajax({
         type: "POST",
         url: "/igrac",
-        data: {_token:'<?php echo csrf_token();?>',nesto : "asd"},
+        data: {_token:'<?php echo csrf_token();?>',ime_filter:ime_filter},
         success: function (data) {
           document.getElementById("igraci_tabla").innerHTML = data;
-          console.log("radi");
           return;
         },
         error: function (data) {
-          console.log("nece")
           return;
         },
       });
     }
-    prikazi_igrace();
+    window.onload = function(){prikazi_igrace();}
+    $(document).on('keyup','#ime_filter',function(){prikazi_igrace();});
+
 </script>
 
 <ul class="nav nav-tabs nav-fill mt-3" id="myTab" role="tablist">
@@ -53,7 +55,7 @@
                 </header>
                 <div class="filter-content">
                   <div class="card-body">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="ime_filter">
 
                   </div> <!-- card-body.// -->
                 </div>
@@ -112,6 +114,7 @@
                 <th scope="col">Ime</th>
                 <th scope="col">Prezime</th>
                 <th scope="col">Rejting</th>
+                <th scope="col">Vise</th>
               </tr>
             </thead>
             <tbody id = "igraci_tabla">
