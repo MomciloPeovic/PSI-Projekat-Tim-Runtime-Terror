@@ -10,6 +10,7 @@ class PlayerController extends Controller
 {
     public function __construct()
     {
+        
     }
 
     public function getPlayers()
@@ -18,6 +19,11 @@ class PlayerController extends Controller
             return view('players.players', [
                 'players' => $players
             ]);
+    }
+
+    public function getPlayersPost(Request $data)
+    {
+        return view('players.players_table')->with('data',$data);
     }
 
     public function getPlayer($id)

@@ -26,6 +26,8 @@ Route::get('/igrac/obrisi/{id}', 'PlayerController@deletePlayer')->where('id', '
 Route::post('/igrac/zahtev_za_klub', 'PlayerController@sendRequestToClub');
 Route::get('/igrac/moj_klub/{id}','PlayerController@myClub')->where('id', '[0-9]+');
 Route::get('/igrac/napusti_klub/{id}' , 'PlayerController@leaveClub')->where('id', '[0-9]+');
+Route::post('/igrac', 'PlayerController@getPlayersPost');
+
 
 Route::get('/turnir', 'TournamentController@index');
 Route::get('/turnir/{id}', 'TournamentController@getTournament')->where('id', '[0-9]+');

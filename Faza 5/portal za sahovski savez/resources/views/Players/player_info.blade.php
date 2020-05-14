@@ -41,7 +41,12 @@
                                         <h5>{{$player->name}}</h5>
                                     @endif
                                     @endauth
-                                    
+
+                    
+                                    @guest('player')
+                                        <h5>{{$player->name}}</h5>
+                                    @endguest
+
                                     @guest('admin') @guest('player') @guest('club')
                                         <h5>{{$player->name}}</h5>
                                     @endguest @endguest @endguest
