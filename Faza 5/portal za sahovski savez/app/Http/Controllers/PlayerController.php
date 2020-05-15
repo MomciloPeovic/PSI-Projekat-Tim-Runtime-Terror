@@ -143,8 +143,15 @@ class PlayerController extends Controller
 
     public function myClub($id)
     {
-        $veza = DB::table('club_player')->where('player_id','=',$id)->first();
-        if($veza == null)
+
+        $u_klubu = false;
+        $veze =  DB::table('club_player')->where('player_id','=',$id)->get();
+        foreach($veze as $veza)
+        {
+            if($veza->left == null)
+                $u_klubu = true;
+        }
+        if($u_klubu == false)
             return view('players.player_club_info');       
         else
         {

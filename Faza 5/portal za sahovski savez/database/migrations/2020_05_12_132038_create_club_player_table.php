@@ -16,7 +16,8 @@ class CreateClubPlayerTable extends Migration
         Schema::create('club_player', function (Blueprint $table) {
             $table->foreignId('club_id')->constrained('clubs')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('player_id')->constrained('players')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamp('time');
+            $table->date('joined')->nullable();
+            $table->date('left')->nullable();
             $table->primary(['club_id', 'player_id']);
         });
     }
