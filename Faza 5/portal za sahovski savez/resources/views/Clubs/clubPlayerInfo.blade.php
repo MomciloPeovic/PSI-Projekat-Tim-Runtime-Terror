@@ -3,7 +3,7 @@
 @section('content')
 
 
-<h4 class="mt-5" align="center">Trenutno niste uclanjeni ni u jedan klub.</h4>
+<h4 class="mt-5" align="center">Trenutno nemate registrovanih igraca.</h4>
 
 
 @endsection

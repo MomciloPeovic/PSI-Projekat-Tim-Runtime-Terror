@@ -52,6 +52,25 @@ class ClubController extends Controller
         return view('clubs.clubsTable')->with('clubs',$clubs)->with('broj_stranica',$num);
     }
 
+    public function getPlayers($id)
+    {
+        $veze =  DB::table('club_player')->where('club_id','=',$id)->get();
+        $uKlubu = false;
+        $players = collect([]);
+
+        foreach($veze as $veza)
+        {
+            if($veza->left == null) {
+                $uKlubu == true;
+                $players->push(DB::table('players')->where('id','=',$veza->player_id)->first());    
+            }
+        }
+        if($uKlubu == false)
+            return view('players.clubPlayerInfo');  
+        else
+        return view('players.playersTable')->with('players',$players);    
+    }
+
     public function getClub($id)
     {
         $club = Club::where('id', $id)->first();

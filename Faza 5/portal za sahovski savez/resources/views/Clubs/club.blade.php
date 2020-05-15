@@ -19,6 +19,11 @@
             </div>
             <div class="col-sm-4">
                 <div class="tab-content">
+                    @auth('club')
+                    @if(Auth::guard('club')->user()->id == $club->id)
+                    <input type="hidden" name="id" value="{{Auth::user()->id}}">
+                    @endif
+                @endauth
                     <div class="tab-pane active" id="home">
                     
                             <div class="form-group">
@@ -27,7 +32,17 @@
                                         <h4>Naziv</h4>
                                     </label>
                                     <div class="alert alert-info" for="name">
-                                        <h5>{{$club->name}}</h5>
+                                        @auth('club')
+                                        @if(Auth::user()->id == $club->id)
+                                            <input type="text" class="form-control" value="{{$club->name}}" name="name" required>
+                                        @else
+                                            <h5>{{$club->name}}</h5>
+                                        @endif
+                                        @endauth
+
+                                        @guest('club')
+                                            <h5>{{$club->name}}</h5>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +53,17 @@
                                         <h4>E-mail</h4>
                                     </label>
                                     <div class="alert alert-info" for="email">
-                                        <h5>{{$club->email}}</h5>
+                                        @auth('club')
+                                        @if(Auth::user()->id == $club->id)
+                                            <input type="text" class="form-control" value="{{$club->email}}" name="email" required>
+                                        @else
+                                            <h5>{{$club->email}}</h5>
+                                        @endif
+                                        @endauth
+
+                                        @guest('club')
+                                            <h5>{{$club->email}}</h5>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +74,17 @@
                                         <h4>Adresa</h4>
                                     </label>
                                     <div class="alert alert-info" for="address">
-                                        <h5>{{$club->address}}</h5>
+                                        @auth('club')
+                                        @if(Auth::user()->id == $club->id)
+                                            <input type="text" class="form-control" value="{{$club->address}}" name="address" required>
+                                        @else
+                                            <h5>{{$club->address}}</h5>
+                                        @endif
+                                        @endauth
+
+                                        @guest('club')
+                                            <h5>{{$club->address}}</h5>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +95,17 @@
                                         <h4>Telefon</h4>
                                     </label>
                                     <div class="alert alert-info" for="phone">
-                                        <h5>{{$club->phone}}</h5>
+                                        @auth('club')
+                                        @if(Auth::user()->id == $club->id)
+                                            <input type="text" class="form-control" value="{{$club->phone}}" name="phone" required>
+                                        @else
+                                            <h5>{{$club->phone}}</h5>
+                                        @endif
+                                        @endauth
+
+                                        @guest('club')
+                                            <h5>{{$club->phone}}</h5>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +117,17 @@
                                 </label>
                                 <br>
                                 <div class="alert alert-info" for="founded"><label id="founded" name="founded">
-                                    <h5>{{$club->founded}}</h5>
+                                    @auth('club')
+                                        @if(Auth::user()->id == $club->id)
+                                            <input type="text" class="form-control" value="{{$club->founded}}" name="founded" required>
+                                        @else
+                                            <h5>{{$club->founded}}</h5>
+                                        @endif
+                                        @endauth
+
+                                        @guest('club')
+                                            <h5>{{$club->founded}}</h5>
+                                        @endguest
                                     </label></div>
                             </div>
                     </div>
