@@ -103,4 +103,21 @@ class TournamentController extends Controller
         $tournament->arbiters()->detach($request->arbiter_id);
         return redirect('/turnir/' . $request->id . '/sudije');
     }
+
+    public function addResults($id)
+    {
+        $tournament = Tournament::where('id', $id)->first();
+        return view('tournaments.addResults', [
+            'tournament' => $tournament
+        ]);
+    }
+
+    public function results(Request $request)
+    {
+        $tournament = Tournament::where('id', $request->id)->first();
+
+        return view('tournaments.resultsPartial', [
+            'participants' => $tournament->participants
+        ]);
+    }
 }

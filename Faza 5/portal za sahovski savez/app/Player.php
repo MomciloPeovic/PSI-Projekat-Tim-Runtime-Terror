@@ -46,4 +46,13 @@ class Player extends User
 
 		return null;
 	}
+
+	public function getPlayerRank()
+	{
+		$rank = $this->belongsTo('App\PlayerRank', 'player_rank_id')->first();
+		if ($rank == null)
+			return "";
+
+		return $rank->name;
+	}
 }

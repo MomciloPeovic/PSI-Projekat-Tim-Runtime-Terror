@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(ArbiterRanksSeeder::class);
+        $this->call(PlayerRanksSeeder::class);
         $this->call(TournamentSeeder::class);
         $this->call(PlayerSeeder::class);
         $this->call(ClubSeeder::class);
