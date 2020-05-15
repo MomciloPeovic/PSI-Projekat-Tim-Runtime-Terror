@@ -73,6 +73,8 @@
                 <th scope="col" class="sudija">Vise Info</th>
               </tr>
             </thead>
+            
+            
             <tbody>
                       
 
@@ -83,6 +85,7 @@
                 <td>{{ $player->surname }}</td>
                 <td>{{ $player->rating }}</td>
                 <td><a class="btn btn-primary" href="igrac/{{ $player->id }}">+</a></td>
+                <td><a class="btn btn-success" href="igrac/sudija/{{ $player->id }}">Unapredi</td>
             </tr>
             @endforeach
 
