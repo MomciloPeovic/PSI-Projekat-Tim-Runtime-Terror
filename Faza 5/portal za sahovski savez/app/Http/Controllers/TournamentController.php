@@ -78,4 +78,28 @@ class TournamentController extends Controller
 
         return redirect()->action('TournamentController@index');
     }
+
+    public function arbiters($id)
+    {
+        $tournament = Tournament::where('id', $id)->first();
+        $arbiters = Player::whereNotNull('arbiter_rank_id')->get();
+        return view('tournaments.arbiters', [
+            'tournament' => $tournament,
+            'arbiters' => $arbiters
+        ]);
+    }
+
+    public function addArbiter(Request $request)
+    {
+        $tournament = Tournament::where('id', $request->id)->first();
+        $tournament->arbiters()->sync($request->arbiter_id);
+        return redirect('/turnir/' . $request->id . '/sudije');
+    }
+
+    public function removeArbiter(Request $request)
+    {
+        $tournament = Tournament::where('id', $request->id)->first();
+        $tournament->arbiters()->detach($request->arbiter_id);
+        return redirect('/turnir/' . $request->id . '/sudije');
+    }
 }
