@@ -18,8 +18,38 @@ class ClubController extends Controller
     {
         $clubs = Club::all();
         return view('clubs.clubs', [
-            'clubs' => Club::orderByDesc('founded')->get()
+            'clubs' => Club::orderByDesc('founded')->get(),
+            'numPlayers' => 0
         ]);
+    }
+
+    public function getClubsPost(Request $data)
+    {
+        $limit = 3;
+        $strana = $data->strana;
+        $start = ($strana-1)*$limit;
+
+        $min_datum_filter = $data->min_datum_filter;
+        if($min_datum_filter == "") $min_datum_filter = date(1900-1-1);
+        $max_datum_filter = $data->max_datum_filter;
+        if($max_datum_filter == "") $max_datum_filter = date("Y-m-d");
+
+        $clubs = "";
+
+        $clubs = Club::where('name', 'like', "%".$data->naziv_filter."%" )
+        ->where('municipality', 'like', "%".$data->opstina_filter."%")
+        ->whereBetween('founded',[$min_datum_filter, $max_datum_filter])
+        ->offset($start)
+        ->limit($limit)
+        ->get();
+
+        $numPages = Club::where('name', 'like', "%".$data->naziv_filter."%" )
+        ->where('municipality', 'like', "%".$data->opstina_filter."%")
+        ->whereBetween('founded',[$min_datum_filter, $max_datum_filter])->count();
+
+        $num = ceil($numPages/$limit);
+
+        return view('clubs.clubsTable')->with('clubs',$clubs)->with('broj_stranica',$num);
     }
 
     public function getClub($id)
@@ -43,6 +73,7 @@ class ClubController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'founded' => $request->founded,
+                'municipality' => $request->municipality,
                 'address' => $request->address,
                 'phone' => $request->phone
             ]);
@@ -54,6 +85,7 @@ class ClubController extends Controller
                 'email' => $request->email,
                 'password' => $request->password,
                 'founded' => $request->founded,
+                'municipality' => $request->municipality,
                 'address' => $request->address,
                 'phone' => $request->phone
             ]);

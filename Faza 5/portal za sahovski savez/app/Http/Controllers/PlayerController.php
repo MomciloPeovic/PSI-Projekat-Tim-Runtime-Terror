@@ -50,7 +50,6 @@ class PlayerController extends Controller
                 ->limit($limit)
                 ->get();
 
-        $broj = 0;
         if($data->pol_filter == "Svi")
         $broj =  Player::where('name','like',"%".$data->ime_filter."%")->whereBetween('rating',[$min_rejting_filter,$max_rejting_filter])->count();
         else $broj = Player::where('name','like',"%".$data->ime_filter."%")
