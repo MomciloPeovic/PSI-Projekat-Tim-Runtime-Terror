@@ -56,7 +56,7 @@
 
 				@auth('player')
 				@if(Auth::guard('player')->user()->isArbiter() && $tournament->arbiters->contains('id', Auth::user()->id))
-				<a href="/turnir/{{$tournament->id}}/dodajRezultat" class="btn btn-primary mb-1">Dodavanje rezultata</a>
+				<a href="/turnir/{{$tournament->id}}/unosRezultata" class="btn btn-primary mb-1">Unos rezultata</a>
 				@endif
 				@endauth
 

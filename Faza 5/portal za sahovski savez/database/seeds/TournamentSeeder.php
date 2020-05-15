@@ -15,7 +15,7 @@ class TournamentSeeder extends Seeder
     {
         DB::table('tournaments')->insert([
             'name' => 'turnir',
-            'email' => 'email' . '@gmail.com',
+            'email' => 'momcilo' . '@gmail.com',
             'phone' => '12345678',
             'start_date' => date("Y-m-d"),
             'end_date' => date("Y-m-d"),
@@ -27,7 +27,7 @@ class TournamentSeeder extends Seeder
 
         DB::table('tournaments')->insert([
             'name' => 'turnir2',
-            'email' => 'email2' . '@gmail.com',
+            'email' => 'nikola' . '@gmail.com',
             'phone' => '12345678',
             'start_date' => date("Y-m-d"),
             'end_date' => date("Y-m-d"),
