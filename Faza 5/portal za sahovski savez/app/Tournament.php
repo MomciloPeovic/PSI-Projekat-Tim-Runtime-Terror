@@ -33,4 +33,9 @@ class Tournament extends Model
 
 		return false;
 	}
+
+	public function arbiters()
+	{
+		return $this->belongsToMany('App\Player', 'arbiter_tournament', 'tournament_id', 'arbiter_id');
+	}
 }

@@ -16,6 +16,7 @@ class CreateArbiterTournamentTable extends Migration
         Schema::create('arbiter_tournament', function (Blueprint $table) {
             $table->foreignId('tournament_id')->constrained('tournaments')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('arbiter_id')->constrained('players')->onDelete('cascade')->onUpdate('cascade');
+            $table->primary(['tournament_id', 'arbiter_id']);
         });
     }
 

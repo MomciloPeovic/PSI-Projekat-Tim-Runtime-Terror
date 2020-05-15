@@ -8,7 +8,7 @@
 
 @auth('player')
 	@if(Auth::guard('player')->user()->email == $tournament->email)
-			<a href="/turnir/{{$tournament->id}}/sudije" class="btn btn-primary">Dodavanje sudija</a>
+		<a href="/turnir/{{$tournament->id}}/sudije" class="btn btn-primary">Dodavanje sudija</a>
 	@endif
 @endauth
 
