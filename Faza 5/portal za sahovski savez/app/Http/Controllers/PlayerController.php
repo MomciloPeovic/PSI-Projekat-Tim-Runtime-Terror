@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ArbiterRank;
 use App\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,8 +17,10 @@ class PlayerController extends Controller
     public function getPlayers()
     {
         $players = Player::all();
+        $arbiterRanks = ArbiterRank::all();
             return view('players.players', [
-                'players' => $players
+                'players' => $players,
+                'arbiterRanks' => $arbiterRanks
             ]);
     }
 
@@ -140,8 +143,21 @@ class PlayerController extends Controller
 
     public function myClub($id)
     {
-        $player = Player::where('id', $id)->first();
-        return view('players.player_club_info')->with('player', $player);        
+
+        $u_klubu = false;
+        $veze =  DB::table('club_player')->where('player_id','=',$id)->get();
+        foreach($veze as $veza)
+        {
+            if($veza->left == null)
+                $u_klubu = true;
+        }
+        if($u_klubu == false)
+            return view('players.player_club_info');       
+        else
+        {
+            $klub = DB::table('clubs')->where('id','=',$veza->club_id)->first();
+            return redirect('/klub/'.$klub->id);
+        }
     }
     
     public function leaveClub($id)
@@ -160,9 +176,23 @@ class PlayerController extends Controller
         return view('admin.referees', ['players' => $players]);
     }
 
-    public function promote()
+    public function promote($id)
     {
-        
+        $player = Player::where('id', $id)->first();
+        $arbiterRanks = ArbiterRank::all();
+        return view('admin.promote', [
+            'player' => $player,
+            'arbiterRanks' => $arbiterRanks
+        ]);
+    }
+
+    public function promotePost(Request $request)
+    {
+        Player::where('id', $request->id)->update([
+            'arbiter_rank_id' => $request->rang
+        ]);
+
+        return redirect()->action('PlayerController@referees');
     }
 }
 
