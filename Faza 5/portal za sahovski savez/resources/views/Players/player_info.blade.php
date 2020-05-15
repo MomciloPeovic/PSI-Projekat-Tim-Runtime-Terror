@@ -185,6 +185,23 @@
                     </div>
                     @endif
                     @endauth
+
+                    @auth('club')
+                    @php
+                        //TODO(Nikola) : bolja probvera da li je igrac u klubu 
+                        $veza =  DB::table('club_player')->where('player_id','=',$player->id)->first();
+                        $player_id = $player->id;
+                        $club_id = Auth::guard('club')->user()->id;
+                    @endphp
+                    @if($veza == null)
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <a href="/klub/{{$club_id}}/posaljiZahtevIgracu/{{$player_id}}" class="btn btn-primary text-white">Posalji zahtev za uclanjenje</a>
+                        </div>
+                    </div>
+                    @endif
+                    @endauth
+
                 </div>
 
             </div>

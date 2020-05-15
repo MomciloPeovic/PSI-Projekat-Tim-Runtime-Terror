@@ -97,4 +97,9 @@ class ClubController extends Controller
 
         return view('home');
     }
+
+    public function requestPlayer($club_id,$player_id)
+    {
+        
+    }
 }

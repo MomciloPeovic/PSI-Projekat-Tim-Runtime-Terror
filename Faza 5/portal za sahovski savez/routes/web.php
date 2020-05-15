@@ -48,6 +48,10 @@ Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+'
 Route::post('/klub/dodaj', 'ClubController@addOrEditClubPost');
 Route::post('/klub/{idKlub}/dajOtkazIgracu/{idIgrac}', 'ClubController@firePlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('/klub/{idKlub}/odgovoriNaZahtev/{idIgrac}', 'ClubController@answerPlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
+//TODO(David): Dodaje se zahtev u tabelu
+Route::get('/klub/{idKlub}/posaljiZahtevIgracu/{idIgrac}', 'ClubController@requestPlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
+
+
 
 Route::get('/sudija', 'PlayerController@referees'); // prikazuje sve sudije
 Route::get('/sudija/{id}', 'PlayerController@show'); // prikazuje detalje sudije
