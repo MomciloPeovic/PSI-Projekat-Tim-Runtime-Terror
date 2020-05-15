@@ -21,6 +21,7 @@ class CreateClubsTable extends Migration
             $table->string('address', 100);
             $table->string('phone', 20)->unique();
             $table->date('founded');
+            $table->boolean('confirmed')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

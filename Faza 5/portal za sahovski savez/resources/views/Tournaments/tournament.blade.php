@@ -6,6 +6,24 @@
 
 <h1> {{ $tournament->name }}</h1>
 
+@auth('player')
+	@if(Auth::guard('player')->user()->email == $tournament->email)
+			<a href="/turnir/{{$tournament->id}}/sudije" class="btn btn-primary">Dodavanje sudija</a>
+	@endif
+@endauth
+
+@auth('admin')
+	@if(Auth::guard('admin')->user()->email == $tournament->email)
+		<a href="/turnir/{{$tournament->id}}/sudije" class="btn btn-primary">Dodavanje sudija</a>
+	@endif
+@endauth
+
+@auth('club')
+	@if(Auth::guard('club')->user()->email == $tournament->email)
+		<a href="/turnir/{{$tournament->id}}/sudije" class="btn btn-primary">Dodavanje sudija</a>
+	@endif
+@endauth
+
 	<ul class="nav nav-tabs nav-fill mt-3" id="myTab" role="tablist">
 		<li class="nav-item">
 			<a class="nav-link active" id="tabela-tab" data-toggle="tab" href="#tabela" role="tab"
@@ -17,7 +35,7 @@
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" id="spisak-tab" data-toggle="tab" href="#spisak" role="tab" aria-controls="spisak"
-				aria-selected="false">Spisak igraca</a>
+				aria-selected="false">Informacije</a>
 		</li>
 	</ul>
 	
@@ -96,35 +114,11 @@
 			</div>
 		</div>
 
-		<!-- Spisak igraca tab-->
+		<!-- Informacije tab-->
 		<div class="tab-pane fade p-5" id="spisak" role="tabpanel" aria-labelledby="spisak-tab">
 			<div class="container-fluid mt-1 ml-5">
-				<h1 class="h1">Spisak</h1>
-				<table class="table table-hover w-75">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Ime i prezime</th>
-							<th scope="col">Datum rodjenja</th>
-							<th scope="col">Rejting</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						@foreach($tournament->participants as $participant)
-						<tr>
-							@if($tournament->type='player')
-							<th scope="row">{{ $loop->index }}</th>
-							<td>{{ $participant->name }}  {{$participant->surname }}</td>
-							<td>{{ date('d.m.Y.', strtotime($participant->birth_date)) }}</td>
-							<td>{{ $participant->rating }}</td>
-							 @endif
-						</tr>
-						@endforeach
-
-						
-					</tbody>
-				</table>
+				<h1 class="h1">Informacije</h1>
+				
 			</div>
 		</div>
 	</div>
