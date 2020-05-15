@@ -13,13 +13,13 @@ class TournamentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['addTournament']);
+        $this->middleware('auth')->except(['index', 'getTournament']);
     }
 
     public function index()
     {
         return view('tournaments.tournaments', [
-            'tournaments' => Tournament::orderByDesc('date')->orderByDesc('time')->get()
+            'tournaments' => Tournament::orderByDesc('start_date')->orderByDesc('time')->get()
         ]);
     }
 
@@ -44,7 +44,8 @@ class TournamentController extends Controller
 
         Tournament::insert([
             'name' => $request->name,
-            'date' => $request->date,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
             'time' => $request->time,
             'rounds' => $request->rounds,
             'phone' => $request->phone,
@@ -92,7 +93,7 @@ class TournamentController extends Controller
     public function addArbiter(Request $request)
     {
         $tournament = Tournament::where('id', $request->id)->first();
-        $tournament->arbiters()->sync($request->arbiter_id);
+        $tournament->arbiters()->syncWithoutDetaching($request->arbiter_id);
         return redirect('/turnir/' . $request->id . '/sudije');
     }
 

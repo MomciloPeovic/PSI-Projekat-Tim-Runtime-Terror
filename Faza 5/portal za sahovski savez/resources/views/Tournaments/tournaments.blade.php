@@ -90,7 +90,7 @@
 					<td>{{ $tournament->name }}</td>
 
 					@php
-					$date = strtotime($tournament->date); 
+					$date = strtotime($tournament->start_date); 
 					$new_date = date('d.m.Y.', $date);
 					@endphp
 					<td>{{ $new_date }}</td>

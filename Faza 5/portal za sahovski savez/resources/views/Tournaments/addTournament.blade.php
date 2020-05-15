@@ -33,8 +33,13 @@
 		</div>
 
 		<div class="form-group">
-			<label class="label-form">Datum</label>
-			<input type="date" class="form-control" name='date'>
+			<label class="label-form">Datum pocetka</label>
+			<input type="date" class="form-control" name='start_date'>
+		</div>
+
+		<div class="form-group">
+			<label class="label-form">Datum kraja</label>
+			<input type="date" class="form-control" name='end_date'>
 		</div>
 
 		<div class="form-group">
