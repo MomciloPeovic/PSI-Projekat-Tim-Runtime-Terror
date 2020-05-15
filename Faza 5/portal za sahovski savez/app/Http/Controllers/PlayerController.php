@@ -143,8 +143,14 @@ class PlayerController extends Controller
 
     public function myClub($id)
     {
-        $player = Player::where('id', $id)->first();
-        return view('players.player_club_info')->with('player', $player);        
+        $veza = DB::table('club_player')->where('player_id','=',$id)->first();
+        if($veza == null)
+            return view('players.player_club_info');       
+        else
+        {
+            $klub = DB::table('clubs')->where('id','=',$veza->club_id)->first();
+            return redirect('/klub/'.$klub->id);
+        }
     }
     
     public function leaveClub($id)
