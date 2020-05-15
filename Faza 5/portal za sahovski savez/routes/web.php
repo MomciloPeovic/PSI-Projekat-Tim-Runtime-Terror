@@ -54,9 +54,9 @@ Route::get('/klub/{idKlub}/posaljiZahtevIgracu/{idIgrac}', 'ClubController@reque
 
 
 Route::get('/sudija', 'PlayerController@referees'); // prikazuje sve sudije
-Route::get('/sudija/{id}', 'PlayerController@show'); // prikazuje detalje sudije
 
-Route::post('/igrac/sudija/{id}', 'PlayerController@promote'); // dodeljuje igracu status sudije
+Route::get('/igrac/sudija/{id}', 'PlayerController@promote');
+Route::post('/igrac/sudija/{id}', 'PlayerController@promotePost'); // dodeljuje igracu status sudije
 Route::get('/rokovi', 'AdminController@deadlines'); // prikazuje trenutne rokove
 Route::get('/dodajRok', 'AdminController@addDeadline');
 Route::post('/dodajRok', 'AdminController@addDeadlinePost'); // dodaje rok
