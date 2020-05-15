@@ -29,16 +29,41 @@
     $(document).on('keyup','#max_rejting_filter',function(){prikazi_igrace();});
     $(document).on('change','#pol_filter',function(){prikazi_igrace();});
 
+    function prikazi_klubove(strana_ = 1)
+    {
+      let naziv_filter = document.getElementById("naziv_filter").value;
+      let opstina_filter = document.getElementById("opstina_filter").value;
+      let min_datum_filter = document.getElementById("min_datum_filter").value;
+      let max_datum_filter = document.getElementById("max_datum_filter").value;
+      let strana = strana_;
+
+      $.ajax({
+        type: "POST",
+        url: "/klub",
+        data: {_token:'<?php echo csrf_token();?>',naziv_filter:naziv_filter,opstina_filter,opstina_filter,min_datum_filter:min_datum_filter,max_datum_filter:max_datum_filter,strana:strana},
+        success: function (data) {
+          document.getElementById("klubovi_tabela").innerHTML = data;
+          return;
+        },
+        error: function (data) {
+          return;
+        },
+      });
+    }
+    $(document).on('click', '#klubovi-tab', function() { prikazi_klubove(); });
+    $(document).on('keyup','#naziv_filter',function() { prikazi_klubove(); });
+    $(document).on('change','#opstina_filter',function() { prikazi_klubove(); });
+    $(document).on('keyup','#min_datum_filter',function() { prikazi_klubove(); });
+    $(document).on('keyup','#max_datum_filter',function() { prikazi_klubove(); });
+    
 </script>
 
 <ul class="nav nav-tabs nav-fill mt-3" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="igraci-tab" data-toggle="tab" href="#igraci" role="tab" aria-controls="igraci"
-        onclick="pregled('igraci')" aria-selected="true">Igraci</a>
+      <a class="nav-link active" id="igraci-tab" data-toggle="tab" href="#igraci" role="tab" aria-controls="igraci" aria-selected="true">Igraci</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="klubovi-tab" data-toggle="tab" href="#klubovi" role="tab" aria-controls="klubovi"
-        onclick="pregled('klubovi')" aria-selected="false">Klubovi</a>
+      <a class="nav-link" id="klubovi-tab" data-toggle="tab" href="#klubovi" role="tab" aria-controls="klubovi" aria-selected="false">Klubovi</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="takmicenja-tab" data-toggle="tab" href="#takmicenja" role="tab" aria-controls="takmicenja"
@@ -53,7 +78,7 @@
         <div class="row">
           <div class="col-sm-3">
 
-            <!-- FILERI  IGRACI -->
+            <!-- FILTERI  IGRACI -->
             <p>Filter</p>
             <div class="card">
               <article class="card-group-item">
@@ -104,7 +129,7 @@
               </article> <!-- card-group-item.// -->
             </div>
           </div>
-          <!-- /FILERI IGRACI -->
+          <!-- /FILTERI IGRACI -->
 
           <!-- TABELA IGRACI -->
           <table class="table col-sm-9">
@@ -123,7 +148,6 @@
           </table>
          <!-- /TABELA IGRACI -->
 
-
         </div>
       </div>
     </div>
@@ -133,27 +157,27 @@
         <div class="row">
           <div class="col-sm-3">
             
-            <!-- FILERI  KLUB -->
+            <!-- FILTERI  KLUB -->
             <p>Filter</p>
             <div class="card">
               <article class="card-group-item">
                 <header class="card-header">
-                  <h6 class="title">Naziv </h6>
+                  <h6 class="title"> Naziv </h6>
                 </header>
                 <div class="filter-content">
                   <div class="card-body">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id = "naziv_filter">
                   </div> <!-- card-body.// -->
                 </div>
               </article> <!-- card-group-item.// -->
 
               <article class="card-group-item">
                 <header class="card-header">
-                  <h6 class="title">Opstina </h6>
+                  <h6 class="title"> Opstina </h6>
                 </header>
                 <div class="filter-content">
                   <div class="card-body">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id = "opstina_filter">
                   </div> <!-- card-body.// -->
                 </div>
               </article> <!-- card-group-item.// -->
@@ -166,12 +190,12 @@
                   <div class="card-body">
                     <div class="form-row">
                       <div class="form-group col-md-6">
-                        <label>Od</label>
-                        <input type="date" class="form-control">
+                        <label> Od </label>
+                        <input type="date" class="form-control" id = "min_datum_filter">
                       </div>
                       <div class="form-group col-md-6 text-right">
-                        <label>Do</label>
-                        <input type="date" class="form-control">
+                        <label> Do </label>
+                        <input type="date" class="form-control" id = "max_datum_filter">
                       </div>
                     </div>
                   </div> <!-- card-body.// -->
@@ -179,33 +203,35 @@
               </article> <!-- card-group-item.// -->
             </div>
           </div>
-            <!-- /FILERI  KLUB -->
+            <!-- /FILTERI  KLUB -->
         
-          <!-- TABLA  KLUB -->
-          <table class="table table-hover col-sm-9">
+          <!-- TABELA  KLUB -->
+          <table class="table table col-sm-9">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Naziv</th>
                 <th scope="col">Broj clanova</th>
-                <th scope="col">Rejting</th>
+                <th scope="col">Adresa</th>
+                <th scope="col">Vise</th>
               </tr>
             </thead>
-            <tbody>
-              
+            <tbody id = 'klubovi_tabela'>
             </tbody>
-            <!-- /TABLA  KLUB -->
+            <!-- /TABELA  KLUB -->
+          
           </table>
         </div>
       </div> 
     </div>
+
     <!-- TURNIRI TAB -->
     <div class="tab-pane fade p-5" id="takmicenja" role="tabpanel" aria-labelledby="takmicenja-tab">
       <div class="container">
         <div class="row">
           <div class="col-sm-3">
             
-            <!-- FILERI TURNIRI -->
+            <!-- FILTERI TURNIRI -->
             <p>Filter</p>
             <div class="card">
               <article class="card-group-item">
@@ -265,9 +291,9 @@
               </article> <!-- card-group-item.// -->
             </div>
           </div>
-        <!-- /FILERI TURNIRI -->
+        <!-- /FILTERI TURNIRI -->
 
-        <!-- TABLA TURNIRI -->
+        <!-- TABELA TURNIRI -->
           <table class="table table-hover col-sm-9">
             <thead class="thead-dark">
               <tr>
@@ -288,7 +314,7 @@
             </thead>
             <tbody>
             </tbody>
-            <!-- /TABLA TURNIRI -->
+            <!-- /TABELA TURNIRI -->
           </table>
         </div>
       </div>

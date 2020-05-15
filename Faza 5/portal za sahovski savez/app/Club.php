@@ -11,7 +11,7 @@ class Club extends User
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'founded', 'address', 'phone'
+        'name', 'email', 'password', 'founded', 'municipality', 'address', 'phone'
     ];
 
     protected $hidden = [
@@ -28,5 +28,11 @@ class Club extends User
     public function players()
     {
         return $this->hasMany('App\Player');
+    }
+
+    public function playerCount() 
+    {
+        $playerCnt = Club::withCount('players')->get();
+        return $playerCnt->players_count;
     }
 }

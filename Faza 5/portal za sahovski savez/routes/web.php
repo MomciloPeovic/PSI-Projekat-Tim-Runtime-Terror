@@ -45,6 +45,7 @@ Route::get('/klub/dodaj', 'ClubController@addClub');
 Route::get('/klub/obrisi/{id}', 'ClubController@deleteClub')->where('id', '[0-9]+');
 Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+');
 Route::post('/klub/dodaj', 'ClubController@addOrEditClubPost');
+Route::post('/klub', 'ClubController@getClubsPost');
 Route::post('/klub/{idKlub}/dajOtkazIgracu/{idIgrac}', 'ClubController@firePlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('/klub/{idKlub}/odgovoriNaZahtev/{idIgrac}', 'ClubController@answerPlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 //TODO(David): Dodaje se zahtev u tabelu
