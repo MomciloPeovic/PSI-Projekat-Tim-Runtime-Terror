@@ -3,7 +3,7 @@
 @section('content')
 
 <form action="/klub/dodaj" method="POST">
-    @csrf
+@csrf
 <div class="container-fluid mt-1 ml-5">
     <div id="klub-profil">
         <div class="row">
@@ -139,6 +139,28 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="founded">
+                                        <h4> Opstina </h4>
+                                    </label>
+                                    <br>
+                                    <div class="alert alert-info" for="municipality"><label id="municipality" name="municipality">
+                                        @auth('club')
+                                            @if(Auth::guard('club')->user()->id == $club->id)
+                                                <input type="text" class="form-control" value="{{$club->municipality}}" name="municipality" required>
+                                            @else
+                                                <h5>{{$club->municipality}}</h5>
+                                            @endif
+                                            @endauth
+
+                                            @guest('club')
+                                                <h5>{{$club->municipality}}</h5>
+                                            @endguest
+                                    </label></div>
+                                </div>
+                            </div>
+
                             @auth('club')
                             @if(Auth::guard('club')->user()->id == $club->id)
                             <div class="form-group">
@@ -151,6 +173,7 @@
                 </div>
             </div>
         </div>
+
     </form>
 
 @endsection

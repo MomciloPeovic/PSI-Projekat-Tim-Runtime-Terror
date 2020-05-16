@@ -73,11 +73,6 @@ class ClubController extends Controller
         return view('clubs.club')->with('club', $club);
     }
 
-    public function addClub()
-    {
-        return view('clubs.addClub');
-    }
-
     public function addOrEditClubPost(Request $request)
     {
         $club = Club::where('id', "=", $request->id)->first();
@@ -98,7 +93,6 @@ class ClubController extends Controller
             Club::where('id', $request->id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
                 'founded' => $request->founded,
                 'municipality' => $request->municipality,
                 'address' => $request->address,

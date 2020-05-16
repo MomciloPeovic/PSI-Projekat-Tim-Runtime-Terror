@@ -44,7 +44,6 @@ Route::post('turnir/{idTurnir}/prijavaKluba/{idKlub}', 'TournamentController@clu
 
 Route::get('/klub', 'ClubController@index');
 Route::get('/klub/{id}', 'ClubController@getClub')->where('id', '[0-9]+');
-Route::get('/klub/dodaj', 'ClubController@addClub');
 Route::get('/klub/obrisi/{id}', 'ClubController@deleteClub')->where('id', '[0-9]+');
 Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+');
 Route::get('/klub/igraci/{id}', 'ClubController@getPlayers');

@@ -16,12 +16,7 @@ class PlayerController extends Controller
 
     public function getPlayers()
     {
-        $players = Player::all();
-        $arbiterRanks = ArbiterRank::all();
-            return view('players.players', [
-                'players' => $players,
-                'arbiterRanks' => $arbiterRanks
-            ]);
+        return view('home');
     }
 
     public function getPlayersPost(Request $data)

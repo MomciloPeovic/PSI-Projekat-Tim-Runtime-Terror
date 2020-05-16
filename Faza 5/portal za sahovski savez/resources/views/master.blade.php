@@ -56,7 +56,7 @@
 
                     <form action="/korisnici/logout" method="GET">
                         <input type="submit" class="btn btn-danger ml-2" value="Odjava"/>
-                    <form>
+                    </form>
                 @endauth
 
                 @auth('club')
@@ -68,7 +68,7 @@
 
                     <form action="/korisnici/logout" method="GET">
                         <input type="submit" class="btn btn-danger ml-2" value="Odjava"/>
-                    <form>
+                    </form>
                 @endauth
 
 
