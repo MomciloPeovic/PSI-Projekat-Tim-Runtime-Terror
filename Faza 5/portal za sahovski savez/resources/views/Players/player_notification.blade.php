@@ -13,26 +13,40 @@
 
 @if($obavestenje->expiry_date >= date('Y-m-d'))
 <div class="alert alert-info" role="alert">
-    Klub "{{$klub->name}}" Vas je pozvao da se uclanite u klub!
-    <form action="" method="POST" class="form-inline">
-        <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
-        <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
-        <input type="submit" class="btn btn-success" value="Prihvati">
-    </form>
-    <form action="" method="POST" class="form-inline">
-        <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
-        <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
-        <input type="submit" class="btn btn-danger" value="Odbij">
-    </form>
+    <div class = "row">
+        <div class = "col-sm-8">
+            Klub "{{$klub->name}}" Vas je pozvao da se uclanite u klub!
+        </div>
+        <div class = "col-sm-2">
+            <form action="" method="POST" class="form-inline">
+                <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
+                <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
+                <input type="submit" class="btn btn-success" value="Prihvati">
+            </form>
+        </div>
+        <div class = "col-sm-2">
+            <form action="" method="POST" class="form-inline">
+                <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
+                <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
+                <input type="submit" class="btn btn-danger" value="Odbij">
+            </form>
+        </div>
+    </div>
 </div>
 @else 
 <div class="alert alert-info" role="alert">
-    Klub "{{$klub->name}}" Vas je pozvao da se uclanite u klub, medjutim poziv je istekao datuma {{$obavestenje->expiry_date}}. &nbsp;
-    <form action="" method="POST">
-        <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
-        <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
-        <input type="submit" class="btn btn-primary" value="X">
-    </form>
+    <div class = "row">
+        <div class = "col-sm-10">
+            Klub "{{$klub->name}}" Vas je pozvao da se uclanite u klub, medjutim poziv je istekao datuma {{$obavestenje->expiry_date}}. &nbsp;
+        </div>
+        <div class = "col-sm-2">
+            <form action="" method="POST">
+                <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
+                <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
+                <input type="submit" class="btn btn-primary" value="X">
+            </form>
+        </div>
+    </div>
 </div>
 @endif
 

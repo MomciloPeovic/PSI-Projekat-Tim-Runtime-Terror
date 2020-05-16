@@ -157,4 +157,10 @@ class ClubController extends Controller
 		return view('players.player_info')->with('player',$player)->withErrors($errors);
         */
     }
+
+    public function getNotifications($id)
+    {
+        $notifications = DB::table('player_club_request')->where('club_id','=',$id)->where('club','=',false)->get();
+        return view('clubs.clubNotifications')->with('notifications', $notifications);
+    }
 }

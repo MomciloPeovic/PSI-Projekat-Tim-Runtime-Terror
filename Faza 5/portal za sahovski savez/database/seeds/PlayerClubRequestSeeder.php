@@ -40,5 +40,32 @@ class PlayerClubRequestSeeder extends Seeder
             'expiry_date' => '2020-05-22'
         ]);
 
+        DB::table('player_club_request')->insert([
+            'player_id' => '4',
+            'club_id' => '5',
+            'club' => '0',
+            'expiry_date' => '2020-05-21'
+        ]);
+
+        DB::table('player_club_request')->insert([
+            'player_id' => '5',
+            'club_id' => '2',
+            'club' => '0',
+            'expiry_date' => '2020-05-30'
+        ]);
+
+        DB::table('player_club_request')->insert([
+            'player_id' => '1',
+            'club_id' => '4',
+            'club' => '0',
+            'expiry_date' => '2020-05-03'
+        ]);
+
+        DB::table('player_club_request')->insert([
+            'player_id' => '2',
+            'club_id' => '2',
+            'club' => '0',
+            'expiry_date' => '2020-05-23'
+        ]);
     }
 }
