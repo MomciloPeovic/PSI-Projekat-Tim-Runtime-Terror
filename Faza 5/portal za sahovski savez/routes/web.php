@@ -58,14 +58,14 @@ Route::post('/klub/posaljiZahtevIgracu', 'ClubController@sendRequestToPlayer');
 
 Route::get('/sudija', 'PlayerController@referees'); // prikazuje sve sudije
 
-Route::get('/igrac/sudija/{id}', 'PlayerController@promote');
-Route::post('/igrac/sudija/{id}', 'PlayerController@promotePost'); // dodeljuje igracu status sudije
+Route::get('/igrac/sudija/{id}', 'PlayerController@promote')->where('id', '[0-9]+');
+Route::post('/igrac/sudija/{id}', 'PlayerController@promotePost')->where('id', '[0-9]+'); // dodeljuje igracu status sudije
 Route::get('/rokovi', 'AdminController@deadlines'); // prikazuje trenutne rokove
 Route::get('/dodajRok', 'AdminController@addDeadline');
 Route::post('/dodajRok', 'AdminController@addDeadlinePost'); // dodaje rok
 Route::get('/korisnici', 'AdminController@getPendingRegs'); //dohvata korisnike koji cekaju da im se odobri registacija
-Route::get('/korisnici/{id}', 'AdminController@pendingRegs');
-Route::post('/korisnici/{id}', 'AdminController@pendingRegsPost');
+Route::get('/korisnici/{id}', 'AdminController@pendingRegs')->where('id', '[0-9]+');
+Route::post('/korisnici/{id}', 'AdminController@pendingRegsPost')->where('id', '[0-9]+');
 
 Route::get('/korisnici/login', 'UsersController@login')->name("login");
 Route::post('/korisnici/login', 'UsersController@verifyLogin');
