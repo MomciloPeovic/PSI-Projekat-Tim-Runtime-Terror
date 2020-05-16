@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Deadline;
 use App\DeadlineType;
+use App\Player;
 
 class AdminController extends Controller {
     public function __construct(){
@@ -34,5 +35,30 @@ class AdminController extends Controller {
         return view('admin.deadlines', [
             'deadlines' => $deadlines
         ]);
+    }
+
+    public function getPendingRegs(){
+        $users = Player::all();
+        return view('admin.users', [
+            'users' => $users
+        ]);
+    }
+
+    public function pendingRegs($id){
+        $user = Player::where('id', $id)->first();
+        return view('admin.reg', [
+            'user' => $user
+        ]);
+    }
+
+    public function pendingRegsPost(Request $request){
+        Player::where('id', $request->id)->update([
+            'rating' => $request->rating,
+            'confirmed' => $request->confirm
+        ]);
+
+        Player::where('confirmed', 2)->delete();
+        
+        return redirect()->action('AdminController@getPendingRegs');
     }
 }
