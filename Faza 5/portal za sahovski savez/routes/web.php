@@ -38,7 +38,7 @@ Route::post('turnir/{id}/dodajSudiju', 'TournamentController@addArbiter')->where
 Route::post('turnir/{id}/ukloniSudiju', 'TournamentController@removeArbiter')->where('id', '[0-9]+');
 Route::get('turnir/{id}/unosRezultata', 'TournamentController@addResults')->where('id', '[0-9]+');
 Route::post('turnir/{id}/unosRezultata', 'TournamentController@addResultsPost')->where('id', '[0-9]+');
-Route::post('turnir/{id}/rezultati', 'TournamentController@results')->where('id', '[0-9]+');
+Route::get('turnir/{id}/rezultati', 'TournamentController@results')->where('id', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaIgraca/{idIgrac}', 'TournamentController@playerRegistration')->where('idTurnir', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaKluba/{idKlub}', 'TournamentController@clubRegistration')->where('idTurnir', '[0-9]+')->where('idKlub', '[0-9]+');
 

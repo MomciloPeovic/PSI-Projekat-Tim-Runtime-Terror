@@ -114,10 +114,24 @@ class TournamentController extends Controller
 
     public function results(Request $request)
     {
-        $tournament = Tournament::where('id', $request->id)->first();
-
+        $results = Result::where('tournament_id', $request->id)->where('round', $request->round)->orderBy('table')->get();
         return view('tournaments.resultsPartial', [
-            'participants' => $tournament->participants
+            'results' => $results
         ]);
+    }
+
+    public function addResultsPost(Request $request)
+    {
+        Result::insert([
+            'white_id' => $request->white[0],
+            'black_id' => $request->black[0],
+            'tournament_id' => $request->id,
+            'result' => $request->result[0],
+            'round' => $request->round,
+            'table' => 1,
+            'arbiter_id' => Auth::user()->id
+        ]);
+
+        return redirect('/turnir/' . $request->id);
     }
 }

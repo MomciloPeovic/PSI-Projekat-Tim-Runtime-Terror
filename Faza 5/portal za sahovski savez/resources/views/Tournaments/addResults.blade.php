@@ -6,18 +6,19 @@
 
 <script>
 
-var round = 0;
+var round = 1;
 
+function loadResults(){
 $.ajax({
-	type: "POST",
+	type: "GET",
 	url: "/turnir/{{$tournament->id}}/rezultati",
 	data: {
-		_token:'<?php echo csrf_token();?>',
 		round: round
 	},
 	success: function (data) {
 		console.log('radi');
 		document.getElementById("rezultati").innerHTML = data;
+		loadNames();
 		return;
 	},
 	error: function (data) {
@@ -25,13 +26,13 @@ $.ajax({
 		return;
 	},
 });
+}
 
 var str = "{{json_encode($tournament->participants()->select('id', 'name', 'surname')->get())}}";
 var participants = JSON.parse(str.replace(/&quot;/g,'"'));
 
 function playerSelected(selected){
 	const index = participants.findIndex(item => item.id == selected.value);
-	alert(index);
 	if (index > -1) {
 	participants.splice(index, 1);
 	loadNames();
@@ -75,6 +76,66 @@ function loadNames(){
 	}
 }
 
+function selectRound()
+{
+	round = document.getElementById("round").value;
+	loadResults();
+}
+
+function addRow()
+{
+	let row = document.createElement('tr');
+	let td1 = document.createElement('td');
+	let td2 = document.createElement('td');
+	let td3 = document.createElement('td');
+	let td4 = document.createElement('td');
+	let option = document.createElement('option');
+	option.value = 0;
+	option.innerHTML = "Izaberite igraca";
+	
+	let whiteSelect = document.createElement('select');
+	whiteSelect.appendChild(option);
+	whiteSelect.classList.add("white");
+	whiteSelect.name = "white[]"/* + document.getElementById('rezultati').childElementCount + "]"*/;
+	whiteSelect.onchange = function() {playerSelected(this)};
+	td2.appendChild(whiteSelect);
+	
+	let blackSelect = document.createElement('select');
+	blackSelect.appendChild(option.cloneNode(true));
+	blackSelect.classList.add("black");
+	blackSelect.name = "black[]"/* + document.getElementById('rezultati').childElementCount + "]"*/;
+	blackSelect.onchange = function() {playerSelected(this)};
+	td4.appendChild(blackSelect);
+
+	let resultSelect = document.createElement('select');
+	let whiteWin = document.createElement('option');
+	whiteWin.value = 2;
+	whiteWin.innerHTML = "1:0";
+	let draw = document.createElement('option');
+	draw.value = 2;
+	draw.innerHTML = "0.5:0.5";
+	let blackWin = document.createElement('option');
+	blackWin.value = 2;
+	blackWin.innerHTML = "0:1";
+
+	resultSelect.name = "result[]";
+	resultSelect.appendChild(whiteWin);
+	resultSelect.appendChild(draw);
+	resultSelect.appendChild(blackWin);
+
+	td3.appendChild(resultSelect);
+
+	td1.innerHTML = document.getElementById('rezultati').childElementCount + 1;
+
+	row.appendChild(td1);
+	row.appendChild(td2);
+	row.appendChild(td3);
+	row.appendChild(td4);
+	document.getElementById('rezultati').appendChild(row);
+
+	loadNames();
+}
+
 </script>
 
 
@@ -82,28 +143,35 @@ function loadNames(){
 <h1>Unos rezultata - {{ $tournament->name }}</h1>
 
 
-<select>
-	@for($i = 1; $i <= $tournament->rounds; $i++)
-	<option value="{{$i}}">{{$i}}</option>
-	@endfor
-</select>
+<button onclick="addRow()" class="btn btn-primary mb-2">Dodaj rezultat</button>
 
-<table class="table table-hover w-75 text-center">
-	<thead class="thead-dark">
-		<tr>
-			<th scope="col">#</th>
-			<th class="w-30" scope="col">Beli</th>
-			<th scope="col">Rezultat</th>
-			<th class="w-30" scope="col">Crni</th>
-		</tr>
-	</thead>
+<form action="/turnir/{{$tournament->id}}/unosRezultata" method="POST" >
+	@csrf
 
-	<tbody id="rezultati">
-		
+	<select name="round" id="round" onchange="selectRound()">
+		@for($i = 1; $i <= $tournament->rounds; $i++)
+		<option value="{{$i}}">{{$i}}</option>
+		@endfor
+	</select>
 
-		
-	</tbody>
-</table>
+	<table class="table table-hover w-75 text-center" onload="loadResults()">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">#</th>
+				<th class="w-30" scope="col">Beli</th>
+				<th scope="col">Rezultat</th>
+				<th class="w-30" scope="col">Crni</th>
+			</tr>
+		</thead>
+
+		<tbody id="rezultati">
+			
+			
+		</tbody>
+	</table>
+	<input type="submit" value="Potvrdi" class="btn btn-success">
+
+</form>	
 
 
 	

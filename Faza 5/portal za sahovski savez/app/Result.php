@@ -8,16 +8,16 @@ class Result extends Model
 {
     public function white()
     {
-        return $this->belongsTo('App\Player')->first();
+        return $this->belongsTo('App\Player');
     }
 
     public function black()
     {
-        return $this->belongsTo('App\Player')->first();
+        return $this->belongsTo('App\Player');
     }
 
     public function tournament()
     {
-        return $this->belongsTo('App\Tournament')->first();
+        return $this->belongsTo('App\Tournament');
     }
 }
