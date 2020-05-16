@@ -18,7 +18,7 @@
                         @csrf
                         <div class="form-group">
                             <label class="label-form">Rejting:</label>
-                            <input type="text" class="form-control" name='rating'>
+                            <input type="text" class="form-control" name='rating' value="0">
                         </div>
 
                         <div class="form-group">
