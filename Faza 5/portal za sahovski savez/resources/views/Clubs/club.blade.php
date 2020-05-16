@@ -2,6 +2,8 @@
 @section('title','Informacije o klubu')
 @section('content')
 
+<form action="/klub/dodaj" method="POST">
+    @csrf
 <div class="container-fluid mt-1 ml-5">
     <div id="klub-profil">
         <div class="row">
@@ -149,5 +151,6 @@
                 </div>
             </div>
         </div>
+    </form>
 
 @endsection
