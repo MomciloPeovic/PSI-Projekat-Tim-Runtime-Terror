@@ -188,5 +188,11 @@ class PlayerController extends Controller
 
         return redirect()->action('PlayerController@referees');
     }
+
+    public function playerNotifications($id)
+    {
+        $notifications = DB::table('player_club_request')->where('player_id','=',$id)->where('club','=',true)->get();
+        return view('players.player_notification')->with('obavestenja',$notifications);
+    }
 }
 
