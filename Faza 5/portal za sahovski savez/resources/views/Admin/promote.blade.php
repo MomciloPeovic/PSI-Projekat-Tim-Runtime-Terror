@@ -18,7 +18,7 @@
             <td>{{ $player->name }}</td>
             <td>{{ $player->surname }}</td>
             <td>{{ $player->rating }}</td>
-        <form class="col-xl-8" action='/igrac/sudija/{{$player->id}}' method="POST">
+        <td><form class="col-xl-8" action='/igrac/sudija/{{$player->id}}' method="POST">
 
                 @csrf
                 <div class="form-group">
@@ -27,12 +27,14 @@
                         @foreach($arbiterRanks as $arbiterRank)
                         <option value="{{$arbiterRank->id}}">{{$arbiterRank->name}}</option>
                         @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Potvrdi">
                 </div>
             </form>
+        </td>
         </tr>
     </tbody>
 </table>

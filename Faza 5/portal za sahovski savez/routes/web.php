@@ -64,6 +64,8 @@ Route::get('/rokovi', 'AdminController@deadlines'); // prikazuje trenutne rokove
 Route::get('/dodajRok', 'AdminController@addDeadline');
 Route::post('/dodajRok', 'AdminController@addDeadlinePost'); // dodaje rok
 Route::get('/korisnici', 'AdminController@getPendingRegs'); //dohvata korisnike koji cekaju da im se odobri registacija
+Route::get('/korisnici/{id}', 'AdminController@pendingRegs');
+Route::post('/korisnici/{id}', 'AdminController@pendingRegsPost');
 
 Route::get('/korisnici/login', 'UsersController@login')->name("login");
 Route::post('/korisnici/login', 'UsersController@verifyLogin');

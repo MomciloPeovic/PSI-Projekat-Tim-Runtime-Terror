@@ -21,7 +21,7 @@ class CreatePlayersTable extends Migration
             $table->string("name", 30);
             $table->string("surname", 30);
             $table->string("gender", 6);
-            $table->boolean('confirmed')->default(false);
+            $table->unsignedSmallInteger('confirmed')->default(0);
             $table->date("birth_date");
             $table->unsignedSmallInteger("rating")->nullable();
             $table->foreignId('arbiter_rank_id')->nullable()->constrained('arbiter_ranks')->onDelete('restrict')->onUpdate('restrict');
