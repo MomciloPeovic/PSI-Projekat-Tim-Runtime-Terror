@@ -42,18 +42,17 @@ Route::post('turnir/{id}/rezultati', 'TournamentController@results')->where('id'
 Route::post('turnir/{idTurnir}/prijavaIgraca/{idIgrac}', 'TournamentController@playerRegistration')->where('idTurnir', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaKluba/{idKlub}', 'TournamentController@clubRegistration')->where('idTurnir', '[0-9]+')->where('idKlub', '[0-9]+');
 
-Route::get('/klub', 'ClubController@getClubs');
+Route::get('/klub', 'ClubController@index');
 Route::get('/klub/{id}', 'ClubController@getClub')->where('id', '[0-9]+');
 Route::get('/klub/dodaj', 'ClubController@addClub');
 Route::get('/klub/obrisi/{id}', 'ClubController@deleteClub')->where('id', '[0-9]+');
 Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+');
 Route::get('/klub/igraci/{id}', 'ClubController@getPlayers');
+Route::get('/klub/dajOtkazIgracu/{id}', 'ClubController@firePlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('/klub/dodaj', 'ClubController@addOrEditClubPost');
 Route::post('/klub', 'ClubController@getClubsPost');
-Route::post('/klub/{idKlub}/dajOtkazIgracu/{idIgrac}', 'ClubController@firePlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
-Route::post('/klub/{idKlub}/odgovoriNaZahtev/{idIgrac}', 'ClubController@answerPlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
-//TODO(David): Dodaje se zahtev u tabelu
-Route::get('/klub/{idKlub}/posaljiZahtevIgracu/{idIgrac}', 'ClubController@requestPlayer')->where('idKlub', '[0-9]+')->where('idIgrac', '[0-9]+');
+Route::post('/klub/odgovoriNaZahtev', 'ClubController@answerPlayer');
+Route::post('/klub/posaljiZahtevIgracu', 'ClubController@sendRequestToPlayer');
 
 
 

@@ -14,13 +14,9 @@ class ClubController extends Controller
     {
     }
 
-    public function getClubs()
+    public function index()
     {
-        $clubs = Club::all();
-        return view('clubs.clubs', [
-            'clubs' => Club::orderByDesc('founded')->get(),
-            'numPlayers' => 0
-        ]);
+        return view('home');
     }
 
     public function getClubsPost(Request $data)
@@ -66,7 +62,7 @@ class ClubController extends Controller
             }
         }
         if($uKlubu == false)
-            return view('players.clubPlayerInfo');  
+            return view('clubs.clubPlayerInfo');  
         else
         return view('players.playersTable')->with('players',$players);    
     }
@@ -127,14 +123,13 @@ class ClubController extends Controller
         return view('home');
     }
 
-    public function firePlayer(Request $request)
+    public function firePlayer(Request $id)
     {
-        $club = Club::where('id', $request->idKlub)->first();
-
-        $player = Player::where('id', $request->idIgrac)->get();
-
-        $club->players()->toggle($player);
-
+        $player = DB::table('club_player')->where('player_id','=', $id)->first();
+        if($player != null)
+        {
+            DB::table('club_player')->where('player_id','=',$id)->delete();
+        }
         return view('home');
     }
 
@@ -149,8 +144,14 @@ class ClubController extends Controller
         return view('home');
     }
 
-    public function requestPlayer($club_id,$player_id)
+    public function sendRequestToPlayer(Request $request)
     {
-        
+        DB::table('player_club_request')->insert([
+            'player_id' => $request->player_id,
+            'club_id' => $request->club_id,
+            'club' => true
+        ]);
+
+        return view('home');
     }
 }

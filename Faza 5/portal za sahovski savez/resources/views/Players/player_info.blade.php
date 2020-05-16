@@ -188,7 +188,7 @@
 
                     @auth('club')
                     @php
-                        //TODO(Nikola) : bolja probvera da li je igrac u klubu 
+                        //TODO(Nikola) : bolja provera da li je igrac u klubu 
                         $u_klubu = false;
                         $veze =  DB::table('club_player')->where('player_id','=',$player->id)->get();
                         foreach($veze as $veza)

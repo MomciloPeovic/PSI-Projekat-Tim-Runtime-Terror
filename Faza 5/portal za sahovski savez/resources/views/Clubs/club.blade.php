@@ -21,7 +21,7 @@
                 <div class="tab-content">
                     @auth('club')
                     @if(Auth::guard('club')->user()->id == $club->id)
-                    <input type="hidden" name="id" value="{{Auth::user()->id}}">
+                    <input type="hidden" name="id" value="{{Auth::guard('club')->user()->id}}">
                     @endif
                 @endauth
                     <div class="tab-pane active" id="home">
@@ -33,7 +33,7 @@
                                     </label>
                                     <div class="alert alert-info" for="name">
                                         @auth('club')
-                                        @if(Auth::user()->id == $club->id)
+                                        @if(Auth::guard('club')->user()->id == $club->id)
                                             <input type="text" class="form-control" value="{{$club->name}}" name="name" required>
                                         @else
                                             <h5>{{$club->name}}</h5>
@@ -54,7 +54,7 @@
                                     </label>
                                     <div class="alert alert-info" for="email">
                                         @auth('club')
-                                        @if(Auth::user()->id == $club->id)
+                                        @if(Auth::guard('club')->user()->id == $club->id)
                                             <input type="text" class="form-control" value="{{$club->email}}" name="email" required>
                                         @else
                                             <h5>{{$club->email}}</h5>
@@ -75,7 +75,7 @@
                                     </label>
                                     <div class="alert alert-info" for="address">
                                         @auth('club')
-                                        @if(Auth::user()->id == $club->id)
+                                        @if(Auth::guard('club')->user()->id == $club->id)
                                             <input type="text" class="form-control" value="{{$club->address}}" name="address" required>
                                         @else
                                             <h5>{{$club->address}}</h5>
@@ -88,7 +88,12 @@
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home">
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="phone">
@@ -96,7 +101,7 @@
                                     </label>
                                     <div class="alert alert-info" for="phone">
                                         @auth('club')
-                                        @if(Auth::user()->id == $club->id)
+                                        @if(Auth::guard('club')->user()->id == $club->id)
                                             <input type="text" class="form-control" value="{{$club->phone}}" name="phone" required>
                                         @else
                                             <h5>{{$club->phone}}</h5>
@@ -111,29 +116,38 @@
                             </div>
 
                             <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="founded">
-                                    <h4>Datum osnivanja </h4>
-                                </label>
-                                <br>
-                                <div class="alert alert-info" for="founded"><label id="founded" name="founded">
-                                    @auth('club')
-                                        @if(Auth::user()->id == $club->id)
-                                            <input type="text" class="form-control" value="{{$club->founded}}" name="founded" required>
-                                        @else
-                                            <h5>{{$club->founded}}</h5>
-                                        @endif
-                                        @endauth
+                                <div class="col-xs-6">
+                                    <label for="founded">
+                                        <h4>Datum osnivanja </h4>
+                                    </label>
+                                    <br>
+                                    <div class="alert alert-info" for="founded"><label id="founded" name="founded">
+                                        @auth('club')
+                                            @if(Auth::guard('club')->user()->id == $club->id)
+                                                <input type="date" class="form-control" value="{{$club->founded}}" name="founded" required>
+                                            @else
+                                                <h5>{{$club->founded}}</h5>
+                                            @endif
+                                            @endauth
 
-                                        @guest('club')
-                                            <h5>{{$club->founded}}</h5>
-                                        @endguest
+                                            @guest('club')
+                                                <h5>{{$club->founded}}</h5>
+                                            @endguest
                                     </label></div>
+                                </div>
                             </div>
-                    </div>
+
+                            @auth('club')
+                            @if(Auth::guard('club')->user()->id == $club->id)
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <input type="submit" class="btn btn-primary" value="Azuriraj podatke">
+                                </div>
+                            </div>
+                            @endif
+                            @endauth
                 </div>
             </div>
         </div>
-    </div>
 
 @endsection
