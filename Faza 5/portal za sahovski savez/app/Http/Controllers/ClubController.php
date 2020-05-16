@@ -7,6 +7,7 @@ use App\Player;
 use App\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\MessageBag;
 
 class ClubController extends Controller
 {
@@ -140,6 +141,7 @@ class ClubController extends Controller
 
     public function sendRequestToPlayer(Request $request)
     {
+    
         DB::table('player_club_request')->insert([
             'player_id' => $request->player_id,
             'club_id' => $request->club_id,
@@ -147,5 +149,12 @@ class ClubController extends Controller
         ]);
 
         return view('home');
+           
+        /*
+        //Primer kako poslati poruku greske ako je igrac vec uclanjen u klub
+        $player = Player::where('id',$request->player_id)->first();
+        $errors = new MessageBag(['error' => ['Igrac je vec u klubu!']]);
+		return view('players.player_info')->with('player',$player)->withErrors($errors);
+        */
     }
 }
