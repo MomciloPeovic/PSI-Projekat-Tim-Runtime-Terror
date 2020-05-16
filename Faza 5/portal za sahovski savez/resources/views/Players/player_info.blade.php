@@ -189,12 +189,33 @@
                         @auth('club')
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <form action="/klub/posaljiZahtevIgracu" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="club_id" value="{{Auth::guard('club')->user()->id}}">
-                                    <input type="hidden" name="player_id" value="{{$player->id}}" >
-                                    <input type="submit" class="btn btn-primary text-white" value="Posalji zahtev za uclanjenje">
-                                </form>
+                                @php
+                                    $in_club = false;
+                                    $club = null;
+                                    $veze =  DB::table('club_player')->where('player_id','=',$player->id)->get();
+                                    foreach($veze as $veza)
+                                    {
+                                        if($veza->left == null)
+                                            $in_club = true;
+                                    }
+                                    if($in_club == true) $club = DB::table('clubs')->where('id','=',$veza->club_id)->first();
+
+                                @endphp
+                                @if($club != null && Auth::guard('club')->user()->id == $club->id)
+                                    <form action="/igrac/napusti_klub" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="club_id" value="{{Auth::guard('club')->user()->id}}">
+                                        <input type="hidden" name="player_id" value="{{$player->id}}" >
+                                        <input type="submit" class="btn btn-primary text-white" value="Napusti klub">
+                                    </form>
+                                @else
+                                    <form action="/klub/posaljiZahtevIgracu" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="club_id" value="{{Auth::guard('club')->user()->id}}">
+                                        <input type="hidden" name="player_id" value="{{$player->id}}" >
+                                        <input type="submit" class="btn btn-primary text-white" value="Posalji zahtev za uclanjenje">
+                                    </form>
+                                @endif
                             </div>
                         </div>
                         @endauth

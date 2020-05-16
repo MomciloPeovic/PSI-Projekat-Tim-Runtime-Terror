@@ -128,17 +128,6 @@ class ClubController extends Controller
         return view('home');
     }
 
-    public function answerPlayer(Request $request)
-    {
-        $club = Club::where('id', $request->idKlub)->first();
-
-        $player = Player::where('id', $request->idIgrac)->get();
-
-        
-
-        return view('home');
-    }
-
     public function sendRequestToPlayer(Request $request)
     {
     
@@ -156,6 +145,37 @@ class ClubController extends Controller
         $errors = new MessageBag(['error' => ['Igrac je vec u klubu!']]);
 		return view('players.player_info')->with('player',$player)->withErrors($errors);
         */
+    }
+
+    public function acceptPlayer(Request $request)
+    {
+        DB::table('club_player')->insert([
+            'player_id' => $request->player_id,
+            'club_id' => $request->club_id
+        ]);
+    }
+
+    public function declinePlayer(Request $request)
+    {
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
+        if($veza != null)
+        {
+            $veza->club = false;
+            $veza->rejection = true;
+        }
+
+        return view('home');
+    }
+
+    public function removeRequest(Request $request)
+    {
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
+        if($veza != null)
+        {
+            $veza->delete();
+        }
+
+        return view('home');
     }
 
     public function getNotifications($id)
