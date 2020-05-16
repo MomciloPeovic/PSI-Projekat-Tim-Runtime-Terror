@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
-Route::get('/igrac', 'PlayerController@getPlayers');
+Route::get('/igrac', 'PlayerController@index');
 Route::get('/igrac/{id}', 'PlayerController@getPlayer')->where('id', '[0-9]+');
 Route::get('/igrac/dodaj', 'PlayerController@addPlayer');
 Route::post('/igrac/dodaj', 'PlayerController@addOrEditPlayerPost');

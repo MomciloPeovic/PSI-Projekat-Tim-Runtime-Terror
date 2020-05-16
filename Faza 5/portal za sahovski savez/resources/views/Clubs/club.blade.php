@@ -170,6 +170,27 @@
                             </div>
                             @endif
                             @endauth
+
+                            @auth('player')
+                            @php
+                                $club_id = null;
+                                $u_klubu = false;
+                                $veze =  DB::table('club_player')->where('player_id','=',Auth::user()->id)->first();
+                                if (is_array($veze) || is_object($veze))
+                                    foreach($veze as $veza)
+                                        if($veza->left == null) {
+                                            $u_klubu = true;
+                                            $club_id = $veza->club_id;
+                                        }      
+                            @endphp
+                            @if($u_klubu == false)
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <a href="/igrac/{{Auth::user()->id}}/zahtev_za_klub/{{$club_id}}" class="btn btn-primary text-white">Posalji zahtev za uclanjenje</a>
+                                </div>
+                            </div>
+                            @endif
+                            @endauth
                 </div>
             </div>
         </div>

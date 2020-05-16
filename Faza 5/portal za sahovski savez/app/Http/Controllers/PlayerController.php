@@ -14,7 +14,7 @@ class PlayerController extends Controller
         
     }
 
-    public function getPlayers()
+    public function index()
     {
         return view('home');
     }
