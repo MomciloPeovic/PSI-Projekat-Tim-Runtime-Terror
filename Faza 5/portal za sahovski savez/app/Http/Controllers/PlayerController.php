@@ -14,7 +14,7 @@ class PlayerController extends Controller
         
     }
 
-    public function getPlayers()
+    public function index()
     {
         return view('home');
     }
@@ -137,7 +137,6 @@ class PlayerController extends Controller
 
     public function myClub($id)
     {
-
         $u_klubu = false;
         $veze =  DB::table('club_player')->where('player_id','=',$id)->get();
         foreach($veze as $veza)
@@ -187,6 +186,43 @@ class PlayerController extends Controller
         ]);
 
         return redirect()->action('PlayerController@referees');
+    }
+
+    public function playerNotifications($id)
+    {
+        $notifications = DB::table('player_club_request')->where('player_id','=',$id)->where('club','=',true)->get();
+        return view('players.player_notification')->with('obavestenja',$notifications);
+    }
+
+    public function acceptClub(Request $request)
+    {
+        DB::table('club_player')->insert([
+            'player_id' => $request->player_id,
+            'club_id' => $request->club_id
+        ]);
+    }
+
+    public function declineClub(Request $request)
+    {
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
+        if($veza != null)
+        {
+            $veza->club = false;
+            $veza->rejection = true;
+        }
+
+        return view('home');
+    }
+
+    public function removeRequest(Request $request)
+    {
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
+        if($veza != null)
+        {
+            $veza->delete();
+        }
+
+        return view('home');
     }
 }
 

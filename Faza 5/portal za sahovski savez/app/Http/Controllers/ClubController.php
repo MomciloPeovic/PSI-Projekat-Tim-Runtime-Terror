@@ -7,6 +7,7 @@ use App\Player;
 use App\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\MessageBag;
 
 class ClubController extends Controller
 {
@@ -127,19 +128,9 @@ class ClubController extends Controller
         return view('home');
     }
 
-    public function answerPlayer(Request $request)
-    {
-        $club = Club::where('id', $request->idKlub)->first();
-
-        $player = Player::where('id', $request->idIgrac)->get();
-
-        
-
-        return view('home');
-    }
-
     public function sendRequestToPlayer(Request $request)
     {
+    
         DB::table('player_club_request')->insert([
             'player_id' => $request->player_id,
             'club_id' => $request->club_id,
@@ -147,5 +138,49 @@ class ClubController extends Controller
         ]);
 
         return view('home');
+           
+        /*
+        //Primer kako poslati poruku greske ako je igrac vec uclanjen u klub
+        $player = Player::where('id',$request->player_id)->first();
+        $errors = new MessageBag(['error' => ['Igrac je vec u klubu!']]);
+		return view('players.player_info')->with('player',$player)->withErrors($errors);
+        */
+    }
+
+    public function acceptPlayer(Request $request)
+    {
+        DB::table('club_player')->insert([
+            'player_id' => $request->player_id,
+            'club_id' => $request->club_id
+        ]);
+    }
+
+    public function declinePlayer(Request $request)
+    {
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
+        if($veza != null)
+        {
+            $veza->club = false;
+            $veza->rejection = true;
+        }
+
+        return view('home');
+    }
+
+    public function removeRequest(Request $request)
+    {
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
+        if($veza != null)
+        {
+            $veza->delete();
+        }
+
+        return view('home');
+    }
+
+    public function getNotifications($id)
+    {
+        $notifications = DB::table('player_club_request')->where('club_id','=',$id)->where('club','=',false)->get();
+        return view('clubs.clubNotifications')->with('notifications', $notifications);
     }
 }
