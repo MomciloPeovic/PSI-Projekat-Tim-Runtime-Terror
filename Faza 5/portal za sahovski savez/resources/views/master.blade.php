@@ -60,11 +60,11 @@
                 @endauth
 
                 @auth('club')
-                <h4>{{ Auth::user()->name }}</h4>
+                <h4>{{  Auth::guard('club')->user()->name }}</h4>
 
-                    <a class="ml-1" href="/klub/igraci/{{Auth::user()->id}}"><i class="fas fa-chess-king fa-3x"></i></i></a>
+                    <a class="ml-1" href="/klub/igraci/{{Auth::guard('club')->user()->id}}"><i class="fas fa-chess-king fa-3x"></i></i></a>
                     <a class="ml-1" href="/klub/obavestenja"><i class="fas fa-envelope fa-3x"></i></a>
-                    <a class="ml-1" href="/klub/{{Auth::user()->id}}"><i class="fas fa-users-cog fa-3x"></i></a>
+                    <a class="ml-1" href="/klub/{{Auth::guard('club')->user()-> id}}"><i class="fas fa-users-cog fa-3x"></i></a>
 
                     <form action="/korisnici/logout" method="GET">
                         <input type="submit" class="btn btn-danger ml-2" value="Odjava"/>
