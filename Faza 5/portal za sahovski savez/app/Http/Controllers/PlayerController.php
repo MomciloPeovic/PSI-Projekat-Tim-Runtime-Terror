@@ -6,6 +6,7 @@ use App\ArbiterRank;
 use App\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\MessageBag;
 
 class PlayerController extends Controller
 {
@@ -143,13 +144,29 @@ class PlayerController extends Controller
 
     public function sendRequestToClub(Request $request)
     {  
-        DB::table('player_club_request')->insert([
-            'player_id' => $request->player_id,
-            'club_id' => $request->club_id,
-            'club' => false
-        ]);
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
+        $errors = null;
 
-        return view('home');
+        $check = DB::table('club_player')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
+
+        if ($veza == null) 
+        {
+            DB::table('player_club_request')->insert([
+                'player_id' => $request->player_id,
+                'club_id' => $request->club_id,
+                'club' => false
+            ]);
+        } elseif ($veza->club == false) {
+            $errors = new MessageBag(['error' => ['Zahtev je vec poslat!']]);
+        } elseif ($check != null && $check->left = null) {
+            $errors = new MessageBag(['error' => ['Vec ste uclanjeni u klub!']]);
+        } else {
+            $this->acceptClub($request);
+            $errors = new MessageBag(['success' => ['Imali ste zahtev od ovog kluba, uclanjeni ste!']]);
+        }
+        $club = DB::table('clubs')->where('id','=', $request->club_id)->first();
+
+		return view('clubs.club')->with('club',$club)->withErrors($errors);
     }
 
     public function myClub($id)
@@ -168,16 +185,6 @@ class PlayerController extends Controller
             $klub = DB::table('clubs')->where('id','=',$veza->club_id)->first();
             return redirect('/klub/'.$klub->id);
         }
-    }
-    
-    public function leaveClub($id)
-    {
-        $veza = DB::table('club_player')->where('player_id','=', $id)->first();
-        if($veza != null)
-        {
-            DB::table('club_player')->where('player_id','=',$id)->delete();
-        }
-        return view('home');
     }
 
     public function referees()
@@ -225,7 +232,7 @@ class PlayerController extends Controller
             }
         }
 
-        //Ako nije uclanjuje se i brise se obavestenje
+        //Ako nije uclanjuje se
         if($u_klubu == false)
         {
             DB::table('club_player')->insert([
@@ -233,22 +240,31 @@ class PlayerController extends Controller
                 'club_id' => $request->club_id,
                 'joined' => date('Y-m-d')
             ]);
+        }
 
+        //Brise se obavestenje
             DB::table('player_club_request')
             ->where('player_id','=',$request->player_id)
             ->where('club_id','=',$request->club_id)
             ->delete();
-        }
-        //Ako jeste samo se brise obavestenje
-        else
-        {
-            DB::table('player_club_request')
-            ->where('player_id','=',$request->player_id)
-            ->where('club_id','=',$request->club_id)
-            ->delete();
-        }
-        $notifications = DB::table('player_club_request')->where('player_id','=',$request->player_id)->where('club','=',true)->get();
+
+        $notifications = DB::table('player_club_request')->where('player_id', '=', $request->player_id)->where('club','=',true)->get();
         return view('players.player_notification')->with('obavestenja',$notifications);
+    }
+
+    public function leaveClub(Request $request)
+    {
+        $veza = DB::table('club_player')->where('player_id', '=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
+        $club = DB::table('clubs')->where('id', '=', $veza->club_id)->first();
+
+        if($veza != null)
+        {
+            DB::table('club_player')
+            ->where('player_id','=', $veza->player_id)
+            ->where('club_id', '=', $veza->club_id)->delete();
+        }
+
+        return view('clubs.club')->with('club', $club);
     }
 
     public function declineClub(Request $request)

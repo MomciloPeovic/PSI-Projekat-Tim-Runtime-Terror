@@ -1,12 +1,12 @@
 
 @foreach ($players as $player)
-<tr>
-    <td class = "col-xl-1">{{$loop->index + 1}}</td> 
-    <td class = "col-xl-3">{{$player->name}}</td>  
-    <td class = "col-xl-3">{{$player->surname}}</td>  
-    <td class = "col-xl-2">{{$player->rating}}</td>  
-    <td class = "col-xl-1"><a class="btn btn-primary" href="/igrac/{{ $player->id }}">+</a></td> 
-</tr>
+    <tr>
+        <td class = "col-xl-1">{{$loop->index + 1}}</td> 
+        <td class = "col-xl-3">{{$player->name}}</td>  
+        <td class = "col-xl-3">{{$player->surname}}</td>  
+        <td class = "col-xl-2">{{$player->rating}}</td>  
+        <td class = "col-xl-1"><a class="btn btn-primary" href="/igrac/{{ $player->id }}">+</a></td> 
+    </tr>
 @endforeach
 
 <tr>
