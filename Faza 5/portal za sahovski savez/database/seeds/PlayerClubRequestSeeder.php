@@ -75,5 +75,13 @@ class PlayerClubRequestSeeder extends Seeder
             'expiry_date' => '2020-05-23',
             'rejection' => '0'
         ]);
+
+        DB::table('player_club_request')->insert([
+            'player_id' => '3',
+            'club_id' => '1',
+            'club' => '0',
+            'expiry_date' => '2020-05-23',
+            'rejection' => '0'
+        ]);
     }
 }

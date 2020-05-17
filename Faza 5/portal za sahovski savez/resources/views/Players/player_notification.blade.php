@@ -31,14 +31,16 @@
             Klub "{{$klub->name}}" Vas je pozvao da se uclanite u klub!
         </div>
         <div class = "col-sm-2">
-            <form action="" method="POST" class="form-inline">
+            <form action="/igrac/prihvatiZahtev" method="POST" class="form-inline">
+                @csrf
                 <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
                 <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
                 <input type="submit" class="btn btn-success" value="Prihvati">
             </form>
         </div>
         <div class = "col-sm-2">
-            <form action="" method="POST" class="form-inline">
+            <form action="/igrac/odbijZahtev" method="POST" class="form-inline">
+                @csrf
                 <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
                 <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
                 <input type="submit" class="btn btn-danger" value="Odbij">
@@ -53,7 +55,8 @@
             Klub "{{$klub->name}}" Vas je pozvao da se uclanite, medjutim poziv je istekao datuma {{$obavestenje->expiry_date}}. &nbsp;
         </div>
         <div class = "col-sm-2">
-            <form action="" method="POST" class="form-inline">
+            <form action="/igrac/ukloniZahtev" method="POST" class="form-inline">
+                @csrf
                 <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
                 <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
                 <input type="submit" class="btn btn-primary" value="X">

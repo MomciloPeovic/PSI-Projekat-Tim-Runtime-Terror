@@ -151,8 +151,16 @@ class ClubController extends Controller
     {
         DB::table('club_player')->insert([
             'player_id' => $request->player_id,
-            'club_id' => $request->club_id
+            'club_id' => $request->club_id,
+            'joined' => date('Y-m-d')
         ]);
+
+        DB::table('player_club_request')
+        ->where('player_id','=',$request->player_id)
+        ->where('club_id','=',$request->club_id)
+        ->delete();
+
+        return view('home');
     }
 
     public function declinePlayer(Request $request)
@@ -160,8 +168,10 @@ class ClubController extends Controller
         $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
         if($veza != null)
         {
-            $veza->club = false;
-            $veza->rejection = true;
+            DB::table('player_club_request')
+            ->where('player_id','=',$veza->player_id)
+            ->where('club_id','=',$veza->club_id)
+            ->update(['club' => true,'rejection' => true]);
         }
 
         return view('home');
@@ -172,7 +182,9 @@ class ClubController extends Controller
         $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
         if($veza != null)
         {
-            $veza->delete();
+            DB::table('player_club_request')
+            ->where('player_id','=', $veza->player_id)
+            ->where('club_id', '=', $veza->club_id)->delete();
         }
 
         return view('home');
@@ -181,6 +193,7 @@ class ClubController extends Controller
     public function getNotifications($id)
     {
         $notifications = DB::table('player_club_request')->where('club_id','=',$id)->where('club','=',false)->get();
-        return view('clubs.clubNotifications')->with('notifications', $notifications);
+        $klub = Club::where('id','=',$id)->first();
+        return view('clubs.clubNotifications')->with('notifications', $notifications)->with('klub',$klub);
     }
 }

@@ -11,7 +11,7 @@
     $player = DB::table('players')->where('id','=',$notification->player_id)->first();
 @endphp    
 
-@if($obavestenje->rejection == true)
+@if($notification->rejection == true)
 <div class="alert alert-info" role="alert">
     <div class = "row">
         <div class = "col-sm-10">
@@ -32,6 +32,7 @@
         </div>
         <div class = "col-sm-2">
             <form action="/klub/prihvatiZahtev" method="POST" class="form-inline">
+                @csrf
                 <input type="hidden" name="club_id" value="{{$notification->club_id}}"> 
                 <input type="hidden" name="player_id" value="{{$notification->player_id}}"> 
                 <input type="submit" class="btn btn-success" value="Prihvati">
@@ -39,6 +40,7 @@
         </div>
         <div class = "col-sm-2">
             <form action="/klub/odbijZahtev" method="POST" class="form-inline"> 
+                @csrf
                 <input type="hidden" name="club_id" value="{{$notification->club_id}}"> 
                 <input type="hidden" name="player_id" value="{{$notification->player_id}}">
                 <input type="submit" class="btn btn-danger" value="Odbij">
@@ -54,6 +56,7 @@
         </div>
         <div class = "col-sm-2">
             <form action="/klub/ukloniZahtev" method="POST" class="form-inline">
+                @csrf
                 <input type="hidden" name="player_id" value="{{$notification->player_id}}"> 
                 <input type="hidden" name="club_id" value="{{$notification->club_id}}"> 
                 <input type="submit" class="btn btn-primary" value="X">
