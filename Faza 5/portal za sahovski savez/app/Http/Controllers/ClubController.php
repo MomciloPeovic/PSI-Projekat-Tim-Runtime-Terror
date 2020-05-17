@@ -51,6 +51,8 @@ class ClubController extends Controller
 
     public function getPlayers($id)
     {
+        $limit = 3;
+
         $veze =  DB::table('club_player')->where('club_id','=',$id)->get();
         $uKlubu = false;
         $players = collect([]);
@@ -62,10 +64,10 @@ class ClubController extends Controller
                 $players->push(DB::table('players')->where('id','=',$veza->player_id)->first());    
             }
         }
-        if($uKlubu == false)
-            return view('clubs.clubPlayerInfo');  
-        else
-        return view('players.playersTable')->with('players',$players);    
+
+        $num = ceil($players->count()/$limit);
+
+        return view('clubs.clubPlayerInfo')->with('players',$players)->with('broj_stranica',$num);    
     }
 
     public function getClub($id)
@@ -130,21 +132,30 @@ class ClubController extends Controller
 
     public function sendRequestToPlayer(Request $request)
     {
-    
-        DB::table('player_club_request')->insert([
-            'player_id' => $request->player_id,
-            'club_id' => $request->club_id,
-            'club' => true
-        ]);
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
+        $errors = null;
 
-        return view('home');
-           
-        /*
-        //Primer kako poslati poruku greske ako je igrac vec uclanjen u klub
-        $player = Player::where('id',$request->player_id)->first();
-        $errors = new MessageBag(['error' => ['Igrac je vec u klubu!']]);
+        $check = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
+
+        if ($veza == null) 
+        {
+            DB::table('player_club_request')->insert([
+                'player_id' => $request->player_id,
+                'club_id' => $request->club_id,
+                'club' => true
+            ]);
+        } else if ($veza->club == true) {
+            $errors = new MessageBag(['error' => ['Zahtev je vec poslat!']]);
+        } elseif ($check != null && $check->left = null) {
+            $errors = new MessageBag(['error' => ['Igrac je vec uclanjen u klub!']]);
+        } else {
+            $this->acceptPlayer($request);
+            $errors = new MessageBag(['success' => ['Imali ste zahtev od ovog igraca, dobili ste novog clana!']]);
+        }
+        $player = DB::table('players')->where('id','=', $request->player_id)->first();
+
 		return view('players.player_info')->with('player',$player)->withErrors($errors);
-        */
+
     }
 
     public function acceptPlayer(Request $request)
@@ -162,7 +173,7 @@ class ClubController extends Controller
             }
         }
 
-        //Ako nije uclanjuje se i brise se obavestenje
+        //Ako nije uclanjuje se
         if($u_klubu == false)
         {
             DB::table('club_player')->insert([
@@ -170,20 +181,13 @@ class ClubController extends Controller
                 'club_id' => $request->club_id,
                 'joined' => date('Y-m-d')
             ]);
+        }
 
-            DB::table('player_club_request')
-            ->where('player_id','=',$request->player_id)
-            ->where('club_id','=',$request->club_id)
-            ->delete();
-        }
-        //Ako jeste samo se brise obavestenje
-        else
-        {
-            DB::table('player_club_request')
-            ->where('player_id','=',$request->player_id)
-            ->where('club_id','=',$request->club_id)
-            ->delete();
-        }
+        //Brise se obavestenje
+        DB::table('player_club_request')
+        ->where('player_id','=',$request->player_id)
+        ->where('club_id','=',$request->club_id)
+        ->delete();
         
         $notifications = DB::table('player_club_request')->where('club_id','=',$request->club_id)->where('club','=',false)->get();
         $klub = Club::where('id','=',$request->club_id)->first();

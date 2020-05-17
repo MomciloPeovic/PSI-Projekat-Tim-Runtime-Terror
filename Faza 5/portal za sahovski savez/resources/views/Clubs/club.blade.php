@@ -177,22 +177,23 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     @php
-                                    $in_club = false;
-                                    $club = null;
-                                    $veze =  DB::table('club_player')->where('player_id','=',$player->id)->get();
-                                    foreach($veze as $veza)
-                                    {
-                                        if($veza->left == null)
-                                            $in_club = true;
-                                    }
-                                    if($in_club == true) $club = DB::table('clubs')->where('id','=',$veza->club_id)->first();
+                                        $in_club = false;
+                                        $klub = null;
+                                        $veze =  DB::table('club_player')->where('player_id','=',Auth::user()->id)->get();
+                                        foreach($veze as $veza)
+                                        {
+                                            if($veza->left == null)
+                                                $in_club = true;
+                                        }
+                                        if($in_club == true) 
+                                            $klub = DB::table('clubs')->where('id','=',$veza->club_id)->first();
+                                    @endphp
 
-                                     @endphp
-                                    @if($club != null && Auth::guard('club')->user()->id == $club->id)
+                                    @if($klub != null && $club->id == $klub->id)
                                         <form action="/igrac/napusti_klub" method="POST">
                                             @csrf
-                                            <input type="hidden" name="club_id" value="{{Auth::guard('club')->user()->id}}">
-                                            <input type="hidden" name="player_id" value="{{$player->id}}" >
+                                            <input type="hidden" name="club_id" value="{{$club->id}}">
+                                            <input type="hidden" name="player_id" value="{{Auth::user()->id}}" >
                                             <input type="submit" class="btn btn-primary text-white" value="Napusti klub">
                                         </form>
                                     @else
@@ -209,5 +210,18 @@
                 </div>
             </div>
         </div>
+
+        @error('error')
+            <div class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{$message}}
+            </div>
+        @enderror
+        @error('success')
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{$message}}
+            </div>
+        @enderror
 
 @endsection

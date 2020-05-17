@@ -15,7 +15,7 @@
 <div class="alert alert-info" role="alert">
     <div class = "row">
         <div class = "col-sm-10">
-            "{{$klub->name}}" je odbio Vasu ponudu da se uclani u klub. &nbsp;
+            "{{$player->name}}" je odbio Vasu ponudu da se uclani u klub. &nbsp;
         </div>
         <div class = "col-sm-2">
             <form action="/klub/odbijZahtev" method="POST" class="form-inline">

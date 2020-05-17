@@ -25,7 +25,7 @@ Route::get('/igrac/izmeni/{id}', 'PlayerController@editPlayer')->where('id', '[0
 Route::get('/igrac/obrisi/{id}', 'PlayerController@deletePlayer')->where('id', '[0-9]+');
 Route::post('/igrac/zahtev_za_klub', 'PlayerController@sendRequestToClub');
 Route::get('/igrac/moj_klub/{id}', 'PlayerController@myClub')->where('id', '[0-9]+');
-Route::get('/igrac/napusti_klub/{id}', 'PlayerController@leaveClub')->where('id', '[0-9]+');
+Route::post('/igrac/napusti_klub', 'PlayerController@leaveClub');
 Route::post('/igrac', 'PlayerController@getPlayersPost');
 Route::get('/igrac/obavestenja/{id}','PlayerController@playerNotifications')->where('id', '[0-9]+');
 Route::post('/igrac/prihvatiZahtev', 'PlayerController@acceptClub');
@@ -59,9 +59,6 @@ Route::post('/klub/prihvatiZahtev', 'ClubController@acceptPlayer');
 Route::post('/klub/odbijZahtev', 'ClubController@declinePlayer');
 Route::post('/klub/ukloniZahtev', 'ClubController@removeRequest');
 Route::post('/klub/posaljiZahtevIgracu', 'ClubController@sendRequestToPlayer');
-
-
-
 
 
 Route::get('/sudija', 'PlayerController@referees'); // prikazuje sve sudije
