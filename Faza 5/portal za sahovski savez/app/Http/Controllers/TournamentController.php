@@ -122,15 +122,38 @@ class TournamentController extends Controller
 
     public function addResultsPost(Request $request)
     {
-        Result::insert([
-            'white_id' => $request->white[0],
-            'black_id' => $request->black[0],
-            'tournament_id' => $request->id,
-            'result' => $request->result[0],
-            'round' => $request->round,
-            'table' => 1,
-            'arbiter_id' => Auth::user()->id
-        ]);
+        for ($i = 0; $i < sizeof($request->white); $i++) {
+            if ($request->white[$i] == 0 || $request->black[$i] == 0)
+                continue;
+
+            $res = Result::where([
+                ['tournament_id', '=', $request->id],
+                ['round', '=', $request->round],
+                ['table', '=', $request->table[$i]]
+            ])->exists();
+
+            if ($res == true) {
+                Result::where([
+                    ['tournament_id', '=', $request->id],
+                    ['round', '=', $request->round],
+                    ['table', '=', $request->table[$i]]
+                ])->update([
+                    'white_id' => $request->white[$i],
+                    'black_id' => $request->black[$i],
+                    'result' => $request->result[$i]
+                ]);
+            } else {
+                Result::insert([
+                    'white_id' => $request->white[$i],
+                    'black_id' => $request->black[$i],
+                    'tournament_id' => $request->id,
+                    'result' => $request->result[$i],
+                    'round' => $request->round,
+                    'table' => $request->table[$i],
+                    'arbiter_id' => Auth::user()->id
+                ]);
+            }
+        }
 
         return redirect('/turnir/' . $request->id);
     }

@@ -34,8 +34,8 @@ var participants = JSON.parse(str.replace(/&quot;/g,'"'));
 function playerSelected(selected){
 	const index = participants.findIndex(item => item.id == selected.value);
 	if (index > -1) {
-	participants.splice(index, 1);
-	loadNames();
+		participants.splice(index, 1);
+		loadNames();
 	}
 }
 
@@ -52,12 +52,44 @@ function loadNames(){
 			whites[j].innerHTML = "";
 			whites[j].appendChild(emptyOption.cloneNode(true));
 		}
+		else{
+			const val = whites[j].value;
+			const name = whites[j].options[whites[j].selectedIndex].text;
+
+			let lastOption = document.createElement('option');
+			lastOption.value = val;
+			lastOption.innerHTML = name;
+
+			whites[j].innerHTML = "";
+			whites[j].appendChild(lastOption);
+
+			const index = participants.findIndex(item => item.id == val);
+			if (index > -1) {
+				participants.splice(index, 1);
+			}
+		}
 	}
 
 	for(let j = 0; j < blacks.length; j++){
 		if(blacks[j].value == 0){
 			blacks[j].innerHTML = "";
 			blacks[j].appendChild(emptyOption.cloneNode(true));
+		}
+		else{
+			const val = blacks[j].value;
+			const name = blacks[j].options[blacks[j].selectedIndex].text;
+
+			let lastOption = document.createElement('option');
+			lastOption.value = val;
+			lastOption.innerHTML = name;
+
+			blacks[j].innerHTML = "";
+			blacks[j].appendChild(lastOption);
+
+			const index = participants.findIndex(item => item.id == val);
+			if (index > -1) {
+				participants.splice(index, 1);
+			}
 		}
 	}
 
@@ -67,9 +99,9 @@ function loadNames(){
 		option.innerHTML = participants[i].name + " " + participants[i].surname;
 		option.value = participants[i].id;
 
-
 		for(let j = 0; j < whites.length; j++){
-			whites[j].appendChild(option.cloneNode(true));
+			if(whites[j].childNodes != 0)
+				whites[j].appendChild(option.cloneNode(true));
 		}
 		for(let j = 0; j < blacks.length; j++)	
 			blacks[j].appendChild(option.cloneNode(true));
@@ -125,7 +157,11 @@ function addRow()
 
 	td3.appendChild(resultSelect);
 
-	td1.innerHTML = document.getElementById('rezultati').childElementCount + 1;
+	let table = document.createElement('input');
+	table.type = "number";
+	table.value = document.getElementById('rezultati').childElementCount + 1;
+	table.name = "table[]";
+	td1.appendChild(table); 
 
 	row.appendChild(td1);
 	row.appendChild(td2);
@@ -135,6 +171,8 @@ function addRow()
 
 	loadNames();
 }
+
+loadResults();
 
 </script>
 
@@ -154,7 +192,7 @@ function addRow()
 		@endfor
 	</select>
 
-	<table class="table table-hover w-75 text-center" onload="loadResults()">
+	<table class="table table-hover w-75 text-center">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col">#</th>

@@ -39,7 +39,7 @@
 					<tbody>
 						@foreach($tournament->participants as $participant)
 						<tr>
-							<th scope="row">1.</th>
+							<th scope="row">{{$loop->index + 1}}</th>
 							<td>{{ $participant->name }} @if($tournament->type='player') {{$participant->surname }} @endif</td>
 							<td>0</td>
 						</tr>
@@ -81,11 +81,11 @@
 
 						@foreach($results as $result)
 						<tr>
-							<th scope="row">{{$loop->index + 1}}.</th>
-							<td class="w-30">{{$result->white()->name}} {{$result->white()->surname}}</td>
+							<th scope="row">{{$result->table}}.</th>
+							<td class="w-30">{{$result->white->name}} {{$result->white->surname}}</td>
 							<td>7</td>
-							<td>{{$result->result}}</td>
-							<td class="w-30">{{$result->black()->name}} {{$result->black()->surname}}</td>
+							<td>{{$result->result == 2 ? "1:0" : ($result->result == 1 ? "0.5:0.5" : "0:1")}}</td>
+							<td class="w-30">{{$result->black->name}} {{$result->black->surname}}</td>
 							<td>3</td>
 						</tr>
 						@endforeach

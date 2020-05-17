@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Result extends Model
 {
+    public $timestamps = false;
+
     public function white()
     {
         return $this->belongsTo('App\Player');
