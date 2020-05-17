@@ -213,18 +213,42 @@ class PlayerController extends Controller
 
     public function acceptClub(Request $request)
     {
-        DB::table('club_player')->insert([
-            'player_id' => $request->player_id,
-            'club_id' => $request->club_id,
-            'joined' => date('Y-m-d')
-        ]);
+        //Provera da li je igrac slucajno vec u klubu
+        $u_klubu = false;
+        $veze = DB::table('club_player')->where('player_id','=',$request->player_id)->get();
+        foreach($veze as $veza)
+        {
+            if($veza->left==null)
+            {
+                $u_klubu = true;
+                 break;
+            }
+        }
 
-        DB::table('player_club_request')
-        ->where('player_id','=',$request->player_id)
-        ->where('club_id','=',$request->club_id)
-        ->delete();
+        //Ako nije uclanjuje se i brise se obavestenje
+        if($u_klubu == false)
+        {
+            DB::table('club_player')->insert([
+                'player_id' => $request->player_id,
+                'club_id' => $request->club_id,
+                'joined' => date('Y-m-d')
+            ]);
 
-        return view('home');
+            DB::table('player_club_request')
+            ->where('player_id','=',$request->player_id)
+            ->where('club_id','=',$request->club_id)
+            ->delete();
+        }
+        //Ako jeste samo se brise obavestenje
+        else
+        {
+            DB::table('player_club_request')
+            ->where('player_id','=',$request->player_id)
+            ->where('club_id','=',$request->club_id)
+            ->delete();
+        }
+        $notifications = DB::table('player_club_request')->where('player_id','=',$request->player_id)->where('club','=',true)->get();
+        return view('players.player_notification')->with('obavestenja',$notifications);
     }
 
     public function declineClub(Request $request)
@@ -238,7 +262,8 @@ class PlayerController extends Controller
             ->update(['club' => false,'rejection' => true]);
         }
 
-        return view('home');
+        $notifications = DB::table('player_club_request')->where('player_id','=',$request->player_id)->where('club','=',true)->get();
+        return view('players.player_notification')->with('obavestenja',$notifications);
     }
 
     public function removeRequest(Request $request)
@@ -251,7 +276,8 @@ class PlayerController extends Controller
             ->where('club_id', '=', $veza->club_id)->delete();
         }
 
-        return view('home');
+        $notifications = DB::table('player_club_request')->where('player_id','=',$request->player_id)->where('club','=',true)->get();
+        return view('players.player_notification')->with('obavestenja',$notifications);
     }
 }
 
