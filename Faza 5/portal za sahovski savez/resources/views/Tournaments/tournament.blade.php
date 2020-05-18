@@ -37,11 +37,11 @@
 					</thead>
 
 					<tbody>
-						@foreach($tournament->participants as $participant)
+						@foreach($table as $participant)
 						<tr>
 							<th scope="row">{{$loop->index + 1}}</th>
-							<td>{{ $participant->name }} @if($tournament->type='player') {{$participant->surname }} @endif</td>
-							<td>0</td>
+							<td>{{ $participant->player->name }} @if($tournament->type='player') {{$participant->player->surname }} @endif</td>
+							<td>{{ $participant->points }}</td>
 						</tr>
 						@endforeach
 					</tbody>

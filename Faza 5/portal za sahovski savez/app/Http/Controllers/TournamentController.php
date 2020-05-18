@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 use App\Tournament;
 use Illuminate\Support\Facades\Auth;
 
+class PlayerPoints
+{
+    public $player;
+    public $points;
+}
+
 class TournamentController extends Controller
 {
     public function __construct()
@@ -27,9 +33,24 @@ class TournamentController extends Controller
     {
         $tournament = Tournament::where('id', $id)->first();
         $rounds = Result::where('tournament_id', $tournament->id)->distinct('round')->count();
+
+        $table = array();
+
+        foreach ($tournament->participants as $participant) {
+            $player = new PlayerPoints();
+            $player->player = $participant;
+            $player->points = $participant->getTournamentPoints($id);
+            $table[] = $player;
+        }
+
+        usort($table, function ($first, $second) {
+            return $first->points < $second->points;
+        });
+
         return view('tournaments.tournament', [
             'tournament' => $tournament,
-            'rounds' => $rounds
+            'rounds' => $rounds,
+            'table' => $table
         ]);
     }
 
@@ -140,7 +161,8 @@ class TournamentController extends Controller
                 ])->update([
                     'white_id' => $request->white[$i],
                     'black_id' => $request->black[$i],
-                    'result' => $request->result[$i]
+                    'result' => $request->result[$i],
+                    'arbiter_id' => Auth::user()->id
                 ]);
             } else {
                 Result::insert([

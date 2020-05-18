@@ -55,4 +55,20 @@ class Player extends User
 
 		return $rank->name;
 	}
+
+	public function getTournamentPoints($id)
+	{
+		$results = Result::where('tournament_id', $id)->get();
+
+		$points = 0;
+		foreach ($results as $result) {
+			if ($result->white->id == $this->id) {
+				$points += $result->result / 2;
+			} else if ($result->black->id == $this->id) {
+				$points -= ($result->result / 2) - 1;
+			}
+		}
+
+		return $points;
+	}
 }

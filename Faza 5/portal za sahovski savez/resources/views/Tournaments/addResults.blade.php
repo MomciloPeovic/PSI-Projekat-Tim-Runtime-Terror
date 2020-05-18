@@ -16,13 +16,12 @@ $.ajax({
 		round: round
 	},
 	success: function (data) {
-		console.log('radi');
 		document.getElementById("rezultati").innerHTML = data;
 		loadNames();
+		participants = participants2.slice(0);
 		return;
 	},
 	error: function (data) {
-		console.log('ne radi');
 		return;
 	},
 });
@@ -30,6 +29,7 @@ $.ajax({
 
 var str = "{{json_encode($tournament->participants()->select('id', 'name', 'surname')->get())}}";
 var participants = JSON.parse(str.replace(/&quot;/g,'"'));
+var participants2 = participants.slice(0);
 
 function playerSelected(selected){
 	const index = participants.findIndex(item => item.id == selected.value);
