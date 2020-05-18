@@ -271,6 +271,20 @@ class PlayerController extends Controller
 
     public function leaveClub(Request $request)
     {
+        //Provera da li je trenutno prelazni rok
+        $id_prelazonog_roka = DB::table('deadline_types')->where('tip','=','Rok za napustanje')->first();
+        $validan_prelazni_rok = DB::table('deadlines')->where('deadline_type_id','=',$id_prelazonog_roka->id)
+                                ->where('start','<',date('Y-m-d'))
+                                ->where('end','>',date('Y-m-d'))
+                                ->first();
+        
+        if($validan_prelazni_rok == null)
+        {
+            $errors = new MessageBag(['error' => ['Napustanje kluba nije uspesno zato sto trenutno nije prelazni rok!']]);
+            $club = DB::table('clubs')->where('id','=', $request->club_id)->first();
+            return view('clubs.club')->with('club',$club)->withErrors($errors);
+        }
+
         $veza = DB::table('club_player')->where('player_id', '=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
         $club = DB::table('clubs')->where('id', '=', $veza->club_id)->first();
 
