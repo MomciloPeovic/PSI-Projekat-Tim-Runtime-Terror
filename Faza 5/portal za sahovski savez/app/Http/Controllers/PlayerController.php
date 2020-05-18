@@ -285,16 +285,11 @@ class PlayerController extends Controller
             return view('clubs.club')->with('club',$club)->withErrors($errors);
         }
 
-        $veza = DB::table('club_player')->where('player_id', '=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
-        $club = DB::table('clubs')->where('id', '=', $veza->club_id)->first();
-
-        if($veza != null)
-        {
-            DB::table('club_player')
-            ->where('player_id','=', $veza->player_id)
-            ->where('club_id', '=', $veza->club_id)->delete();
-        }
-
+        $veza = DB::table('club_player')->where('player_id', '=', $request->player_id)
+        ->where('club_id', '=', $request->club_id)
+        ->update(['left'=>date('Y-m-d')]);
+    
+        $club = DB::table('clubs')->where('id', '=', $request->club_id)->first();
         return view('clubs.club')->with('club', $club);
     }
 

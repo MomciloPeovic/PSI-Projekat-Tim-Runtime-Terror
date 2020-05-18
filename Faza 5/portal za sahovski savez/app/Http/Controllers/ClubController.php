@@ -142,8 +142,8 @@ class ClubController extends Controller
         if($validan_prelazni_rok == null)
         {
             $errors = new MessageBag(['error' => ['Zahtev nije poslat zato sto trenutno nije prelazni rok!']]);
-            $club = DB::table('clubs')->where('id','=', $request->club_id)->first();
-            return view('clubs.club')->with('club',$club)->withErrors($errors);
+            $player = DB::table('players')->where('id','=', $request->player_id)->first();
+            return view('players.player_info')->with('player',$player)->withErrors($errors);
         }
 
         $datum_isteka = $validan_prelazni_rok->end;

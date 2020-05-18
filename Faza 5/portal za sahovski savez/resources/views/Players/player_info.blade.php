@@ -147,31 +147,37 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="datum_rodjenja">
-                                    <h4>Klub</h4>
+                                    <h4>Klubovi</h4>
                                 </label>
                                 <div class="alert alert-info"> 
                                     @php
                                     $ime_kluba = "";
-                                    $veza = DB::table('club_player')->where('player_id','=',$player->id)->first();
-                                    if($veza == null)
+                                    $veze = DB::table('club_player')->where('player_id','=',$player->id)->get();
+                                    if(count($veze) == 0)
                                     {
-                                        $ime_kluba = "Igrac nije uclanjen ni u jedan klub.";
+                                        echo "<p>Igrac nije uclanjen ni u jedan klub.</p>";
                                     } 
                                     else 
                                     {
-                                    $klub = DB::table('clubs')->where('id','=',$veza->club_id)->first();
-                                    if($klub == null)
-                                    {
-                                        $ime_kluba = "Greska!";
-                                    }
-                                    else 
-                                    {
-                                        $ime_kluba = $klub->name;    
-                                    }
+                                        foreach($veze as $veza)
+                                        {
+                                            $klub = DB::table('clubs')->where('id','=',$veza->club_id)->first();
+                                            if($klub == null)
+                                            {
+                                                echo "<p>Greska</p>";
+                                            }
+                                            else 
+                                            {
+                                                echo "<p>".$klub->name." : </p>";
+                                                if($veza->left != null)
+                                                    echo "<p>".$veza->joined." <-> ".$veza->left."</p>";
+                                                else
+                                                    echo "<p>".$veza->joined." <-> danas</p>";
+                                            }
+                                        }
                                     }
 
                                     @endphp
-                                    <h5>{{$ime_kluba}}</h5>
                                 </div>
                             </div>
                         </div>
