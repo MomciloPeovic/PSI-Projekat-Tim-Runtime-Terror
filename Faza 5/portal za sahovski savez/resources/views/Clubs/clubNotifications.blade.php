@@ -18,7 +18,10 @@
             "{{$player->name}}" je odbio Vasu ponudu da se uclani u klub. &nbsp;
         </div>
         <div class = "col-sm-2">
-            <form action="/klub/odbijZahtev" method="POST" class="form-inline">
+            <form action="/klub/ukloniZahtev" method="POST" class="form-inline">
+                @csrf
+                <input type="hidden" name="player_id" value="{{$notification->player_id}}"> 
+                <input type="hidden" name="club_id" value="{{$notification->club_id}}"> 
                 <input type="submit" class="btn btn-primary" value="X">
             </form>
         </div>
