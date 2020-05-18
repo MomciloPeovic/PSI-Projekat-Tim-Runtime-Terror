@@ -164,6 +164,7 @@ class ClubController extends Controller
                 'club' => true,
                 'expiry_date' => $datum_isteka
             ]);
+            $errors = new MessageBag(['success' => ['Uspesno ste poslali zahtev!']]);
         } else if ($veza != null && $veza->club == true) {
             $errors = new MessageBag(['error' => ['Zahtev je vec poslat!']]);
         } elseif ($check != null && $check->left == null) {
@@ -180,7 +181,6 @@ class ClubController extends Controller
 
     public function acceptPlayer(Request $request)
     {
-
         //Provera da li je igrac slucajno vec u klubu
         $u_klubu = false;
         $veze = DB::table('club_player')->where('player_id','=',$request->player_id)->get();
@@ -203,11 +203,11 @@ class ClubController extends Controller
             ]);
         }
 
-        //Brise se obavestenje
+        //Azurira se status obavestenja
         DB::table('player_club_request')
         ->where('player_id','=',$request->player_id)
         ->where('club_id','=',$request->club_id)
-        ->delete();
+        ->update(['club' => true, 'status' => 'accepted']);
         
         $notifications = DB::table('player_club_request')->where('club_id','=',$request->club_id)->where('club','=',false)->get();
         $klub = Club::where('id','=',$request->club_id)->first();
@@ -222,7 +222,7 @@ class ClubController extends Controller
             DB::table('player_club_request')
             ->where('player_id','=',$veza->player_id)
             ->where('club_id','=',$veza->club_id)
-            ->update(['club' => true,'rejection' => true]);
+            ->update(['club' => true,'status' => 'declined']);
         }
 
         

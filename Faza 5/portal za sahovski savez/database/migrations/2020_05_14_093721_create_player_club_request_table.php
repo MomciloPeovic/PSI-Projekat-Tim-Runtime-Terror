@@ -18,7 +18,7 @@ class CreatePlayerClubRequestTable extends Migration
             $table->foreignId('club_id')->constrained('clubs')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('club')->nullable();
             $table->date('expiry_date')->nullable();
-            $table->boolean('rejection')->default(false);
+            $table->enum('status',['sent', 'accepted','declined'])->default('sent');
             $table->primary(['player_id', 'club_id','club']);
         });
     }

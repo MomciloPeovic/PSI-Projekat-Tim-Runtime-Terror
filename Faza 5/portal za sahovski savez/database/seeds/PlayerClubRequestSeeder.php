@@ -12,7 +12,7 @@ class PlayerClubRequestSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('player_club_request')->insert([
+       /* DB::table('player_club_request')->insert([
             'player_id' => '1',
             'club_id' => '1',
             'club' => '1',
@@ -82,6 +82,6 @@ class PlayerClubRequestSeeder extends Seeder
             'club' => '0',
             'expiry_date' => '2020-05-23',
             'rejection' => '0'
-        ]);
+        ]);*/
     }
 }
