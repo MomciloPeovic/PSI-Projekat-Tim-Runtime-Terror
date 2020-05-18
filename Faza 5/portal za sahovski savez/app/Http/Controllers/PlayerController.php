@@ -6,6 +6,7 @@ use App\ArbiterRank;
 use App\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\MessageBag;
 
 class PlayerController extends Controller
@@ -294,6 +295,21 @@ class PlayerController extends Controller
 
         $notifications = DB::table('player_club_request')->where('player_id','=',$request->player_id)->where('club','=',true)->get();
         return view('players.player_notification')->with('obavestenja',$notifications);
+    }
+    
+    public function changePassword(Request $request)
+    {
+        $player_info = Player::where('id','=',$request->player_id)->first();
+        if(!Hash::check($request->old_pass,$player_info->password) || ($request->new_pass != $request->new_pass_2))
+        {
+            $errors = new MessageBag(['error' => ['Nesto od podatak nije ispravno, pokusajte ponovo!']]);
+            return view('players.player_info')->with('player',$player_info)->withErrors($errors);
+        } 
+
+        Player::where('id','=',$request->player_id)->update(['password' => bcrypt($request->new_pass)]);
+
+        $errors = new MessageBag(['success' => ['Uspesno izmenjena lozinka!']]);
+        return view('players.player_info')->with('player',$player_info)->withErrors($errors);
     }
 }
 

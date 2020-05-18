@@ -235,16 +235,38 @@
     
         </div>
     </div>
+
+    @auth('player')
+    @if(Auth::user()->id == $player->id)
+    <h2 class="mt-5" align="center">Promena lozinke</h2>
+    <div class="container w-75 text-center">
+        <form action="/igrac/promena_lozinke" method="POST">
+            @csrf
+            <input type="hidden" name="player_id" value="{{$player->id}}"> 
+            <!-- Stara lozinka -->
+            <input type="password" class="form-control mt-2" name="old_pass" placeholder="Stara lozinka" required>
+            
+            <!-- Nova lozinka -->
+            <input type="password" class="form-control mt-2" name="new_pass"  placeholder="Nova lozinka" required>
+                  
+            <!-- Nova lozinka portvrda-->
+            <input type="password" class="form-control mt-2" name="new_pass_2" placeholder="Potvrda lozinke" required>
+            
+            <input type="submit" class="btn btn-primary mt-2" value="Promeni lozinku">
+        </form>
+    </div>
+    @endif
+    @endauth
      
     @error('error')
-        <div class="alert alert-danger alert-dismissible fade show">
+        <div class="alert alert-danger alert-dismissible fade show mt-3">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             {{$message}}
         </div>
     @enderror
 
     @error('success')
-    <div class="alert alert-success alert-dismissible fade show">
+    <div class="alert alert-success alert-dismissible fade show mt-3">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{$message}}
     </div>

@@ -31,7 +31,7 @@ Route::get('/igrac/obavestenja/{id}','PlayerController@playerNotifications')->wh
 Route::post('/igrac/prihvatiZahtev', 'PlayerController@acceptClub');
 Route::post('/igrac/odbijZahtev', 'PlayerController@declineClub');
 Route::post('/igrac/ukloniZahtev', 'PlayerController@removeRequest');
-
+Route::post('/igrac/promena_lozinke','PlayerController@changePassword');
 
 Route::get('/turnir', 'TournamentController@index');
 Route::get('/turnir/{id}', 'TournamentController@getTournament')->where('id', '[0-9]+');
