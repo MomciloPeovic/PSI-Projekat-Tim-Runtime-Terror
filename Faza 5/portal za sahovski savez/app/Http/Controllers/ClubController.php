@@ -164,6 +164,7 @@ class ClubController extends Controller
                 'club' => true,
                 'expiry_date' => $datum_isteka
             ]);
+            $errors = new MessageBag(['success' => ['Uspesno ste poslali zahtev!']]);
         } else if ($veza != null && $veza->club == true) {
             $errors = new MessageBag(['error' => ['Zahtev je vec poslat!']]);
         } elseif ($check != null && $check->left == null) {

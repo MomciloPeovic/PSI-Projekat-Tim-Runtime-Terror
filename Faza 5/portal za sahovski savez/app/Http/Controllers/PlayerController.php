@@ -180,6 +180,7 @@ class PlayerController extends Controller
                 'club' => false,
                 'expiry_date' => $datum_isteka
             ]);
+            $errors = new MessageBag(['success' => ['Uspesno ste poslali zahtev!']]);
         } elseif ($veza != null && $veza->club == false) {
             $errors = new MessageBag(['error' => ['Zahtev je vec poslat!']]);
         } elseif ($check != null) {
