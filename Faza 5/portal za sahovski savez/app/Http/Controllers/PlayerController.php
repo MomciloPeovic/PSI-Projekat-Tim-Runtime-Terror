@@ -145,6 +145,22 @@ class PlayerController extends Controller
 
     public function sendRequestToClub(Request $request)
     {  
+        //Provera da li je trenutno prelazni rok
+        $id_prelazonog_roka = DB::table('deadline_types')->where('tip','=','Rok za uclanjivanje')->first();
+        $validan_prelazni_rok = DB::table('deadlines')->where('deadline_type_id','=',$id_prelazonog_roka->id)
+                                ->where('start','<',date('Y-m-d'))
+                                ->where('end','>',date('Y-m-d'))
+                                ->first();
+        
+        if($validan_prelazni_rok == null)
+        {
+            $errors = new MessageBag(['error' => ['Zahtev nije poslat zato sto trenutno nije prelazni rok!']]);
+            $club = DB::table('clubs')->where('id','=', $request->club_id)->first();
+            return view('clubs.club')->with('club',$club)->withErrors($errors);
+        }
+
+        $datum_isteka = $validan_prelazni_rok->end;
+        //
         $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
         $errors = null;
 
@@ -155,7 +171,8 @@ class PlayerController extends Controller
             DB::table('player_club_request')->insert([
                 'player_id' => $request->player_id,
                 'club_id' => $request->club_id,
-                'club' => false
+                'club' => false,
+                'expiry_date' => $datum_isteka
             ]);
         } elseif ($veza->club == false) {
             $errors = new MessageBag(['error' => ['Zahtev je vec poslat!']]);
@@ -166,7 +183,6 @@ class PlayerController extends Controller
             $errors = new MessageBag(['success' => ['Imali ste zahtev od ovog kluba, uclanjeni ste!']]);
         }
         $club = DB::table('clubs')->where('id','=', $request->club_id)->first();
-
 		return view('clubs.club')->with('club',$club)->withErrors($errors);
     }
 
