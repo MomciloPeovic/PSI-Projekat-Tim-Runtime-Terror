@@ -11,11 +11,27 @@
     $klub = DB::table('clubs')->where('id','=',$obavestenje->club_id)->first();
 @endphp    
 
-@if($obavestenje->rejection == true)
+@if($obavestenje->status == 'declined')
 <div class="alert alert-info" role="alert">
     <div class = "row">
         <div class = "col-sm-10">
             Klub "{{$klub->name}}" je odbio Vas zahtev da se uclanite. &nbsp;
+        </div>
+        <div class = "col-sm-2">
+            <form action="/igrac/ukloniZahtev" method="POST" class="form-inline">
+                @csrf
+                <input type="hidden" name="player_id" value="{{$obavestenje->player_id}}"> 
+                <input type="hidden" name="club_id" value="{{$obavestenje->club_id}}"> 
+                <input type="submit" class="btn btn-primary" value="X">
+            </form>
+        </div>
+    </div>
+</div>
+@elseif($obavestenje->status == 'accepted')
+<div class="alert alert-info" role="alert">
+    <div class = "row">
+        <div class = "col-sm-10">
+            Klub "{{$klub->name}}" je prihvatio vaz zhatev! &nbsp;
         </div>
         <div class = "col-sm-2">
             <form action="/igrac/ukloniZahtev" method="POST" class="form-inline">

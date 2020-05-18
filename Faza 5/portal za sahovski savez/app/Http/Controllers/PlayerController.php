@@ -161,7 +161,11 @@ class PlayerController extends Controller
 
         $datum_isteka = $validan_prelazni_rok->end;
         //
-        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
+        $veza = DB::table('player_club_request')
+        ->where('player_id','=', $request->player_id)
+        ->where('club_id', '=', $request->club_id)
+        ->first(); 
+
         $errors = null;
 
         $check = DB::table('club_player')
@@ -261,11 +265,11 @@ class PlayerController extends Controller
             ]);
         }
 
-        //Brise se obavestenje
-            DB::table('player_club_request')
-            ->where('player_id','=',$request->player_id)
-            ->where('club_id','=',$request->club_id)
-            ->delete();
+        //Azurira se da je prihvacen zahtev
+        DB::table('player_club_request')
+        ->where('player_id','=',$request->player_id)
+        ->where('club_id','=',$request->club_id)
+        ->update(['status' => 'accepted','club' => false]);
 
         $notifications = DB::table('player_club_request')->where('player_id', '=', $request->player_id)->where('club','=',true)->get();
         return view('players.player_notification')->with('obavestenja',$notifications);
@@ -303,7 +307,7 @@ class PlayerController extends Controller
             DB::table('player_club_request')
             ->where('player_id','=',$veza->player_id)
             ->where('club_id','=',$veza->club_id)
-            ->update(['club' => false,'rejection' => true]);
+            ->update(['club' => false,'status' => 'declined']);
         }
 
         $notifications = DB::table('player_club_request')->where('player_id','=',$request->player_id)->where('club','=',true)->get();

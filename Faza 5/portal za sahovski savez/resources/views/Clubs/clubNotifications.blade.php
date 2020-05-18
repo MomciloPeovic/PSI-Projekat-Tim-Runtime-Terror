@@ -11,11 +11,27 @@
     $player = DB::table('players')->where('id','=',$notification->player_id)->first();
 @endphp    
 
-@if($notification->rejection == true)
+@if($notification->status == 'declined')
 <div class="alert alert-info" role="alert">
     <div class = "row">
         <div class = "col-sm-10">
             "{{$player->name}}" je odbio Vasu ponudu da se uclani u klub. &nbsp;
+        </div>
+        <div class = "col-sm-2">
+            <form action="/klub/ukloniZahtev" method="POST" class="form-inline">
+                @csrf
+                <input type="hidden" name="player_id" value="{{$notification->player_id}}"> 
+                <input type="hidden" name="club_id" value="{{$notification->club_id}}"> 
+                <input type="submit" class="btn btn-primary" value="X">
+            </form>
+        </div>
+    </div>
+</div>
+@elseif($notification->status == 'accepted')
+<div class="alert alert-info" role="alert">
+    <div class = "row">
+        <div class = "col-sm-10">
+            "{{$player->name}}" je prihvatio Vasu ponudu da se uclani u klub. &nbsp;
         </div>
         <div class = "col-sm-2">
             <form action="/klub/ukloniZahtev" method="POST" class="form-inline">
