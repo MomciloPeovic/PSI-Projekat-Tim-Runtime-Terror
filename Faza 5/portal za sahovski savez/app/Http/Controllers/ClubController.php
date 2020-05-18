@@ -152,9 +152,11 @@ class ClubController extends Controller
         $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
         $errors = null;
 
-        $check = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
+        $check = DB::table('club_player')
+        ->where('player_id','=', $request->player_id)
+        ->whereNull('left')->first(); 
 
-        if ($veza == null) 
+        if ($veza == null && $check == null) 
         {
             DB::table('player_club_request')->insert([
                 'player_id' => $request->player_id,
@@ -162,9 +164,9 @@ class ClubController extends Controller
                 'club' => true,
                 'expiry_date' => $datum_isteka
             ]);
-        } else if ($veza->club == true) {
+        } else if ($veza != null && $veza->club == true) {
             $errors = new MessageBag(['error' => ['Zahtev je vec poslat!']]);
-        } elseif ($check != null && $check->left = null) {
+        } elseif ($check != null && $check->left == null) {
             $errors = new MessageBag(['error' => ['Igrac je vec uclanjen u klub!']]);
         } else {
             $this->acceptPlayer($request);
