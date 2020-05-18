@@ -2,6 +2,7 @@
 @section('title','Igraci')
 @section('content')
 
+@auth('admin')
 <h1>Unapredjivanje igraca u sudiju</h1>
 <table class="table table-hover col-xl-8">
     <thead class="thead-dark">
@@ -38,5 +39,6 @@
         </tr>
     </tbody>
 </table>
+@endauth
 
 @endsection

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use Illuminate\Http\Request;
 use App\Deadline;
 use App\DeadlineType;
 use App\Player;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\MessageBag;
 
 class AdminController extends Controller {
     public function __construct(){
@@ -60,5 +64,36 @@ class AdminController extends Controller {
         Player::where('confirmed', 2)->delete();
         
         return redirect()->action('AdminController@getPendingRegs');
+    }
+
+    public function editProfile(){
+        $user = Auth::guard('admin')->user();
+        $admin = Admin::where('id', $user->id)->first();
+
+        return view('admin.profile', [
+            'admin' => $admin
+        ]);
+    }
+
+    public function editEmail(Request $request){
+        Admin::where('id', $request->a_id)->update([
+            'email' => $request->email
+        ]);
+
+        return redirect()->action('AdminController@editProfile');
+    }
+
+    public function changePassword(Request $request){
+        $admin_info = Admin::where('id','=',$request->admin_id)->first();
+        if(!Hash::check($request->old_pass,$admin_info->password) || ($request->new_pass != $request->new_pass_2))
+        {
+            $errors = new MessageBag(['error' => ['Nesto od podatak nije ispravno, pokusajte ponovo!']]);
+            return view('admin.profile')->with('admin',$admin_info)->withErrors($errors);
+        } 
+
+        Admin::where('id','=',$request->admin_id)->update(['password' => bcrypt($request->new_pass)]);
+
+        $errors = new MessageBag(['success' => ['Uspesno izmenjena lozinka!']]);
+        return view('admin.profile')->with('admin',$admin_info)->withErrors($errors);
     }
 }

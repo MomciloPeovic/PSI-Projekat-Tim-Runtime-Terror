@@ -4,6 +4,7 @@
 
 @section('content')
 
+@auth('admin')
 <h1>Razmatranje zahteva za registraciju</h1>
 <div class="row">
     <table class="table table-hover col-xl-8 mt-5">
@@ -21,5 +22,6 @@
         </tbody>
     </table>
 </div>
+@endauth
 
 @endsection

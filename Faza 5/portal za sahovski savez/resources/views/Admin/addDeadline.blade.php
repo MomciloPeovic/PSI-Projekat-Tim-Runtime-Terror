@@ -4,6 +4,7 @@
 
 @section('content')
 
+@auth('admin')
 <h1>Dodavanje prelaznog roka</h1>
 <div class="row">
     <form class="col-xl-8" action='/dodajRok' method="POST">
@@ -33,5 +34,6 @@
 		</div>
     </form>
 </div>
+@endauth
 
 @endsection
