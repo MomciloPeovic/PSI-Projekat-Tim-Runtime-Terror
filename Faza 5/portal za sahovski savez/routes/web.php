@@ -72,6 +72,9 @@ Route::post('/dodajRok', 'AdminController@addDeadlinePost'); // dodaje rok
 Route::get('/korisnici', 'AdminController@getPendingRegs'); //dohvata korisnike koji cekaju da im se odobri registacija
 Route::get('/korisnici/{id}', 'AdminController@pendingRegs')->where('id', '[0-9]+');
 Route::post('/korisnici/{id}', 'AdminController@pendingRegsPost')->where('id', '[0-9]+');
+Route::get('/klubovi', 'AdminController@getPendingRegsClubs');
+Route::get('/klubovi/{id}', 'AdminController@pendingRegsClubs')->where('id', '[0-9]+');
+Route::post('/klubovi/{id}', 'AdminController@pendingRegsClubsPost')->where('id', '[0-9]+');
 Route::get('/adminProfil', 'AdminController@editProfile'); //pregled i edit adminovog profila
 Route::post('/promenaEmaila', 'AdminController@editEmail');
 Route::post('/promenaLozinke', 'AdminController@changePassword');
