@@ -4,17 +4,17 @@
 
 <script>
     //Igraci
-    function prikazi_igrace(strana_ = 1) {
-      let ime_filter = document.getElementById("ime_filter").value;
-      let pol_filter = document.getElementById("pol_filter").value;
-      let min_rejting_filter = document.getElementById("min_rejting_filter").value;
-      let max_rejting_filter = document.getElementById("max_rejting_filter").value;
-      let strana = strana_;
+    function prikazi_igrace(page_ = 1) {
+      let name = document.getElementById("ime_filter").value;
+      let gender = document.getElementById("pol_filter").value;
+      let min_rating = document.getElementById("min_rejting_filter").value;
+      let max_rating = document.getElementById("max_rejting_filter").value;
+      let page = page_;
 
       $.ajax({
         type: "POST",
         url: "/igrac",
-        data: {_token:'<?php echo csrf_token();?>',ime_filter:ime_filter,pol_filter,pol_filter,min_rejting_filter:min_rejting_filter,max_rejting_filter:max_rejting_filter,strana:strana},
+        data: {_token:'<?php echo csrf_token();?>',name:name,gender:gender,min_rating:min_rating,max_rating:max_rating,page:page},
         success: function (data) {
           document.getElementById("igraci_tabla").innerHTML = data;
           return;

@@ -12,7 +12,7 @@
 <tr>
     <td colspan="5">
     <ul class="pagination justify-content-center">
-    @for($i = 1; $i< $broj_stranica + 1;$i++)
+    @for($i = 1; $i< $number_of_pages + 1;$i++)
         <li class="page-item"><button class="page-link"  onclick="prikazi_igrace({{$i}})">{{$i}}</button></li>
     @endfor
     </ul>
