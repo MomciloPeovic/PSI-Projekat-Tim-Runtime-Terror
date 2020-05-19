@@ -32,8 +32,34 @@ class TournamentSeeder extends Seeder
             'start_date' => date("Y-m-d"),
             'end_date' => date("Y-m-d"),
             'time' => date("H:i:s"),
-            'place' => 'novi sad',
+            'place' => 'nis',
             'rounds' => 7,
+            'type' => 'club'
+        ]);
+
+        
+        DB::table('tournaments')->insert([
+            'name' => 'turnir3',
+            'email' => 'david' . '@gmail.com',
+            'phone' => '12345678',
+            'start_date' => date("Y-m-d"),
+            'end_date' => date("Y-m-d"),
+            'time' => date("H:i:s"),
+            'place' => 'subotica',
+            'rounds' => 7,
+            'type' => 'player'
+        ]);
+
+        
+        DB::table('tournaments')->insert([
+            'name' => 'turnir4',
+            'email' => 'dedpul' . '@gmail.com',
+            'phone' => '12345678',
+            'start_date' => date("Y-m-d"),
+            'end_date' => date("Y-m-d"),
+            'time' => date("H:i:s"),
+            'place' => 'beograd',
+            'rounds' => 4,
             'type' => 'club'
         ]);
     }

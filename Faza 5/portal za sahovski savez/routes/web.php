@@ -46,6 +46,7 @@ Route::post('turnir/{id}/unosRezultata', 'TournamentController@addResultsPost')-
 Route::get('turnir/{id}/rezultati', 'TournamentController@results')->where('id', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaIgraca/{idIgrac}', 'TournamentController@playerRegistration')->where('idTurnir', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaKluba/{idKlub}', 'TournamentController@clubRegistration')->where('idTurnir', '[0-9]+')->where('idKlub', '[0-9]+');
+Route::post('/turnir', 'TournamentController@getTournamentsAjax');
 
 Route::get('/klub', 'ClubController@index');
 Route::get('/klub/{id}', 'ClubController@getClub')->where('id', '[0-9]+');

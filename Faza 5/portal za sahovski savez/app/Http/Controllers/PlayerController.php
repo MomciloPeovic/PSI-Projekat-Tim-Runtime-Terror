@@ -23,7 +23,6 @@ class PlayerController extends Controller
 
     public function getPlayersPost(Request $data)
     {
-
         $limit = 3;
         $strana = $data->strana;
         $start = ($strana-1)*$limit;
