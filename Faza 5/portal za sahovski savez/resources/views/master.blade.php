@@ -52,6 +52,7 @@
                     <a class="ml-1" href="/adminProfil"><i class="fas fa-cog fa-3x"></i></a>
                     <a class="ml-1" href="/dodajRok"><i class="fas fa-clock fa-3x"></i></a>
                     <a class="ml-1" href="/korisnici"><i class="fas fa-user fa-3x"></i></a>
+                    <a class="ml-1" href="/klubovi"><i class="fas fa-chess-king fa-3x"></i></a>
 
                     <form action="/korisnici/logout" method="GET">
                         <input type="submit" class="btn btn-danger ml-2" value="Odjava"/>

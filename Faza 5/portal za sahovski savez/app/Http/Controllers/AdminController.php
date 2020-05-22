@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Admin;
+use App\Club;
 use Illuminate\Http\Request;
 use App\Deadline;
 use App\DeadlineType;
@@ -48,10 +49,24 @@ class AdminController extends Controller {
         ]);
     }
 
+    public function getPendingRegsClubs(){
+        $clubs = Club::all();
+        return view('admin.clubs', [
+            'clubs' => $clubs
+        ]);
+    }
+
     public function pendingRegs($id){
         $user = Player::where('id', $id)->first();
         return view('admin.reg', [
             'user' => $user
+        ]);
+    }
+
+    public function pendingRegsClubs($id){
+        $club = Club::where('id', $id)->first();
+        return view('admin.regClubs', [
+            'club' => $club
         ]);
     }
 
@@ -64,6 +79,16 @@ class AdminController extends Controller {
         Player::where('confirmed', 2)->delete();
         
         return redirect()->action('AdminController@getPendingRegs');
+    }
+
+    public function pendingRegsClubsPost(Request $request){
+        Club::where('id', $request->id)->update([
+            'confirmed' => $request->confirm
+        ]);
+
+        Club::where('confirmed', 2)->delete();
+
+        return redirect()->action('AdminController@getPendingRegsClubs');
     }
 
     public function editProfile(){

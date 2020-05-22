@@ -20,7 +20,7 @@ class TournamentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:player,club,admin')->except(['index', 'getTournament']);
+        $this->middleware('auth:player,club,admin')->except(['index', 'getTournament', 'getTournamentsAjax']);
     }
 
     public function index()
@@ -197,5 +197,30 @@ class TournamentController extends Controller
         }
 
         return redirect('/turnir/' . $request->id);
+    }
+
+    public function getTournamentsAjax(Request $data)
+    {
+        $limit = 3;
+        $page = $data->page;
+        $start = ($page - 1) * $limit;
+        $query = Tournament::query();
+
+        $query = $query->where('name', 'like', "%" . $data->name . "%")->where('place', 'like', "%" . $data->place . "%");
+
+        if ($data->rounds != "")
+            $query = $query->where('rounds', '=', $data->rounds);
+
+        if ($data->start_date != "")
+            $query = $query->where('start_date', '>=', $data->start_date);
+
+        if ($data->end_date != "")
+            $query = $query->where('end_date', '<=', $data->end_date);
+
+        $number_of_rows = $query->count();
+        $tournaments = $query->offset($start)->limit($limit)->get();
+
+        $number_of_pages = ceil($number_of_rows / $limit);
+        return view('tournaments.tournaments_table')->with('tournaments', $tournaments)->with('number_of_pages', $number_of_pages);
     }
 }

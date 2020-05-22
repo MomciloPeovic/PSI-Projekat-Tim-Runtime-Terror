@@ -46,6 +46,7 @@ Route::post('turnir/{id}/unosRezultata', 'TournamentController@addResultsPost')-
 Route::get('turnir/{id}/rezultati', 'TournamentController@results')->where('id', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaIgraca/{idIgrac}', 'TournamentController@playerRegistration')->where('idTurnir', '[0-9]+')->where('idIgrac', '[0-9]+');
 Route::post('turnir/{idTurnir}/prijavaKluba/{idKlub}', 'TournamentController@clubRegistration')->where('idTurnir', '[0-9]+')->where('idKlub', '[0-9]+');
+Route::post('/turnir', 'TournamentController@getTournamentsAjax');
 
 Route::get('/klub', 'ClubController@index');
 Route::get('/klub/{id}', 'ClubController@getClub')->where('id', '[0-9]+');
@@ -72,6 +73,9 @@ Route::post('/dodajRok', 'AdminController@addDeadlinePost'); // dodaje rok
 Route::get('/korisnici', 'AdminController@getPendingRegs'); //dohvata korisnike koji cekaju da im se odobri registacija
 Route::get('/korisnici/{id}', 'AdminController@pendingRegs')->where('id', '[0-9]+');
 Route::post('/korisnici/{id}', 'AdminController@pendingRegsPost')->where('id', '[0-9]+');
+Route::get('/klubovi', 'AdminController@getPendingRegsClubs');
+Route::get('/klubovi/{id}', 'AdminController@pendingRegsClubs')->where('id', '[0-9]+');
+Route::post('/klubovi/{id}', 'AdminController@pendingRegsClubsPost')->where('id', '[0-9]+');
 Route::get('/adminProfil', 'AdminController@editProfile'); //pregled i edit adminovog profila
 Route::post('/promenaEmaila', 'AdminController@editEmail');
 Route::post('/promenaLozinke', 'AdminController@changePassword');

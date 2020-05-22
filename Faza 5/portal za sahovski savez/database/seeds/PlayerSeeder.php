@@ -19,7 +19,8 @@ class PlayerSeeder extends Seeder
             'gender' => 'Muski',
             'birth_date' => date("Y-m-d"),
             'rating' => '577',
-            'password' => bcrypt('ja123')
+            'password' => bcrypt('ja123'),
+            'confirmed' => '1'
         ]);
         DB::table('players')->insert([
             'email' => 'dedpul' . '@gmail.com',
@@ -28,7 +29,8 @@ class PlayerSeeder extends Seeder
             'gender' => 'Muski',
             'birth_date' => date("Y-m-d"),
             'rating' => '300',
-            'password' => bcrypt('ja123')
+            'password' => bcrypt('ja123'),
+            'confirmed' => '1'
         ]);
         DB::table('players')->insert([
             'email' => 'jovana' . '@gmail.com',
@@ -37,7 +39,8 @@ class PlayerSeeder extends Seeder
             'gender' => 'Zenski',
             'birth_date' => date("Y-m-d"),
             'rating' => '500',
-            'password' => bcrypt('ja123')
+            'password' => bcrypt('ja123'),
+            'confirmed' => '0'
         ]);
         DB::table('players')->insert([
             'email' => 'jelena' . '@gmail.com',
@@ -46,7 +49,8 @@ class PlayerSeeder extends Seeder
             'gender' => 'Zenski',
             'birth_date' => date("Y-m-d"),
             'rating' => '900',
-            'password' => bcrypt('ja123')
+            'password' => bcrypt('ja123'),
+            'confirmed' => '1'
         ]);
 
         DB::table('players')->insert([
@@ -56,7 +60,8 @@ class PlayerSeeder extends Seeder
             'gender' => 'Muski',
             'birth_date' => date("Y-m-d"),
             'rating' => '1500',
-            'password' => bcrypt('ja123')
+            'password' => bcrypt('ja123'),
+            'confirmed' => '1'
         ]);
 
         DB::table('players')->insert([
@@ -66,7 +71,8 @@ class PlayerSeeder extends Seeder
             'gender' => 'Muski',
             'birth_date' => date("Y-m-d"),
             'rating' => '1450',
-            'password' => bcrypt('ja123')
+            'password' => bcrypt('ja123'),
+            'confirmed' => '1'
         ]);
     }
 }
