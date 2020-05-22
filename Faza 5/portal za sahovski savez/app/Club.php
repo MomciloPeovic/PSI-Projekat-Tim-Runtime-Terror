@@ -17,7 +17,7 @@ class Club extends User
         'password', 'remember_token',
     ];
 
-	public $timestamps = false;
+    public $timestamps = false;
 
     public function tournaments()
     {
@@ -26,12 +26,31 @@ class Club extends User
 
     public function players()
     {
-        return $this->hasMany('App\Player');
+        return $this->belongsToMany('App\Player');
     }
 
-    public function playerCount() 
+    public function playerCount()
     {
         $playerCnt = Club::withCount('players')->get();
         return $playerCnt->players_count;
+    }
+
+    public function getTournamentPoints($id)
+    {
+        if (Tournament::where('id', $id)->first()->type == 'player')
+            $results = Result::where('tournament_id', $id)->get();
+        else
+            $results = ClubResult::where('tournament_id', $id)->get();
+
+        $points = 0;
+        foreach ($results as $result) {
+            if ($result->white->id == $this->id) {
+                $points += $result->white_result;
+            } else if ($result->black->id == $this->id) {
+                $points += $result->black_result;
+            }
+        }
+
+        return $points;
     }
 }

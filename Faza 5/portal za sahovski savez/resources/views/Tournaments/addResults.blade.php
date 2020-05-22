@@ -27,9 +27,16 @@ $.ajax({
 });
 }
 
+@if($tournament->type == 'player')
 var str = "{{json_encode($tournament->participants()->select('id', 'name', 'surname')->get())}}";
 var participants = JSON.parse(str.replace(/&quot;/g,'"'));
 var participants2 = participants.slice(0);
+@else
+var str = "{{json_encode($tournament->participants()->select('id', 'name')->get())}}";
+var participants = JSON.parse(str.replace(/&quot;/g,'"'));
+var participants2 = participants.slice(0);
+@endif
+
 
 function playerSelected(selected){
 	const index = participants.findIndex(item => item.id == selected.value);
@@ -42,7 +49,11 @@ function playerSelected(selected){
 function loadNames(){
 	let emptyOption = document.createElement('option');
 	emptyOption.value = 0;
+	@if($tournament->type == 'player')
 	emptyOption.innerHTML = "Izaberite igraca";
+	@else
+	emptyOption.innerHTML = "Izaberite klub";
+	@endif
 	
 	const whites = document.getElementsByClassName("white");
 	const blacks = document.getElementsByClassName("black");
@@ -96,7 +107,13 @@ function loadNames(){
 	for(let i = 0; i < participants.length; i++)
 	{
 		let option = document.createElement('option');
+
+		@if($tournament->type == 'player')
 		option.innerHTML = participants[i].name + " " + participants[i].surname;
+		@else
+		option.innerHTML = participants[i].name;
+		@endif
+
 		option.value = participants[i].id;
 
 		for(let j = 0; j < whites.length; j++){
@@ -128,14 +145,14 @@ function addRow()
 	let whiteSelect = document.createElement('select');
 	whiteSelect.appendChild(option);
 	whiteSelect.classList.add("white");
-	whiteSelect.name = "white[]"/* + document.getElementById('rezultati').childElementCount + "]"*/;
+	whiteSelect.name = "white[]";
 	whiteSelect.onchange = function() {playerSelected(this)};
 	td2.appendChild(whiteSelect);
 	
 	let blackSelect = document.createElement('select');
 	blackSelect.appendChild(option.cloneNode(true));
 	blackSelect.classList.add("black");
-	blackSelect.name = "black[]"/* + document.getElementById('rezultati').childElementCount + "]"*/;
+	blackSelect.name = "black[]";
 	blackSelect.onchange = function() {playerSelected(this)};
 	td4.appendChild(blackSelect);
 

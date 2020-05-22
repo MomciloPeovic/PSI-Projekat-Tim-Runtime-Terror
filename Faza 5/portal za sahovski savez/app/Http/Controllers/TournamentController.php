@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\ClubResult;
 use App\Player;
 use App\Result;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class TournamentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'getTournament']);
+        $this->middleware('auth:player,club,admin')->except(['index', 'getTournament']);
     }
 
     public function index()
@@ -32,7 +33,12 @@ class TournamentController extends Controller
     public function getTournament($id)
     {
         $tournament = Tournament::where('id', $id)->first();
-        $rounds = Result::where('tournament_id', $tournament->id)->distinct('round')->count();
+
+        $type = 'App\Result';
+        if ($tournament->type == 'club')
+            $type = 'App\ClubResult';
+
+        $rounds = $type::where('tournament_id', $tournament->id)->distinct('round')->count();
 
         $table = array();
 
@@ -43,14 +49,17 @@ class TournamentController extends Controller
             $table[] = $player;
         }
 
+
         usort($table, function ($first, $second) {
             return $first->points < $second->points;
         });
 
+
         return view('tournaments.tournament', [
             'tournament' => $tournament,
             'rounds' => $rounds,
-            'table' => $table
+            'table' => $table,
+            'type' => $type
         ]);
     }
 
@@ -91,7 +100,7 @@ class TournamentController extends Controller
 
     public function clubRegistration(Request $request)
     {
-        $club = Club::where('id', $request->idKlub)->get();
+        $club = Club::where('id', $request->idKlub)->first();
 
         $tournament = Tournament::where('id', $request->idTurnir)->first();
 
@@ -128,6 +137,7 @@ class TournamentController extends Controller
     public function addResults($id)
     {
         $tournament = Tournament::where('id', $id)->first();
+
         return view('tournaments.addResults', [
             'tournament' => $tournament
         ]);
@@ -143,33 +153,42 @@ class TournamentController extends Controller
 
     public function addResultsPost(Request $request)
     {
+        $r = 'App\\Result';
+        if (Tournament::where('id', $request->id)->first()->type == 'club')
+            $r = 'App\\ClubResult';
+
+
         for ($i = 0; $i < sizeof($request->white); $i++) {
             if ($request->white[$i] == 0 || $request->black[$i] == 0)
                 continue;
 
-            $res = Result::where([
+
+            $res = $r::where([
                 ['tournament_id', '=', $request->id],
                 ['round', '=', $request->round],
                 ['table', '=', $request->table[$i]]
             ])->exists();
 
+
             if ($res == true) {
-                Result::where([
+                $r::where([
                     ['tournament_id', '=', $request->id],
                     ['round', '=', $request->round],
                     ['table', '=', $request->table[$i]]
                 ])->update([
                     'white_id' => $request->white[$i],
                     'black_id' => $request->black[$i],
-                    'result' => $request->result[$i],
+                    'white_result' => $request->result[$i] / 2,
+                    'black_result' => 1 - $request->result[$i] / 2,
                     'arbiter_id' => Auth::user()->id
                 ]);
             } else {
-                Result::insert([
+                $r::insert([
                     'white_id' => $request->white[$i],
                     'black_id' => $request->black[$i],
                     'tournament_id' => $request->id,
-                    'result' => $request->result[$i],
+                    'white_result' => $request->result[$i] / 2,
+                    'black_result' => 1 - $request->result[$i] / 2,
                     'round' => $request->round,
                     'table' => $request->table[$i],
                     'arbiter_id' => Auth::user()->id

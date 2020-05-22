@@ -76,16 +76,16 @@
 
 					<tbody>
 						@php
-						$results = App\Result::where('tournament_id', $tournament->id)->where('round', $i)->orderBy('table')->get();
+						$results = $type::where('tournament_id', $tournament->id)->where('round', $i)->orderBy('table')->get();
 						@endphp
-
+						
 						@foreach($results as $result)
 						<tr>
 							<th scope="row">{{$result->table}}.</th>
-							<td class="w-30">{{$result->white->name}} {{$result->white->surname}}</td>
+							<td class="w-30">{{$result->white->name}} @if($tournament->type == 'player') {{$result->white->surname}} @endif</td>
 							<td>7</td>
-							<td>{{$result->result == 2 ? "1:0" : ($result->result == 1 ? "0.5:0.5" : "0:1")}}</td>
-							<td class="w-30">{{$result->black->name}} {{$result->black->surname}}</td>
+							<td>{{$result->white_result}} : {{$result->black_result}}</td>
+							<td class="w-30">{{$result->black->name}} @if($tournament->type == 'player') {{$result->black->surname}} @endif</td>
 							<td>3</td>
 						</tr>
 						@endforeach
@@ -160,13 +160,42 @@
 							<th scope="row">{{$loop->index + 1}}</th>
 							<td>{{ $arbiter->name }} {{$arbiter->surname }}</td>
 							<td>{{ $arbiter->getArbiterRank() }}</td>
-							<td>
-								<form class="form-inline d-flex justify-content-center" method="POST" action="/turnir/{{$tournament->id}}/ukloniSudiju">
-									@csrf
-									<input type="hidden" name="arbiter_id" value="{{$arbiter->id}}">
-									<input type="submit" class="btn btn-danger" value="-">
-								</form>
-							</td>
+
+							@auth('player')
+								@if(Auth::guard('player')->user()->email == $tournament->email)
+									<td>
+										<form class="form-inline d-flex justify-content-center" method="POST" action="/turnir/{{$tournament->id}}/ukloniSudiju">
+											@csrf
+											<input type="hidden" name="arbiter_id" value="{{$arbiter->id}}">
+											<input type="submit" class="btn btn-danger" value="-">
+										</form>
+									</td>
+								@endif
+							@endauth
+
+							@auth('club')
+								@if(Auth::guard('club')->user()->email == $tournament->email)
+									<td>
+										<form class="form-inline d-flex justify-content-center" method="POST" action="/turnir/{{$tournament->id}}/ukloniSudiju">
+											@csrf
+											<input type="hidden" name="arbiter_id" value="{{$arbiter->id}}">
+											<input type="submit" class="btn btn-danger" value="-">
+										</form>
+									</td>
+								@endif
+							@endauth
+
+							@auth('admin')
+								@if(Auth::guard('admin')->user()->email == $tournament->email)
+									<td>
+										<form class="form-inline d-flex justify-content-center" method="POST" action="/turnir/{{$tournament->id}}/ukloniSudiju">
+											@csrf
+											<input type="hidden" name="arbiter_id" value="{{$arbiter->id}}">
+											<input type="submit" class="btn btn-danger" value="-">
+										</form>
+									</td>
+								@endif
+							@endauth
 						</tr>
 						@endforeach
 					</tbody>

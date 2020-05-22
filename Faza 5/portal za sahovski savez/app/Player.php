@@ -27,7 +27,7 @@ class Player extends User
 
 	public function club()
 	{
-		return $this->belongsTo('App\Club');
+		return $this->belongsToMany('App\Club');
 	}
 
 	public function isArbiter()
