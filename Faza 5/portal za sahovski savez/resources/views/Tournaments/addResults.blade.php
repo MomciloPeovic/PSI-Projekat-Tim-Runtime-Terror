@@ -39,11 +39,29 @@ var participants2 = participants.slice(0);
 
 
 function playerSelected(selected){
-	const index = participants.findIndex(item => item.id == selected.value);
-	if (index > -1) {
-		participants.splice(index, 1);
-		loadNames();
+		
+	for(let i = 1; i < selected.childNodes.length; i++){
+		const index = participants.findIndex(item => item.id == selected.childNodes[i].value);
+		if (index == -1) {
+			var name = selected.childNodes[i].innerHTML;
+			@if($tournament->type == 'player')
+				var surname = name.split(" ")[1];
+				name = name.split(" ")[0];
+			@endif
+			var part = {id:selected.childNodes[i].value, name:name, @if($tournament->type == 'player') surname:surname @endif}
+			participants.push(part);
+		}
 	}
+	
+
+	if(selected.value > 0){
+		const index = participants.findIndex(item => item.id == selected.value);
+		if (index > -1) {
+			participants.splice(index, 1);
+		}
+	}
+	
+	loadNames();
 }
 
 function loadNames(){
@@ -70,9 +88,12 @@ function loadNames(){
 			let lastOption = document.createElement('option');
 			lastOption.value = val;
 			lastOption.innerHTML = name;
+			lastOption.selected = true;
 
 			whites[j].innerHTML = "";
+			whites[j].appendChild(emptyOption.cloneNode(true));
 			whites[j].appendChild(lastOption);
+
 
 			const index = participants.findIndex(item => item.id == val);
 			if (index > -1) {
@@ -93,8 +114,10 @@ function loadNames(){
 			let lastOption = document.createElement('option');
 			lastOption.value = val;
 			lastOption.innerHTML = name;
+			lastOption.selected = true;
 
 			blacks[j].innerHTML = "";
+			blacks[j].appendChild(emptyOption.cloneNode(true));
 			blacks[j].appendChild(lastOption);
 
 			const index = participants.findIndex(item => item.id == val);

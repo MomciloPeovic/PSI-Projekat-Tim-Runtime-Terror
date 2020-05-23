@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClubResult extends Model
 {
+    public $timestamps = false;
+
     public function white()
     {
         return $this->belongsTo('App\Club');

@@ -18,8 +18,8 @@ class CreateResultsTable extends Migration
             $table->foreignId('tournament_id')->constrained('tournaments')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('white_id')->constrained('players')->onDelete('no action')->onUpdate('no action');
             $table->foreignId('black_id')->constrained('players')->onDelete('no action')->onUpdate('no action');
-            $table->integer('white_result');
-            $table->integer('black_result');
+            $table->float('white_result');
+            $table->float('black_result');
             $table->integer('table');
             $table->integer('round');
             $table->foreignId('arbiter_id')->constrained('players')->onDelete('no action')->onUpdate('no action');

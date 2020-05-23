@@ -95,7 +95,7 @@ class TournamentController extends Controller
 
         $tournament->participants()->toggle($player);
 
-        return redirect()->action('TournamentController@index');
+        return redirect()->back();
     }
 
     public function clubRegistration(Request $request)
@@ -107,7 +107,7 @@ class TournamentController extends Controller
 
         $tournament->participants()->toggle($club);
 
-        return redirect()->action('TournamentController@index');
+        return redirect()->back();
     }
 
     public function arbiters($id)
@@ -145,7 +145,14 @@ class TournamentController extends Controller
 
     public function results(Request $request)
     {
-        $results = Result::where('tournament_id', $request->id)->where('round', $request->round)->orderBy('table')->get();
+        $tournament = Tournament::where('id', $request->id)->first();
+        $results = collect();
+
+        if ($tournament->type == 'player')
+            $results = Result::where('tournament_id', $request->id)->where('round', $request->round)->orderBy('table')->get();
+        else
+            $results = ClubResult::where('tournament_id', $request->id)->where('round', $request->round)->orderBy('table')->get();
+
         return view('tournaments.resultsPartial', [
             'results' => $results
         ]);

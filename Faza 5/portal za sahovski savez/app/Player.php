@@ -63,9 +63,9 @@ class Player extends User
 		$points = 0;
 		foreach ($results as $result) {
 			if ($result->white->id == $this->id) {
-				$points += $result->result / 2;
+				$points += $result->white_result;
 			} else if ($result->black->id == $this->id) {
-				$points -= ($result->result / 2) - 1;
+				$points += $result->black_result;
 			}
 		}
 

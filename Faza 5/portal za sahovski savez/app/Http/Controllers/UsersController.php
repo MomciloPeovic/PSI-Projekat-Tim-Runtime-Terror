@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Player;
 use App\Admin;
+use App\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -44,6 +45,32 @@ class UsersController extends Controller
 		}
 
 		$credentials = $request->only('email', 'password');
+
+		$player = Player::where('email', $request->email)->first();
+		if ($player == null) {
+			$club = Club::where('email', $request->email)->first();
+
+			if ($club == null) {
+				$admin = Admin::where('email', $request->email)->first();
+
+				if ($admin == null) {
+					$errors = new MessageBag(['login' => ['Pogresan email ili lozinka!']]);
+					return redirect()->action('UsersController@login')->withErrors($errors)->withInput();
+				}
+			} else {
+				if ($club->confirmed == false) {
+					$errors = new MessageBag(['login' => ['Nalog nije potvrdjen od strane administratora!']]);
+					return redirect()->action('UsersController@login')->withErrors($errors)->withInput();
+				}
+			}
+		} else {
+			if ($player->confirmed == false) {
+				$errors = new MessageBag(['login' => ['Nalog nije potvrdjen od strane administratora!']]);
+				return redirect()->action('UsersController@login')->withErrors($errors)->withInput();
+			}
+		}
+
+
 
 		if (Auth::guard('player')->attempt($credentials)) {
 			return redirect()->back();

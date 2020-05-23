@@ -6,6 +6,28 @@
 
 <h1> {{ $tournament->name }}</h1>
 
+@if(Auth::guard('player')->check() && $tournament->type == 'player')
+	
+	<form action="/turnir/{{$tournament->id}}/prijavaIgraca/{{Auth::guard('player')->user()->id}}" method="POST">
+		@csrf
+		@if(!$tournament->isPlayerParticipating(Auth::guard('player')->user()->id))
+		<input type="submit" value="Prijava na turnir" class="btn btn-primary"/>
+		@else
+		<input type="submit" value="Odjava sa turnira" class="btn btn-danger"/>
+		@endif
+	</form>
+@elseif(Auth::guard('club')->check() && $tournament->type == 'club')
+
+	<form action="/turnir/{{$tournament->id}}/prijavaKluba/{{Auth::guard('club')->user()->id}}" method="POST">
+		@csrf
+		@if(!$tournament->isClubParticipating(Auth::guard('club')->user()->id))
+		<input type="submit" value="Prijava na turnir" class="btn btn-primary"/>
+		@else
+		<input type="submit" value="Odjava sa turnira" class="btn btn-danger"/>
+		@endif
+	</form>
+@endif
+
 	<ul class="nav nav-tabs nav-fill mt-3" id="myTab" role="tablist">
 		<li class="nav-item">
 			<a class="nav-link active" id="tabela-tab" data-toggle="tab" href="#tabela" role="tab"
@@ -65,12 +87,10 @@
 				<table class="table table-hover w-75 text-center">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">#</th>
-							<th class="w-30" scope="col">Beli</th>
-							<th scope="col">Poeni</th>
-							<th scope="col">Rezultat</th>
-							<th class="w-30" scope="col">Crni</th>
-							<th scope="col">Poeni</th>
+							<th scope="col" style="width:10%">#</th>
+							<th class="w-30" scope="col" style="width:40%">Beli</th>
+							<th scope="col" style="width:10%">Rezultat</th>
+							<th class="w-30" scope="col" style="width:40%">Crni</th>
 						</tr>
 					</thead>
 
@@ -83,10 +103,8 @@
 						<tr>
 							<th scope="row">{{$result->table}}.</th>
 							<td class="w-30">{{$result->white->name}} @if($tournament->type == 'player') {{$result->white->surname}} @endif</td>
-							<td>7</td>
 							<td>{{$result->white_result}} : {{$result->black_result}}</td>
 							<td class="w-30">{{$result->black->name}} @if($tournament->type == 'player') {{$result->black->surname}} @endif</td>
-							<td>3</td>
 						</tr>
 						@endforeach
 					</tbody>

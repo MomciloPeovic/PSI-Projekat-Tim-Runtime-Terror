@@ -3,19 +3,21 @@
 	<td><input type="number" value="{{$result->table}}" name="table[]"></td>
 	<td>
 		<select onchange="playerSelected(this)" name="white[]" class="white">
-			<option value="{{$result->white->id}}">{{$result->white->name}} {{$result->white->surname}}</option>
+			<option value="0">Izaberite igraca</option>
+			<option value="{{$result->white->id}}" selected>{{$result->white->name}} {{$result->white->surname}}</option>
 		</select>
 	</td>
 	<td>
 		<select name="result[]">
-			<option value="2" {{ $result->result == 2 ? "selected" : ""}}>1:0</option>
-			<option value="1" {{ $result->result == 1 ? "selected" : ""}}>0.5:0.5</option>
-			<option value="0" {{ $result->result == 0 ? "selected" : ""}}>0:1</option>
+			<option value="2" {{ $result->white_result == 1 ? "selected" : ""}}>1:0</option>
+			<option value="1" {{ $result->white_result == $result->black_result ? "selected" : ""}}>0.5:0.5</option>
+			<option value="0" {{ $result->white_result == 0 ? "selected" : ""}}>0:1</option>
 		</select>
 	</td>
 	<td>
 		<select onchange="playerSelected(this)" name="black[]" class="black">
-			<option value="{{$result->black->id}}">{{$result->black->name}} {{$result->black->surname}}</option>
+			<option value="0">Izaberite igraca</option>
+			<option value="{{$result->black->id}}" selected>{{$result->black->name}} {{$result->black->surname}}</option>
 		</select>
 	</td>
 </tr>
