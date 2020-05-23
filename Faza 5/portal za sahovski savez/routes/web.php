@@ -63,7 +63,7 @@ Route::post('/klub/prihvatiZahtev', 'ClubController@acceptPlayer');
 Route::post('/klub/odbijZahtev', 'ClubController@declinePlayer');
 Route::post('/klub/ukloniZahtev', 'ClubController@removeRequest');
 Route::post('/klub/posaljiZahtevIgracu', 'ClubController@sendRequestToPlayer');
-
+Route::post('/klub/slika' , 'ClubController@uploadImage');
 
 Route::get('/sudija', 'PlayerController@referees'); // prikazuje sve sudije
 

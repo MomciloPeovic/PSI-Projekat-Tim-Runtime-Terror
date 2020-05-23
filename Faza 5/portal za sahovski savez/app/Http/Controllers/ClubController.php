@@ -252,4 +252,15 @@ class ClubController extends Controller
         $klub = Club::where('id','=',$id)->first();
         return view('clubs.clubNotifications')->with('notifications', $notifications)->with('klub',$klub);
     }
+
+    public function uploadImage(Request $request)
+    {
+        Club::where('id','=',$request->id)
+        ->update(
+            ['image' => file_get_contents($request->image)]
+        );
+
+        $club = Club::where('id','=',$request->id)->first();
+        return view('clubs.club')->with('club', $club);
+    }
 }

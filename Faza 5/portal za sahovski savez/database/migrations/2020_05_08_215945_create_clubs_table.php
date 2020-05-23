@@ -23,6 +23,7 @@ class CreateClubsTable extends Migration
             $table->date('founded');
             $table->string('municipality');
             $table->boolean('confirmed')->default(false);
+            $table->binary('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

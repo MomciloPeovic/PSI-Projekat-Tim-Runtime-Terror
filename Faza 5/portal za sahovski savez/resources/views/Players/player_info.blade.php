@@ -27,8 +27,8 @@
                 @csrf               
                     <div class="input-group mb-3">
                         <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="image">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".jpg,.png,.jpeg" name="image" required>
+                        <label class="custom-file-label" for="inputGroupFile01">Izaberite fajl</label>
                         </div>
                     </div>
                     <input type="hidden" name="id" value="{{Auth::user()->id}}">

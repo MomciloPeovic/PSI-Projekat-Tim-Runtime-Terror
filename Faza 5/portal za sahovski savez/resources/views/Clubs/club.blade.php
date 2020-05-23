@@ -2,24 +2,49 @@
 @section('title','Informacije o klubu')
 @section('content')
 
-<form action="/klub/dodaj" method="POST">
-@csrf
+
 <div class="container-fluid mt-1 ml-5">
     <div id="klub-profil">
         <div class="row">
             <div class="col-sm-3">
 
                 <div class="text-center">
+                    @if($club->image == null)
                     <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="width: 500px"
                         class="avatar img-circle img-thumbnail" alt="avatar">
+                    @else
+                        @php
+                            $image = base64_encode( $club->image);
+                        @endphp
+                        <img src="data:image/jpeg;base64,{{$image}}" style="width: 500px "class="avatar img-circle img-thumbnail"alt="avatar"/>
+                    @endif
                     <div class="col-sm-12">
                         <h1>{{$club->name}}</h1>
                     </div>
                 </div>
+                @auth('club')
+                @if(Auth::guard('club')->user()->id == $club->id)
+                <form action="/klub/slika" method="POST" enctype="multipart/form-data">   
+                @csrf               
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".jpg,.png,.jpeg" name="image" required>
+                        <label class="custom-file-label" for="inputGroupFile01">Izaberite fajl</label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="{{$club->id}}">
+                    <input type="submit" class="btn btn-primary" value="Promeni sliku">
+                </form>
+
+                @endif
+                @endauth
+
                 <hr>
                 <a href="/klub" class="badge badge-primary"> < Nazad</a>
             </div>
             <div class="col-sm-4">
+            <form action="/klub/dodaj" method="POST">
+            @csrf
                 <div class="tab-content">
                     @auth('club')
                     @if(Auth::guard('club')->user()->id == $club->id)
@@ -223,5 +248,12 @@
                 {{$message}}
             </div>
         @enderror
+
+        <script>
+            $('input[type="file"]').change(function(e){
+                  var fileName = e.target.files[0].name;
+                  $('.custom-file-label').html(fileName);
+              });
+          </script>
 
 @endsection
