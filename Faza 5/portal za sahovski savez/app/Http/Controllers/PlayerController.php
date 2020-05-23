@@ -314,5 +314,16 @@ class PlayerController extends Controller
         $errors = new MessageBag(['success' => ['Uspesno izmenjena lozinka!']]);
         return view('players.player_info')->with('player',$player_info)->withErrors($errors);
     }
+
+    public function uploadImage(Request $request)
+    {
+        Player::where('id','=',$request->id)
+        ->update(
+            ['image' => file_get_contents($request->image)]
+        );
+
+        $player = Player::where('id','=',$request->id)->first();
+        return view('players.player_info')->with('player',$player);
+    }
 }
 

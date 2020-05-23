@@ -2,24 +2,47 @@
 @section('title','Informacije o igracu')
 @section('content')
 
-<form action="/igrac/dodaj" method="POST">
-@csrf
+
 <div class="container-fluid mt-1 ml-5">
     <div id="igrac-profil">
         <div class="row">
             <div class="col-sm-3 mt-4">
-
                 <div class="text-center">
+                    @if($player->image == null)
                     <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="width: 500px"
                         class="avatar img-circle img-thumbnail" alt="avatar">
+                    @else
+                        @php
+                            $image = base64_encode( $player->image);
+                        @endphp
+                        <img src="data:image/jpeg;base64,{{$image}}" style="width: 500px "class="avatar img-circle img-thumbnail"alt="avatar"/>
+                    @endif
                     <div class="col-sm-12">
                         <h1>{{$player->name}} {{$player->surname}}</h1>
                     </div>
                 </div>
+                @auth('player')
+                @if(Auth::guard('player')->user()->id == $player->id)
+                <form action="/igrac/slika" method="POST" enctype="multipart/form-data">   
+                @csrf               
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="image">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="{{Auth::user()->id}}">
+                    <input type="submit" class="btn btn-primary" value="Promeni sliku">
+                </form>
+
+                @endif
+                @endauth
                 <hr>
                 <a href="/igrac" class="badge badge-primary"> < Nazad</a>
             </div>
             <div class="col-sm-4 mt-4">
+            <form action="/igrac/dodaj" method="POST">
+            @csrf
                 <div class="tab-content">
                     @auth('player')
                     @if(Auth::guard('player')->user()->id == $player->id)
@@ -277,5 +300,12 @@
         {{$message}}
     </div>
 @enderror
+
+<script>
+  $('input[type="file"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+    });
+</script>
 
 @endsection
