@@ -19,7 +19,7 @@ class CreatePlayerClubRequestTable extends Migration
             $table->boolean('club')->nullable();
             $table->date('expiry_date')->nullable();
             $table->enum('status',['sent', 'accepted','declined'])->default('sent');
-            $table->primary(['player_id', 'club_id','club']);
+            $table->primary(['player_id', 'club_id','club','status']);
         });
     }
 

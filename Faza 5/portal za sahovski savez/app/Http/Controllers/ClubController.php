@@ -149,7 +149,11 @@ class ClubController extends Controller
         $datum_isteka = $validan_prelazni_rok->end;
 
 
-        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first(); 
+        $veza = DB::table('player_club_request')
+        ->where('player_id','=', $request->player_id)
+        ->where('club_id', '=', $request->club_id)
+        ->where('status','=','sent')
+        ->first(); 
         $errors = null;
 
         $check = DB::table('club_player')
@@ -233,12 +237,16 @@ class ClubController extends Controller
 
     public function removeRequest(Request $request)
     {
-        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)->first();
+        $veza = DB::table('player_club_request')->where('player_id','=', $request->player_id)->where('club_id', '=', $request->club_id)
+        ->where('status','<>','sent')
+        ->first();
         if($veza != null)
         {
             DB::table('player_club_request')
             ->where('player_id','=', $veza->player_id)
-            ->where('club_id', '=', $veza->club_id)->delete();
+            ->where('club_id', '=', $veza->club_id)
+            ->where('status','=',$veza->status)
+            ->delete();
         }
 
         $notifications = DB::table('player_club_request')->where('club_id','=',$request->club_id)->where('club','=',false)->get();
