@@ -154,7 +154,8 @@ class TournamentController extends Controller
             $results = ClubResult::where('tournament_id', $request->id)->where('round', $request->round)->orderBy('table')->get();
 
         return view('tournaments.resultsPartial', [
-            'results' => $results
+            'results' => $results,
+            'maxTables' => $tournament->participants()->count() / 2
         ]);
     }
 

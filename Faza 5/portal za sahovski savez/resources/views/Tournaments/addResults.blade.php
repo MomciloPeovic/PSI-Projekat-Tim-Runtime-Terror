@@ -156,6 +156,11 @@ function selectRound()
 
 function addRow()
 {
+	if(document.getElementById('rezultati').childElementCount >= participants2.length / 2){
+		alert("Nije moguce dodati jos redova");
+		return;
+	}
+
 	let row = document.createElement('tr');
 	let td1 = document.createElement('td');
 	let td2 = document.createElement('td');
@@ -199,6 +204,8 @@ function addRow()
 
 	let table = document.createElement('input');
 	table.type = "number";
+	table.min = "1";
+	table.max = participants2.length / 2;
 	table.value = document.getElementById('rezultati').childElementCount + 1;
 	table.name = "table[]";
 	td1.appendChild(table); 
@@ -226,11 +233,13 @@ loadResults();
 <form action="/turnir/{{$tournament->id}}/unosRezultata" method="POST" >
 	@csrf
 
+	<label class="h5">Kolo:
 	<select name="round" id="round" onchange="selectRound()">
 		@for($i = 1; $i <= $tournament->rounds; $i++)
 		<option value="{{$i}}">{{$i}}</option>
 		@endfor
 	</select>
+	</label>
 
 	<table class="table table-hover w-75 text-center">
 		<thead class="thead-dark">

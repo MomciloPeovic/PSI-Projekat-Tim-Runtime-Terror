@@ -1,12 +1,12 @@
 @foreach ($tournaments as $tournament)
     <tr>
-        <td class = "col-xl-1">{{$loop->index + 1}}</td> 
-        <td class = "col-xl-3">{{$tournament->name}}</td>  
-        <td class = "col-xl-3">{{$tournament->place}}</td>
-        <td class = "col-xl-3">{{$tournament->rounds}}</td>    
-        <td class = "col-xl-3">{{$tournament->start_date}}</td>  
-        <td class = "col-xl-3">{{$tournament->end_date}}</td>  
-        <td class = "col-xl-1"><a class="btn btn-primary" href="/turnir/{{ $tournament->id }}">+</a></td> 
+        <th scope="row">{{$loop->index + 1}}</td> 
+        <td>{{$tournament->name}}</td>  
+        <td>{{$tournament->place}}</td>
+        <td>{{$tournament->rounds}}</td>    
+        <td>{{date("d.m.Y.", strtotime($tournament->start_date))}}</td>  
+        <td>{{date("d.m.Y.", strtotime($tournament->end_date))}}</td>  
+        <td><a class="btn btn-primary" href="/turnir/{{ $tournament->id }}">+</a></td> 
     </tr>
 @endforeach
 

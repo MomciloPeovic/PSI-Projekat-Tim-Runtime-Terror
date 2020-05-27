@@ -1,6 +1,6 @@
 @foreach($results as $result)
 <tr>
-	<td><input type="number" value="{{$result->table}}" name="table[]"></td>
+	<td><input type="number" value="{{$result->table}}" name="table[]" min="1" max="{{$maxTables}}"></td>
 	<td>
 		<select onchange="playerSelected(this)" name="white[]" class="white">
 			<option value="0">Izaberite igraca</option>
@@ -25,7 +25,7 @@
 
 @if(sizeof($results) == 0)
 <tr>
-	<td><input type="number" value="{{sizeof($results) + 1}}" name="table[]"></td>
+	<td><input type="number" value="{{$result->table}}" name="table[]" min="1" max="{{$maxTables}}"></td>
 	<td>
 		<select onchange="playerSelected(this)" name="white[]" class="white">
 			<option value="0">Izaberite igraca</option>

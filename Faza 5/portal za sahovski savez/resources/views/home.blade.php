@@ -108,10 +108,9 @@
     <div class="tab-pane fade show active p-5" id="igraci" role="tabpanel" aria-labelledby="igraci-tab">
       <div class="container">
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-xl-4 mb-2">
 
             <!-- FILTERI  IGRACI -->
-            <p>Filter</p>
             <div class="card">
               <article class="card-group-item">
                 <header class="card-header">
@@ -164,7 +163,7 @@
           <!-- /FILTERI IGRACI -->
 
           <!-- TABELA IGRACI -->
-          <table class="table col-sm-9">
+          <table class="table table-hover table-responsive-md col-xl-8">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -187,10 +186,9 @@
     <div class="tab-pane fade p-5" id="klubovi" role="tabpanel" aria-labelledby="klubovi-tab">
       <div class="container">
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-xl-4 mb-2">
             
             <!-- FILTERI  KLUB -->
-            <p>Filter</p>
             <div class="card">
               <article class="card-group-item">
                 <header class="card-header">
@@ -238,7 +236,7 @@
             <!-- /FILTERI  KLUB -->
         
           <!-- TABELA  KLUB -->
-          <table class="table table col-sm-9">
+          <table class="table table-hover table-responsive-md col-xl-8">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -262,12 +260,8 @@
 
       <div class="container">
         <div class="row">
-          
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
+          <div class="col-xl-4 mb-2">
             <!-- FILTERI TURNIRI -->        
-            <p>Filter</p>
             <div class="card">
               <article class="card-group-item">
                 <header class="card-header">
@@ -333,7 +327,7 @@
         <!-- /FILTERI TURNIRI -->
 
         <!-- TABELA TURNIRI -->
-          <table class="table col-sm-9">
+          <table class="table table-hover table-responsive-md col-xl-8">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -342,10 +336,7 @@
                 <th scope="col">Broj kola</th>
                 <th scope="col">Datum pocetka</th>
                 <th scope="col">Datum kraja</th>
-                <th scope="col" class="igrac">Vise</th>
-
-      
-                
+                <th scope="col" class="igrac">Vise</th>                
               </tr>
             </thead>
             <tbody id="turniri_tabla">

@@ -1,10 +1,10 @@
 @foreach ($clubs as $club)
 <tr>
-    <td class = "col-xl-1"> {{$loop->index + 1}} </td> 
-    <td class = "col-xl-3"> {{$club->name}} </td>  
-    <td class = "col-xl-3"> {{0}} </td>  
-    <td class = "col-xl-4"> {{$club->address}} </td>
-    <td class = "col-xl-1"><a class="btn btn-primary" href="/klub/{{ $club->id }}">+</a></td> 
+    <td> {{$loop->index + 1}} </td> 
+    <td> {{$club->name}} </td>  
+    <td> {{0}} </td>  
+    <td> {{$club->address}} </td>
+    <td><a class="btn btn-primary" href="/klub/{{ $club->id }}">+</a></td> 
 </tr>
 @endforeach
 
