@@ -257,8 +257,8 @@
 
     <!-- TURNIRI TAB -->
     <div class="tab-pane fade p-5" id="takmicenja" role="tabpanel" aria-labelledby="takmicenja-tab">
-
       <div class="container">
+        <a href="/turnir/dodaj" class="btn btn-primary mb-2">Novi turnir</a>
         <div class="row">
           <div class="col-xl-4 mb-2">
             <!-- FILTERI TURNIRI -->        

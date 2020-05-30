@@ -4,6 +4,21 @@
 
 @section('content')
 
+<script>
+
+function typeSelected(value)
+{
+	if(value == "club")
+	{
+		document.getElementById("playersPerClub").style.display = "block";
+	}
+	else
+	{
+		document.getElementById("playersPerClub").style.display = "none";
+	}
+}
+</script>
+
 <h1>Dodavanje takmicenja</h1>
 <div class="row">
 	<form class="col-xl-8" action='/turnir/dodaj' method="POST">
@@ -12,14 +27,22 @@
 		<div class="form-group">
 			<label class="label-form">Naziv</label>
 			<input type="text" class="form-control" name='name'>
+			@error('name')
+			<span class="text-danger">{{$message}}</span>
+			@enderror
 		</div>
 
 		<div class="form-group">
 			<label class="label-form">Tip turnira:</label>
-			<select class="form-control" name="type">
+			<select class="form-control" name="type" onchange="typeSelected(this.value)">
 				<option value="club">Ekipno</option>
-				<option value="player">Pojedinacni</option>
+				<option value="player">Pojedinacno</option>
 			</select>
+		</div>
+
+		<div class="form-group" id="playersPerClub">
+			<label class="label-form">Broj igraca po klubu:</label>
+			<input type="number" class="form-control" name="playersPerClub">
 		</div>
 
 		<div class="form-group">
@@ -35,6 +58,9 @@
 		<div class="form-group">
 			<label class="label-form">Datum pocetka</label>
 			<input type="date" class="form-control" name='start_date'>
+			@error('start_date')
+			<span class="text-danger">{{$message}}</span>
+			@enderror
 		</div>
 
 		<div class="form-group">

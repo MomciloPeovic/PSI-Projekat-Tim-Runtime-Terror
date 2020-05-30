@@ -25,6 +25,7 @@ class CreateTournamentsTable extends Migration
             $table->string("email", 50);
             $table->unsignedSmallInteger("rounds");
             $table->string("type", 20);
+            $table->integer("playersPerClub")->nullable();
         });
     }
 

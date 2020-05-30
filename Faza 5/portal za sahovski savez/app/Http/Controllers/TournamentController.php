@@ -9,6 +9,8 @@ use App\Result;
 use Illuminate\Http\Request;
 use App\Tournament;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 class PlayerPoints
 {
@@ -33,6 +35,9 @@ class TournamentController extends Controller
     public function getTournament($id)
     {
         $tournament = Tournament::where('id', $id)->first();
+
+        if ($tournament == null)
+            return redirect('/');
 
         $type = 'App\Result';
         if ($tournament->type == 'club')
@@ -70,7 +75,29 @@ class TournamentController extends Controller
 
     public function addTournamentPost(Request $request)
     {
-        //to do: validations
+        $errorMessages = [
+            'required' => ':attribute se mora popuniti',
+            'email.email' => 'Unesite ispravan email!',
+            'start_date.before' => 'Datum pocetka mora biti pre datum zavrsetka'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'start_date' => 'required|date|before:end_date',
+            'end_date' => 'required|date',
+            'time' => 'required',
+            'rounds' => 'required|min:1',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'place' => 'required',
+            'type' => 'required',
+        ], $errorMessages);
+
+        if ($validator->fails()) {
+            return redirect()->action('TournamentController@addTournament')
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
 
         Tournament::insert([
             'name' => $request->name,
@@ -81,7 +108,8 @@ class TournamentController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'place' => $request->place,
-            'type' => $request->type
+            'type' => $request->type,
+            'playersPerClub' => $request->playersPerClub
         ]);
 
         return redirect()->action('TournamentController@index');
@@ -113,6 +141,10 @@ class TournamentController extends Controller
     public function arbiters($id)
     {
         $tournament = Tournament::where('id', $id)->first();
+
+        if ($tournament == null)
+            return redirect('/');
+
         $arbiters = Player::whereNotNull('arbiter_rank_id')->get();
         return view('tournaments.arbiters', [
             'tournament' => $tournament,
@@ -123,6 +155,10 @@ class TournamentController extends Controller
     public function addArbiter(Request $request)
     {
         $tournament = Tournament::where('id', $request->id)->first();
+
+        if ($tournament == null)
+            return redirect('/turnir/' . $request->id . '/sudije');
+
         $tournament->arbiters()->syncWithoutDetaching($request->arbiter_id);
         return redirect('/turnir/' . $request->id . '/sudije');
     }
@@ -130,6 +166,9 @@ class TournamentController extends Controller
     public function removeArbiter(Request $request)
     {
         $tournament = Tournament::where('id', $request->id)->first();
+        if ($tournament == null)
+            return redirect('/');
+
         $tournament->arbiters()->detach($request->arbiter_id);
         return redirect('/turnir/' . $request->id . '/sudije');
     }
@@ -137,6 +176,9 @@ class TournamentController extends Controller
     public function addResults($id)
     {
         $tournament = Tournament::where('id', $id)->first();
+
+        if ($tournament == null)
+            return redirect('/');
 
         return view('tournaments.addResults', [
             'tournament' => $tournament
@@ -146,6 +188,10 @@ class TournamentController extends Controller
     public function results(Request $request)
     {
         $tournament = Tournament::where('id', $request->id)->first();
+
+        if ($tournament == null)
+            return redirect('/');
+
         $results = collect();
 
         if ($tournament->type == 'player')
@@ -155,54 +201,94 @@ class TournamentController extends Controller
 
         return view('tournaments.resultsPartial', [
             'results' => $results,
-            'maxTables' => $tournament->participants()->count() / 2
+            'maxTables' => $tournament->participants()->count() / 2,
+            'tournament' => $tournament
         ]);
     }
 
     public function addResultsPost(Request $request)
     {
-        $r = 'App\\Result';
-        if (Tournament::where('id', $request->id)->first()->type == 'club')
-            $r = 'App\\ClubResult';
+        $tournament = Tournament::where('id', $request->id)->first();
 
+        if ($tournament == null)
+            return redirect('/');
 
-        for ($i = 0; $i < sizeof($request->white); $i++) {
-            if ($request->white[$i] == 0 || $request->black[$i] == 0)
-                continue;
+        if ($tournament->type == "player") {
+            for ($i = 0; $i < sizeof($request->white); $i++) {
+                if ($request->white[$i] == 0 || $request->black[$i] == 0)
+                    continue;
 
-
-            $res = $r::where([
-                ['tournament_id', '=', $request->id],
-                ['round', '=', $request->round],
-                ['table', '=', $request->table[$i]]
-            ])->exists();
-
-
-            if ($res == true) {
-                $r::where([
+                $res = Result::where([
                     ['tournament_id', '=', $request->id],
                     ['round', '=', $request->round],
                     ['table', '=', $request->table[$i]]
-                ])->update([
-                    'white_id' => $request->white[$i],
-                    'black_id' => $request->black[$i],
-                    'white_result' => $request->result[$i] / 2,
-                    'black_result' => 1 - $request->result[$i] / 2,
-                    'arbiter_id' => Auth::user()->id
-                ]);
-            } else {
-                $r::insert([
-                    'white_id' => $request->white[$i],
-                    'black_id' => $request->black[$i],
-                    'tournament_id' => $request->id,
-                    'white_result' => $request->result[$i] / 2,
-                    'black_result' => 1 - $request->result[$i] / 2,
-                    'round' => $request->round,
-                    'table' => $request->table[$i],
-                    'arbiter_id' => Auth::user()->id
-                ]);
+                ])->exists();
+
+
+                if ($res == true) {
+                    Result::where([
+                        ['tournament_id', '=', $request->id],
+                        ['round', '=', $request->round],
+                        ['table', '=', $request->table[$i]]
+                    ])->update([
+                        'white_id' => $request->white[$i],
+                        'black_id' => $request->black[$i],
+                        'white_result' => $request->result[$i] / 2,
+                        'black_result' => 1 - $request->result[$i] / 2,
+                        'arbiter_id' => Auth::user()->id
+                    ]);
+                } else {
+                    Result::insert([
+                        'white_id' => $request->white[$i],
+                        'black_id' => $request->black[$i],
+                        'tournament_id' => $request->id,
+                        'white_result' => $request->result[$i] / 2,
+                        'black_result' => 1 - $request->result[$i] / 2,
+                        'round' => $request->round,
+                        'table' => $request->table[$i],
+                        'arbiter_id' => Auth::user()->id
+                    ]);
+                }
+            }
+        } else {
+            for ($i = 0; $i < sizeof($request->white); $i++) {
+                if ($request->white[$i] == 0 || $request->black[$i] == 0)
+                    continue;
+
+                $res = ClubResult::where([
+                    ['tournament_id', '=', $request->id],
+                    ['round', '=', $request->round],
+                    ['table', '=', $request->table[$i]]
+                ])->exists();
+
+
+                if ($res == true) {
+                    ClubResult::where([
+                        ['tournament_id', '=', $request->id],
+                        ['round', '=', $request->round],
+                        ['table', '=', $request->table[$i]]
+                    ])->update([
+                        'white_id' => $request->white[$i],
+                        'black_id' => $request->black[$i],
+                        'white_result' => $request->result[$i],
+                        'black_result' => $tournament->playersPerClub - $request->result[$i],
+                        'arbiter_id' => Auth::user()->id
+                    ]);
+                } else {
+                    ClubResult::insert([
+                        'white_id' => $request->white[$i],
+                        'black_id' => $request->black[$i],
+                        'tournament_id' => $request->id,
+                        'white_result' => $request->result[$i],
+                        'black_result' => $tournament->playersPerClub - $request->result[$i],
+                        'round' => $request->round,
+                        'table' => $request->table[$i],
+                        'arbiter_id' => Auth::user()->id
+                    ]);
+                }
             }
         }
+
 
         return redirect('/turnir/' . $request->id);
     }
