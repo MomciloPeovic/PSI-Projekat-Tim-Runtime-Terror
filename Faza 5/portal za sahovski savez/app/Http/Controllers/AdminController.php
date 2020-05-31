@@ -14,11 +14,11 @@ use Illuminate\Support\MessageBag;
 
 class AdminController extends Controller {
     public function __construct(){
-
+        $this->middleware('auth:admin')->except(['index', 'deadlines']);
     }
 
     public function index(){
-        return view('admin.deadlines', ['deadlines'=>Deadline::all()]);
+        return view('home');
     }
 
     public function addDeadline(){
@@ -37,6 +37,7 @@ class AdminController extends Controller {
 
     public function deadlines(){
         $deadlines = Deadline::all();
+        if ($deadlines->count()==0) return redirect()->action('AdminController@index');
         return view('admin.deadlines', [
             'deadlines' => $deadlines
         ]);

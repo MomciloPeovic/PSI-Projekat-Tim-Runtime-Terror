@@ -81,6 +81,7 @@ Route::post('/klubovi/{id}', 'AdminController@pendingRegsClubsPost')->where('id'
 Route::get('/adminProfil', 'AdminController@editProfile'); //pregled i edit adminovog profila
 Route::post('/promenaEmaila', 'AdminController@editEmail');
 Route::post('/promenaLozinke', 'AdminController@changePassword');
+Route::get('/admin', 'AdminController@index');
 
 Route::get('/korisnici/login', 'UsersController@login')->name("login");
 Route::post('/korisnici/login', 'UsersController@verifyLogin');
