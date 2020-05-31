@@ -13,6 +13,7 @@ class ClubController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth:club,admin')->except(['index', 'getClubsPost', 'getPlayers', 'getClub']);
     }
 
     public function index()
@@ -22,7 +23,7 @@ class ClubController extends Controller
 
     public function getClubsPost(Request $data)
     {
-        $limit = 3;
+        $limit = 10;
         $strana = $data->strana;
         $start = ($strana-1)*$limit;
 
@@ -51,7 +52,7 @@ class ClubController extends Controller
 
     public function getPlayers($id)
     {
-        $limit = 3;
+        $limit = 10;
 
         $veze =  DB::table('club_player')->where('club_id','=',$id)->get();
         $uKlubu = false;
@@ -72,8 +73,10 @@ class ClubController extends Controller
 
     public function getClub($id)
     {
+
         $club = Club::where('id', $id)->first();
-        return view('clubs.club')->with('club', $club);
+        if ($club != null) return view('clubs.club')->with('club', $club);
+        else return view('home');
     }
 
     public function addOrEditClubPost(Request $request)
@@ -109,7 +112,8 @@ class ClubController extends Controller
     public function editClub($id)
     {
         $club = Club::where('id', $id)->first();
-        return view('clubs.addClub')->with('club', $club);
+        if ($club != null) return view('clubs.addClub')->with('club', $club);
+        else return view('home');
     }
 
     public function deleteClub($id)
