@@ -13,7 +13,7 @@ class PlayerController extends Controller
 {
     public function __construct()
     {
-        
+        $this->middleware('auth:player,admin,club')->except(['index', 'getPlayersPost', 'getPlayer']);
     }
 
     public function index()
@@ -23,7 +23,7 @@ class PlayerController extends Controller
 
     public function getPlayersPost(Request $data)
     {
-        $limit = 3;
+        $limit = 10;
         $page = $data->page;
         $start = ($page-1)*$limit;
 
@@ -49,7 +49,11 @@ class PlayerController extends Controller
     public function getPlayer($id)
     {
         $player = Player::where('id', $id)->first();
-        return view('players.player_info')->with('player',$player);
+
+        if($player != null)
+            return view('players.player_info')->with('player',$player);
+        else
+        return view('home');
     }
     
     public function addPlayer()

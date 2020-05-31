@@ -295,7 +295,7 @@ class TournamentController extends Controller
 
     public function getTournamentsAjax(Request $data)
     {
-        $limit = 3;
+        $limit = 10;
         $page = $data->page;
         $start = ($page - 1) * $limit;
         $query = Tournament::query();
