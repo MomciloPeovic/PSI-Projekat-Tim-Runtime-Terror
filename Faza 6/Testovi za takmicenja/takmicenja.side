@@ -1,0 +1,552 @@
+{
+  "id": "04375bba-17a8-4e32-b73d-d856e766eda2",
+  "version": "2.0",
+  "name": "psi",
+  "url": "http://localhost:8000",
+  "tests": [{
+    "id": "6d3c02f5-b877-4bca-a009-a23faa7f46f4",
+    "name": "Pregled takmicenja",
+    "commands": [{
+      "id": "dd2074ff-bb19-4b3b-a857-47c68697485a",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "99516aa8-8518-46cc-b04d-c64231d536ff",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "798x768",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4182c11e-7faf-411f-b9df-b96b20c091cd",
+      "comment": "",
+      "command": "click",
+      "target": "id=takmicenja-tab",
+      "targets": [
+        ["id=takmicenja-tab", "id"],
+        ["linkText=Turniri", "linkText"],
+        ["css=#takmicenja-tab", "css:finder"],
+        ["xpath=(//a[contains(text(),'Turniri')])[2]", "xpath:link"],
+        ["xpath=//a[@id='takmicenja-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#takmicenja')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "404ae71f-8a66-4da7-8270-be6e8de20b96",
+      "comment": "",
+      "command": "click",
+      "target": "id=turnir_filter_naizv",
+      "targets": [
+        ["id=turnir_filter_naizv", "id"],
+        ["css=#turnir_filter_naizv", "css:finder"],
+        ["xpath=//input[@id='turnir_filter_naizv']", "xpath:attributes"],
+        ["xpath=//div[@id='takmicenja']/div/div/div/div/article/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/article/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6d6852bc-1ff8-45fc-8580-c303a18f4d43",
+      "comment": "",
+      "command": "type",
+      "target": "id=turnir_filter_naizv",
+      "targets": [
+        ["id=turnir_filter_naizv", "id"],
+        ["css=#turnir_filter_naizv", "css:finder"],
+        ["xpath=//input[@id='turnir_filter_naizv']", "xpath:attributes"],
+        ["xpath=//div[@id='takmicenja']/div/div/div/div/article/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/article/div/div/input", "xpath:position"]
+      ],
+      "value": "turnir2"
+    }, {
+      "id": "26593407-f6fc-4dfd-8195-c67509490ca6",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) .page-link",
+      "targets": [
+        ["css=tr:nth-child(2) .page-link", "css:finder"],
+        ["xpath=//button[@onclick='prikazi_turnire(1)']", "xpath:attributes"],
+        ["xpath=//tbody[@id='turniri_tabla']/tr[2]/td/ul/li/button", "xpath:idRelative"],
+        ["xpath=//tr[2]/td/ul/li/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3f82e7b7-505a-4fd9-b184-92f027a16a45",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=#turniri_tabla td:nth-child(2)",
+      "targets": [
+        ["css=#turniri_tabla td:nth-child(2)", "css:finder"],
+        ["xpath=//tbody[@id='turniri_tabla']/tr/td", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/table/tbody/tr/td", "xpath:position"],
+        ["xpath=//td[contains(.,'turnir2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4693d0d2-3f9d-497a-844a-81c6193dd882",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=+",
+      "targets": [
+        ["linkText=+", "linkText"],
+        ["css=td:nth-child(7) > .btn", "css:finder"],
+        ["xpath=(//a[contains(text(),'+')])[6]", "xpath:link"],
+        ["xpath=//tbody[@id='turniri_tabla']/tr/td[6]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/turnir/2')]", "xpath:href"],
+        ["xpath=//td[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "7602beaa-5372-47e4-b5be-914155303ebf",
+    "name": "Dodavanje sudija na takmicenja",
+    "commands": [{
+      "id": "ec82b576-9f60-4dc0-9b62-6230e9f75064",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "37432b0a-cd39-4946-b0cb-d99795085dcc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "798x768",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "768e2baf-ed2e-492a-9dbf-6c6a61d96a81",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-toggler",
+      "targets": [
+        ["css=.navbar-toggler", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ec65ea8f-8fb2-47dc-b363-3bdbeeb12cf2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-toggler-icon",
+      "targets": [
+        ["css=.navbar-toggler-icon", "css:finder"],
+        ["xpath=//span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f8d0b58-0cfd-4bfe-9f0c-428c676a2437",
+      "comment": "",
+      "command": "click",
+      "target": "id=takmicenja-tab",
+      "targets": [
+        ["id=takmicenja-tab", "id"],
+        ["linkText=Turniri", "linkText"],
+        ["css=#takmicenja-tab", "css:finder"],
+        ["xpath=(//a[contains(text(),'Turniri')])[2]", "xpath:link"],
+        ["xpath=//a[@id='takmicenja-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#takmicenja')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cc733a7e-c22a-4c56-a8be-c46f69f938f4",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(6) .btn",
+      "targets": [
+        ["css=tr:nth-child(6) .btn", "css:finder"],
+        ["xpath=(//a[contains(text(),'+')])[11]", "xpath:link"],
+        ["xpath=//tbody[@id='turniri_tabla']/tr[6]/td[6]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/turnir/6')]", "xpath:href"],
+        ["xpath=//tr[6]/td[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6ec1bae5-b57f-4202-9133-e72b6d2ac312",
+      "comment": "",
+      "command": "click",
+      "target": "id=spisak-tab",
+      "targets": [
+        ["id=spisak-tab", "id"],
+        ["linkText=Informacije", "linkText"],
+        ["css=#spisak-tab", "css:finder"],
+        ["xpath=//a[contains(text(),'Informacije')]", "xpath:link"],
+        ["xpath=//a[@id='spisak-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#spisak')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Informacije')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c473ddd5-d729-4e01-b17a-c649f7506a5c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Dodavanje sudija",
+      "targets": [
+        ["linkText=Dodavanje sudija", "linkText"],
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//a[contains(text(),'Dodavanje sudija')]", "xpath:link"],
+        ["xpath=//div[@id='spisak']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/turnir/6/sudije')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Dodavanje sudija')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e34b2e42-9b95-45ef-9bbf-b6fdd88c97fd",
+      "comment": "",
+      "command": "click",
+      "target": "name=arbiter_id",
+      "targets": [
+        ["name=arbiter_id", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//select[@name='arbiter_id']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"],
+        ["xpath=//select[contains(.,'Nikola Babic')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "10ffc746-b2c8-4144-abb6-a54ac66802ed",
+      "comment": "",
+      "command": "click",
+      "target": "name=arbiter_id",
+      "targets": [
+        ["name=arbiter_id", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//select[@name='arbiter_id']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"],
+        ["xpath=//select[contains(.,'Nikola Babic')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7550fc81-c67a-4c88-be85-92f260f62496",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//input[@value='Dodaj']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7059b621-9990-4c4a-b30a-94ca27ba4387",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-toggler-icon",
+      "targets": [
+        ["css=.navbar-toggler-icon", "css:finder"],
+        ["xpath=//span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "524ff62a-d294-4bf6-932e-3ec7785edf1d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-toggler-icon",
+      "targets": [
+        ["css=.navbar-toggler-icon", "css:finder"],
+        ["xpath=//span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ad9c293-f1f5-434b-b9da-d6f6f374ba38",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=tbody th",
+      "targets": [
+        ["css=tbody th", "css:finder"],
+        ["xpath=//tbody/tr/th", "xpath:position"],
+        ["xpath=//th[contains(.,'1')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ba77d12-6914-4996-b3c4-5720461728fc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-danger:nth-child(3)",
+      "targets": [
+        ["css=.btn-danger:nth-child(3)", "css:finder"],
+        ["xpath=//input[@value='-']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "54126400-bb55-45a9-85d1-9f4df8cc3968",
+    "name": "Unos rezultata takmicenja",
+    "commands": [{
+      "id": "8e1bd71c-f847-41f1-a279-8cc73efd3330",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1cae7d9d-a653-4063-a499-5e33f46aa271",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "803x768",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "28f8ddbf-f3d7-4ec2-b4f6-94f65198b9df",
+      "comment": "",
+      "command": "click",
+      "target": "id=takmicenja-tab",
+      "targets": [
+        ["id=takmicenja-tab", "id"],
+        ["linkText=Turniri", "linkText"],
+        ["css=#takmicenja-tab", "css:finder"],
+        ["xpath=(//a[contains(text(),'Turniri')])[2]", "xpath:link"],
+        ["xpath=//a[@id='takmicenja-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#takmicenja')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3d70cf60-3e49-4a27-a2b1-469201046c84",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,189.60000610351562)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "024c3cd5-8305-40c1-a5a2-cc82a8d6daca",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(6) .btn",
+      "targets": [
+        ["css=tr:nth-child(6) .btn", "css:finder"],
+        ["xpath=(//a[contains(text(),'+')])[11]", "xpath:link"],
+        ["xpath=//tbody[@id='turniri_tabla']/tr[6]/td[6]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/turnir/6')]", "xpath:href"],
+        ["xpath=//tr[6]/td[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "12b717ee-c5ac-4e3c-9436-e481944754b1",
+      "comment": "",
+      "command": "click",
+      "target": "id=rezultati-id",
+      "targets": [
+        ["id=rezultati-id", "id"],
+        ["linkText=Rezultati", "linkText"],
+        ["css=#rezultati-id", "css:finder"],
+        ["xpath=//a[contains(text(),'Rezultati')]", "xpath:link"],
+        ["xpath=//a[@id='rezultati-id']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#rezultati')]", "xpath:href"],
+        ["xpath=//body/div/ul/li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Rezultati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "23944e47-78f4-45ed-8727-7d974c90cddd",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Unos rezultata",
+      "targets": [
+        ["linkText=Unos rezultata", "linkText"],
+        ["css=.mb-1", "css:finder"],
+        ["xpath=//a[contains(text(),'Unos rezultata')]", "xpath:link"],
+        ["xpath=//div[@id='rezultati']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/turnir/6/unosRezultata')]", "xpath:href"],
+        ["xpath=//div/div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Unos rezultata')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "47efcf46-ed00-468a-87ad-4b44f9d2fce5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@onclick='addRow()']", "xpath:attributes"],
+        ["xpath=//div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dodaj rezultat')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4117d444-fd39-413e-8e2a-5f7f6600f407",
+      "comment": "",
+      "command": "assertAlert",
+      "target": "Nije moguce dodati jos redova",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "98536b74-1037-45c4-a246-f397e12ba1a4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//input[@value='Potvrdi']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c3c5e22c-69a5-4999-a4ac-cd59447f7ecb",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=td:nth-child(1)",
+      "targets": [
+        ["css=td:nth-child(1)", "css:finder"],
+        ["xpath=//tbody[@id='rezultati']/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "49d84a4c-885f-4044-a290-19e4456d539c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=td:nth-child(4)",
+      "targets": [
+        ["css=td:nth-child(4)", "css:finder"],
+        ["xpath=//tbody[@id='rezultati']/tr/td[4]", "xpath:idRelative"],
+        ["xpath=//td[4]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fd12d2b4-c6ea-4bb8-b197-ad5e3dbc092d",
+    "name": "Dodavanje sudija na takmicenja - prijava na turnir",
+    "commands": [{
+      "id": "adf0c4c1-167f-4a09-a2c2-821541058316",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b1d694d5-d364-4de6-af75-54c3ce3eb40e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "801x768",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "716493b4-c495-4396-9d19-29a403d1d152",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-toggler",
+      "targets": [
+        ["css=.navbar-toggler", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "008e0df2-c2f2-44b9-a48e-817f1f5af97a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-toggler-icon",
+      "targets": [
+        ["css=.navbar-toggler-icon", "css:finder"],
+        ["xpath=//span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d18206cf-808b-4f17-b62d-763bbec4f769",
+      "comment": "",
+      "command": "click",
+      "target": "id=takmicenja-tab",
+      "targets": [
+        ["id=takmicenja-tab", "id"],
+        ["linkText=Turniri", "linkText"],
+        ["css=#takmicenja-tab", "css:finder"],
+        ["xpath=(//a[contains(text(),'Turniri')])[2]", "xpath:link"],
+        ["xpath=//a[@id='takmicenja-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#takmicenja')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "60d70c5a-214c-49d4-88fc-8e7b88bafbc9",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(6) .btn",
+      "targets": [
+        ["css=tr:nth-child(6) .btn", "css:finder"],
+        ["xpath=(//a[contains(text(),'+')])[11]", "xpath:link"],
+        ["xpath=//tbody[@id='turniri_tabla']/tr[6]/td[6]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/turnir/6')]", "xpath:href"],
+        ["xpath=//tr[6]/td[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e84c3f97-6624-4703-b858-b4a17999d282",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//input[@value='Prijava na turnir']",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//input[@value='Prijava na turnir']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc96e5b5-3fd1-4e5e-9fca-8f6d4ef8ee69",
+      "comment": "",
+      "command": "click",
+      "target": "id=rezultati-id",
+      "targets": [
+        ["id=rezultati-id", "id"],
+        ["linkText=Rezultati", "linkText"],
+        ["css=#rezultati-id", "css:finder"],
+        ["xpath=//a[contains(text(),'Rezultati')]", "xpath:link"],
+        ["xpath=//a[@id='rezultati-id']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#rezultati')]", "xpath:href"],
+        ["xpath=//body/div/ul/li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Rezultati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a33d443-534c-4883-b9e3-99e65206455b",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//input[@value='Prijava na turnir']",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "48a00eb3-2119-4901-bbef-e38c2b7d81aa",
+      "comment": "",
+      "command": "click",
+      "target": "id=spisak-tab",
+      "targets": [
+        ["id=spisak-tab", "id"],
+        ["linkText=Informacije", "linkText"],
+        ["css=#spisak-tab", "css:finder"],
+        ["xpath=//a[contains(text(),'Informacije')]", "xpath:link"],
+        ["xpath=//a[@id='spisak-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#spisak')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Informacije')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "6a5402ff-02b7-43cc-8db6-426bb62a1956",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["6d3c02f5-b877-4bca-a009-a23faa7f46f4"]
+  }],
+  "urls": ["http://localhost:8000/"],
+  "plugins": []
+}
