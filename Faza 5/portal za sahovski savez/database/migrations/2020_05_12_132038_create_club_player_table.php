@@ -18,7 +18,6 @@ class CreateClubPlayerTable extends Migration
             $table->foreignId('player_id')->constrained('players')->onDelete('cascade')->onUpdate('cascade');
             $table->date('joined')->nullable();
             $table->date('left')->nullable();
-            $table->primary(['club_id', 'player_id','joined']);
         });
     }
 
