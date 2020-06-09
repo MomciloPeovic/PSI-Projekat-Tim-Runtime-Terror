@@ -146,7 +146,7 @@ class ClubController extends Controller
         ->update(['left'=>date('Y-m-d')]);
     
         $player = DB::table('players')->where('id','=', $request->player_id)->first();
-        return view('players.player_info')->with('player', $player);
+        return view('home');
     }
 
     public function sendRequestToPlayer(Request $request)
