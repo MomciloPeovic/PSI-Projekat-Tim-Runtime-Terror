@@ -236,7 +236,7 @@
                                         @csrf
                                         <input type="hidden" name="club_id" value="{{Auth::guard('club')->user()->id}}">
                                         <input type="hidden" name="player_id" value="{{$player->id}}" >
-                                        <input type="submit" class="btn btn-primary text-white" value="Daj otkaz igracu">
+                                        <input type="submit" class="btn btn-primary text-white" value="Otpusti igraca">
                                     </form>
                                 @else
                                     <form action="/klub/posaljiZahtevIgracu" method="POST">
