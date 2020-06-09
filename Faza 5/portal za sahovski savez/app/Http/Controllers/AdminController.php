@@ -26,13 +26,15 @@ class AdminController extends Controller {
     }
 
     public function addDeadlinePost(Request $request){
+        if ($request->start < $request->end){
         Deadline::insert([
             'start' => $request->start,
             'end' => $request->end,
             'deadline_type_id' => $request->tip
         ]);
-
         return redirect()->action('AdminController@deadlines');
+        }
+        else return redirect()->action('AdminController@addDeadline');
     }
 
     public function deadlines(){
