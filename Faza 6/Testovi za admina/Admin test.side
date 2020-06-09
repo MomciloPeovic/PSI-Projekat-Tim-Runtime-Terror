@@ -1,0 +1,410 @@
+{
+  "id": "968bd825-86c1-4ce3-a8e4-f8b9229f1e77",
+  "version": "2.0",
+  "name": "Admin test",
+  "url": "http://127.0.0.1:8000/dodajRok",
+  "tests": [{
+    "id": "0ce43788-e571-46b8-aae5-f2e48d038ced",
+    "name": "Prihvatanje igraca",
+    "commands": [{
+      "id": "f1e99e6d-06a9-463f-99b7-9a2d04feb2a5",
+      "comment": "",
+      "command": "open",
+      "target": "/korisnici",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4822fd69-26de-47bf-b13d-b323aff89ec5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x840",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "df311dca-99c1-48d1-950b-51c47bde8631",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Razmotri zahtev",
+      "targets": [
+        ["linkText=Razmotri zahtev", "linkText"],
+        ["css=.btn-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Razmotri zahtev')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/korisnici/3')]", "xpath:href"],
+        ["xpath=//td[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Razmotri zahtev')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "65b58546-dee0-4f9f-acdb-2385416dfa45",
+      "comment": "",
+      "command": "click",
+      "target": "name=confirm",
+      "targets": [
+        ["name=confirm", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//select[@name='confirm']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a834888b-9fa3-4ca6-b9c0-57d4d492eb9f",
+      "comment": "",
+      "command": "select",
+      "target": "name=confirm",
+      "targets": [],
+      "value": "label=Prihvati"
+    }, {
+      "id": "8ddd3e49-627e-4dfd-b3bc-d6fde846f3f0",
+      "comment": "",
+      "command": "click",
+      "target": "name=confirm",
+      "targets": [
+        ["name=confirm", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//select[@name='confirm']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2a0025a-fcee-45b5-a43a-13dbd859910e",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr",
+      "targets": [
+        ["css=tr", "css:finder"],
+        ["xpath=//tr", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e28fc523-88a1-4840-8dc7-78c9bbc4445f",
+      "comment": "",
+      "command": "type",
+      "target": "name=rating",
+      "targets": [
+        ["name=rating", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='rating']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "510"
+    }, {
+      "id": "bbe0a648-79bf-4670-b1a9-185c3a48ee6f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//input[@value='Potvrdi']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a90402e9-44c4-406e-b3c9-083c86c2a8d9",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "linkText=Razmotri zahtev",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "a9a56a52-924f-4a59-bbff-8951da15afa1",
+    "name": "Prihvatanje klubova",
+    "commands": [{
+      "id": "0dd6c875-df48-432d-a549-471215acc0a8",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/klubovi",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bc52da38-9b17-4326-8bdc-00f3fecbb4a3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "752x680",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bd67940d-a23d-4d8c-88f5-7f48b0d8b28d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Razmotri zahtev",
+      "targets": [
+        ["linkText=Razmotri zahtev", "linkText"],
+        ["css=tr:nth-child(1) .btn-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Razmotri zahtev')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/klubovi/3')]", "xpath:href"],
+        ["xpath=//td[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Razmotri zahtev')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "97433551-ccf6-4e62-a324-a5f78bac42c3",
+      "comment": "",
+      "command": "click",
+      "target": "name=confirm",
+      "targets": [
+        ["name=confirm", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//select[@name='confirm']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "99a9f0d4-c757-4394-af48-2d6c8ebdbaa9",
+      "comment": "",
+      "command": "select",
+      "target": "name=confirm",
+      "targets": [],
+      "value": "label=Prihvati"
+    }, {
+      "id": "be636651-3ff5-43ed-a024-3fce0bbf5a51",
+      "comment": "",
+      "command": "click",
+      "target": "name=confirm",
+      "targets": [
+        ["name=confirm", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//select[@name='confirm']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f1a04ca8-9fc2-43e4-afe6-f29b8b19bc70",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//input[@value='Potvrdi']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cc6087ab-9cec-4f9a-afc3-c991106904c2",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//td[contains(.,'Bagra')]",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(1)", "css:finder"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Majstori')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3a735205-4aa8-4145-8264-171a828aed7a",
+    "name": "Pravljenje roka",
+    "commands": [{
+      "id": "4e4d71ce-6de7-4133-b9f2-7f472ea8cef9",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/dodajRok",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1f6eb170-fb99-45c6-a468-1bcd71a71a43",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "752x680",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9b677fe4-143f-4d49-a117-8b21bbe39aa7",
+      "comment": "",
+      "command": "click",
+      "target": "name=start",
+      "targets": [
+        ["name=start", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='start']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d9fe97f-2a22-4ba3-984b-b27a5b99682d",
+      "comment": "",
+      "command": "type",
+      "target": "name=start",
+      "targets": [
+        ["name=start", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='start']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "2020-06-09"
+    }, {
+      "id": "4bd2b135-5b26-48da-ba5d-0a7888df4f0a",
+      "comment": "",
+      "command": "click",
+      "target": "name=end",
+      "targets": [
+        ["name=end", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='end']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "62df4410-2fdc-48da-a56b-a32b50b97516",
+      "comment": "",
+      "command": "type",
+      "target": "name=end",
+      "targets": [
+        ["name=end", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='end']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "2020-06-10"
+    }, {
+      "id": "b7264292-a178-465c-b367-beba7d5fa20c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//input[@value='Potvrdi']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "105b354c-057a-4ca9-a21c-776496696ca9",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//td[contains(.,'2020-06-10')]",
+      "targets": [
+        ["css=tr:nth-child(5) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[5]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'2020-06-10')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "19956eff-2864-4b80-8e8c-40d0a12a038f",
+    "name": "Pregled rokova",
+    "commands": [{
+      "id": "1b32edd1-9a79-457c-afe7-583b7c2b11d9",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/rokovi",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d897a8c1-8506-41ce-8a23-b67eb53541e5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "750x678",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e3897a39-9171-47de-a7ff-7c6c6abacdc2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//td[contains(.,'Rok za uclanjivanje')]",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(3)", "css:finder"],
+        ["xpath=//td[3]", "xpath:position"],
+        ["xpath=//td[contains(.,'Rok za uclanjivanje')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "9f91d1b8-da31-4b08-9fa3-25cca1f355cd",
+    "name": "Pravljenje roka pogresan datum",
+    "commands": [{
+      "id": "7c1b7e57-3b20-486b-9c8b-27fb98dafbab",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/dodajRok",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4db05849-6b0b-4b26-92c4-6dc727ee859d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "750x678",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bed766fe-adf7-4cd9-b95c-6e95b260c14e",
+      "comment": "",
+      "command": "click",
+      "target": "name=start",
+      "targets": [
+        ["name=start", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='start']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1eed3614-6c27-4886-9b10-d34342fbf2ee",
+      "comment": "",
+      "command": "type",
+      "target": "name=start",
+      "targets": [
+        ["name=start", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='start']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "2020-06-13"
+    }, {
+      "id": "cd8f8579-eb24-4fa3-897f-2d1b82852ead",
+      "comment": "",
+      "command": "click",
+      "target": "name=end",
+      "targets": [
+        ["name=end", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='end']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "58064a72-ee0e-441b-b1d3-f6c9ac4607f1",
+      "comment": "",
+      "command": "type",
+      "target": "name=end",
+      "targets": [
+        ["name=end", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='end']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "2020-06-11"
+    }, {
+      "id": "157b6e54-a0a6-4596-bb22-a58c1870c2ed",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//input[@value='Potvrdi']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a3a4ede3-15f6-44bb-a7db-35c1c67b657e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//h1[contains(.,'Dodavanje prelaznog roka')]",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Dodavanje prelaznog roka')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "a291ac5a-45c1-42e6-8c45-2a77c925a837",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1:8000/", "http://127.0.0.1:8000/klubovi", "http://127.0.0.1:8000/dodajRok", "http://127.0.0.1:8000/rokovi"],
+  "plugins": []
+}
