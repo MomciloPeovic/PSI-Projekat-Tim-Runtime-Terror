@@ -19,7 +19,8 @@ class ClubSeeder extends Seeder
             'founded' => date("1999-5-3"),
             'municipality' => 'Vracar',
             'address' => 'Ulica u Beograd 15',
-            'phone' => '062047265'
+            'phone' => '062047265',
+            'confirmed' => '1'
         ]);
         DB::table('clubs')->insert([
             'name' => 'Veverice',
@@ -28,7 +29,8 @@ class ClubSeeder extends Seeder
             'founded' => date("2001-4-15"),
             'municipality' => 'Dedinje',
             'address' => 'Ulica u Beograd 17',
-            'phone' => '063440212'
+            'phone' => '063440212',
+            'confirmed' => '1'
         ]);
         DB::table('clubs')->insert([
             'name' => 'Bagra',
@@ -55,7 +57,8 @@ class ClubSeeder extends Seeder
             'founded' => date("2006-11-1"),
             'municipality' => 'Palilula',
             'address' => 'Ulica u Beograd 67',
-            'phone' => '064902061'
+            'phone' => '064902061',
+            'confirmed' => '1'
         ]);
         DB::table('clubs')->insert([
             'name' => 'Drvored',

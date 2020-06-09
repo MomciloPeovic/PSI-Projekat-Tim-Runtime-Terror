@@ -37,6 +37,7 @@ class ClubController extends Controller
         $clubs = Club::where('name', 'like', "%".$data->naziv_filter."%" )
         ->where('municipality', 'like', "%".$data->opstina_filter."%")
         ->whereBetween('founded',[$min_datum_filter, $max_datum_filter])
+        ->where('confirmed','=',1)
         ->offset($start)
         ->limit($limit)
         ->get();
@@ -124,14 +125,28 @@ class ClubController extends Controller
         return view('home');
     }
 
-    public function firePlayer(Request $id)
+    public function firePlayer(Request $request)
     {
-        $player = DB::table('club_player')->where('player_id','=', $id)->first();
-        if($player != null)
+        //Provera da li je trenutno prelazni rok
+        $id_prelazonog_roka = DB::table('deadline_types')->where('tip','=','Rok za napustanje')->first();
+        $validan_prelazni_rok = DB::table('deadlines')->where('deadline_type_id','=',$id_prelazonog_roka->id)
+                                ->where('start','<',date('Y-m-d'))
+                                ->where('end','>',date('Y-m-d'))
+                                ->first();
+        
+        if($validan_prelazni_rok == null)
         {
-            DB::table('club_player')->where('player_id','=',$id)->delete();
+            $errors = new MessageBag(['error' => ['Otpustanje igraca nije uspesno , trenutno nije prelazni rok!']]);
+            $player = DB::table('players')->where('id','=', $request->player_id)->first();
+            return view('players.player_info')->with('player',$player)->withErrors($errors);
         }
-        return view('home');
+
+        $veza = DB::table('club_player')->where('player_id', '=', $request->player_id)
+        ->where('club_id', '=', $request->club_id)
+        ->update(['left'=>date('Y-m-d')]);
+    
+        $player = DB::table('players')->where('id','=', $request->player_id)->first();
+        return view('players.player_info')->with('player', $player);
     }
 
     public function sendRequestToPlayer(Request $request)

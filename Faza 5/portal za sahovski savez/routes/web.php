@@ -55,7 +55,7 @@ Route::get('/klub/{id}', 'ClubController@getClub')->where('id', '[0-9]+');
 Route::get('/klub/obrisi/{id}', 'ClubController@deleteClub')->where('id', '[0-9]+');
 Route::get('/klub/izmeni/{id}', 'ClubController@editClub')->where('id', '[0-9]+');
 Route::get('/klub/igraci/{id}', 'ClubController@getPlayers')->where('id', '[0-9]+');
-Route::get('/klub/dajOtkazIgracu/{id}', 'ClubController@firePlayer')->where('id', '[0-9]+');
+Route::post('/klub/dajOtkazIgracu', 'ClubController@firePlayer')->where('id', '[0-9]+');
 Route::get('/klub/obavestenja/{id}', 'ClubController@getNotifications')->where('id', '[0-9]+');
 Route::post('/klub/dodaj', 'ClubController@addOrEditClubPost');
 Route::post('/klub', 'ClubController@getClubsPost');
