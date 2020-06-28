@@ -20,14 +20,10 @@ DWORD WINAPI nit1run(){
 	char filepath1[] = "/fajl2.dat";
 	File *f1 = FS::open(filepath1, 'w');
 	wait(mutex); cout << threadName << ": Kreiran fajl '" << filepath1 << "'" << endl; signal(mutex);
-	char filepath2[] = "/fajl1.dat";
-	File *f2 = FS::open(filepath2, 'r');
-
-
 
 	{
 		char filepath[]="/fajl1.dat";
-		File *f=FS::open(filepath,'w');
+		File *f = FS::open(filepath, 'a');
 		char *buff = new char[2048];
 		partition->readCluster(3, buff);
 		cout << buff << "\n";
@@ -39,6 +35,8 @@ DWORD WINAPI nit1run(){
 		delete f;
 		wait(mutex); cout<< threadName << ": zatvoren fajl '" << filepath << "'"<<endl; signal(mutex);
 	}	
+	char filepath2[] = "/fajl1.dat";
+	File *f2 = FS::open(filepath2, 'r');
 	/*
 	{
 		char filepath[]="/fajl1.dat";

@@ -4,6 +4,8 @@
 
 Directory *KernelFS::directory;
 int *KernelFS::bitVector;
+KernelFile **KernelFS::files;
+int KernelFS::top;
 
 ClusterNo KernelFS::dir;
 ClusterNo KernelFS::firstClusterAfterBV;
@@ -14,7 +16,10 @@ HANDLE semMount = CreateSemaphore(NULL, 1, 32, NULL);
 
 KernelFS::KernelFS() {
 	dir = 0;
+	top = 0;
 	bitVector = new int[partition->getNumOfClusters()];
+	for (unsigned long i = 0; i < partition->getNumOfClusters(); i++) bitVector[i] = 0;
+	files = new KernelFile*[partition->getNumOfClusters() / 64];
 }
 
 KernelFS::~KernelFS() {
@@ -64,8 +69,8 @@ char KernelFS::doesExist(char *fname) {
 	partition->readCluster(cluster, buffer);
 	for (int i = 0; i < directory->numOfFiles; i++) {
 		c = '1';
-		for (int j = 0; j < 32; j++) if (buff[j] != buffer[i * 32 + j]) {
-			c = '0';
+		for (int j = 0; j < 11; j++) if (buff[j] != buffer[i * 32 + j]) {
+			c = 0;
 			break;
 		}
 		if (c == '1') return c;
@@ -76,52 +81,55 @@ char KernelFS::doesExist(char *fname) {
 File *KernelFS::open(char *fname, char mode) {
 	char buff[32];
 	directory->getBuffer(buff, fname);
-
 	if (mode == 'w') {
 		File *file = new File();
-		unsigned long seek = - 1;
+		files[top++] = file->myImpl;
+		long seek = -1;
 
 		if (doesExist(fname)) {
 			char buffer[2048], c;
 			partition->readCluster(directory->getNextCluster(), buffer);
 			for (int i = 0; i < directory->numOfFiles; i++) {
 				c = '1';
-				for (int j = 0; j < 32; j++) if (buff[j] != buffer[i * 32 + j]) {
+				for (int j = 0; j < 11; j++) if (buff[j] != buffer[i * 32 + j]) {
 					c = '0';
 					break;
 				}
-				if (c == '1') seek = i * 32;
+				if (c == '1') {
+					seek = i * 32;
+					break;
+				}
 			}
 		}
 
 		ClusterNo cluster = directory->getNextCluster();
-		if (seek == -1) seek = directory->getNextFree();
-		char index[4];
-		for (unsigned int i = firstClusterAfterDir; i < partition->getNumOfClusters(); i++)
-			if (bitVector[i] == 0) {
-				file->myImpl->firstIndex = i;
-				bitVector[i] = 1;
+		if (seek == -1) {
+			seek = directory->getNextFree();
+			for (unsigned int i = firstClusterAfterDir; i < partition->getNumOfClusters(); i++)
+				if (bitVector[i] == 0) {
+					file->myImpl->firstIndex = i;
+					bitVector[i] = 1;
 
-				for (int i = 0; i < 4; i++) index[i] = '0';
-				itoa(i, index, 10);
-				for (int i = 0; i < 4; i++) if (index[i] == '\0') index[i] = '0';
-				for (int i = 11; i < 15; i++) buff[i] = index[i - 11];
-				break;
-			}
+					char index[4];
+					for (int i = 0; i < 4; i++) index[i] = '0';
+					itoa(i, index, 10);
+					for (int i = 0; i < 4; i++) if (index[i] == '\0') index[i] = '0';
+					for (int i = 12; i < 16; i++) buff[i] = index[i - 12];
+					break;
+				}
+		}
 
 		char buffer[2048];
 		partition->readCluster(cluster, buffer);
-		for (int i = 0; i < 32; i++) buffer[seek++] = buff[i];
+		for (int i = 0; i < 32; i++) buffer[seek++] = file->myImpl->buff[i] = buff[i];
 		partition->writeCluster(cluster, buffer);
 
-		for (int i = 0; i < 32; i++) file->myImpl->buff[i] = buff[i];
 		file->myImpl->mode = 'w';
 		directory->numOfFiles++;
 		bitVector[cluster] = 1;
 
 		return file;
-	}
-	else if (mode == 'r') {
+	} else if (mode == 'r') {
 		if (!doesExist(fname)) return 0;
 
 		File *file = new File();
@@ -130,21 +138,67 @@ File *KernelFS::open(char *fname, char mode) {
 		partition->readCluster(directory->getNextCluster(), buffer);
 		for (int i = 0; i < directory->numOfFiles; i++) {
 			c = '1';
-			for (int j = 0; j < 32; j++) if (buff[j] != buffer[i * 32 + j]) {
+			for (int j = 0; j < 11; j++) if (buff[j] != buffer[i * 32 + j]) {
+				c = '0';
+				break;
+			}
+			if (c == '1') break;
+		}
+		
+		for (int i = 12; i < 16; i++) buff[i] = buffer[i];
+		ClusterNo ind;
+		char index[4];
+		for (int i = 0; i < 4; i++) index[i] = '0';
+		for (int i = 12; i < 16; i++) index[i - 12] = buff[i];
+		for (int i = 0; i < 4; i++) if (index[i] == '0') index[i] = '\0';
+		ind = atoi(index);
+		file->myImpl->firstIndex = ind;
+
+		for (int i = 0; i < top; i++) {
+			if (files[i]->firstIndex == ind) {
+				file->myImpl = files[i];
+				break;
+			}
+		}
+		//for (int i = 0; i < 32; i++) file->myImpl->buff[i] = buff[i];
+		file ->myImpl->mode = 'r';
+		file->myImpl->position = 0;
+
+		return file;
+	}
+	else {
+		if (!doesExist(fname)) return 0;
+
+		File *file = new File();
+
+		char buffer[2048], c;
+		partition->readCluster(directory->getNextCluster(), buffer);
+		for (int i = 0; i < directory->numOfFiles; i++) {
+			c = '1';
+			for (int j = 0; j < 11; j++) if (buff[j] != buffer[i * 32 + j]) {
 				c = '0';
 				break;
 			}
 			if (c == '1') break;
 		}
 
-		for (int i = 0; i < 32; i++) file->myImpl->buff[i] = buff[i];
-		file ->myImpl->mode = 'r';
+		for (int i = 12; i < 16; i++) buff[i] = buffer[i];
+		ClusterNo ind;
+		char index[4];
+		for (int i = 0; i < 4; i++) index[i] = '0';
+		for (int i = 12; i < 16; i++) index[i - 12] = buff[i];
+		for (int i = 0; i < 4; i++) if (index[i] == '0') index[i] = '\0';
+		ind = atoi(index);
+		file->myImpl->firstIndex = ind;
 
-		return file;
-	}
-	else {
-		File *file = new File();
+		for (int i = 0; i < top; i++) {
+			if (files[i]->firstIndex == ind) {
+				file->myImpl = files[i];
+				break;
+			}
+		}
 
+		//for (int i = 0; i < 32; i++) file->myImpl->buff[i] = buff[i];
 		file->myImpl->mode = 'a';
 
 		return file;

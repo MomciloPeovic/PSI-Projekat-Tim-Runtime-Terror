@@ -6,7 +6,7 @@ File::File() {
 }
 
 File::~File() {
-	delete myImpl;
+
 }
 
 char File::write(BytesCnt cnt, char *buffer) {

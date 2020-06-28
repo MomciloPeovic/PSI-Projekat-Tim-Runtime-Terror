@@ -5,18 +5,18 @@
 KernelFile::KernelFile() {
 	mode = 'r';
 	index1 = 0;
-	index2 = 0;
+	index2 = 1;
 	index3 = 0;
 	index4 = 0;
 	firstIndex = 0;
 	current = 0;
+	size = 0;
 
-	numOfClusters = partition->getNumOfClusters() - (partition->getNumOfClusters() / 64 + partition->getNumOfClusters() / (ClusterSize * 8) + 3);
-	clusters = new Cluster[numOfClusters];
+	clusters = new Cluster[partition->getNumOfClusters() - (partition->getNumOfClusters() / 64 + partition->getNumOfClusters() / (ClusterSize * 8) + 3)];
 }
 
 char KernelFile::write(BytesCnt count, char *b) {
-	if (mode != 'w') return '0';
+	if (mode == 'r') return '0';
 
 	if (clusters[index2].index[index4] == 0)
 		for (unsigned int i = KernelFS::firstClusterAfterDir; i < partition->getNumOfClusters(); i++)
@@ -36,6 +36,7 @@ char KernelFile::write(BytesCnt count, char *b) {
 					if (index4 == ClusterSize / 4) index2++;
 					if (index2 == ClusterSize / 4) index3++;
 					KernelFS::bitVector[i] = 1;
+					break;
 				}
 			}
 	char buf[2048];
@@ -43,13 +44,13 @@ char KernelFile::write(BytesCnt count, char *b) {
 	buf[position++ % 2048] = b[0];
 	if (position % 2048 == 0) index4++;
 	partition->writeCluster(current, buf);
+	size++;
 
 	return '0';
 }
 
 BytesCnt KernelFile::read(BytesCnt count, char *buffer) {
-	if (position == endOfFile && mode != 'r') return 0;
-
+	if (position == size && mode != 'r') return 0;
 
 
 
@@ -67,14 +68,13 @@ BytesCnt KernelFile::filePos() {
 }
 
 char KernelFile::eof() {
-	if (position == endOfFile)
+	if (position == size)
 		return '1';
 	return '0';
 }
 
 BytesCnt KernelFile::getFileSize() {
-
-	return 0;
+	return size;
 }
 
 char KernelFile::truncate() {

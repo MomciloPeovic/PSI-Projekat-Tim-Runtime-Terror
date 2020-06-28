@@ -20,7 +20,7 @@ public:
 	char truncate();
 
 	BytesCnt position;
-	BytesCnt endOfFile;
+	BytesCnt size;
 
 	//atributes
 	char buff[32];
@@ -34,7 +34,6 @@ public:
 	unsigned long index4;
 	ClusterNo firstIndex;
 	ClusterNo current;
-	ClusterNo numOfClusters;
 	Cluster *clusters;
 
 	friend class FS;

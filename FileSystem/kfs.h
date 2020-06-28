@@ -29,6 +29,8 @@ public:  ~KernelFS();
 		 //Indexing
 		 static ClusterNo dir;
 		 static Directory *directory;
+		 static KernelFile **files;
+		 static int top;
 
 		 //BitVector
 		 static int *bitVector;
