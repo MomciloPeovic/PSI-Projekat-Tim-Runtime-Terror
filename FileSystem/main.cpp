@@ -35,7 +35,7 @@ int main(){
 	nit1=CreateThread(NULL, 0,(LPTHREAD_START_ROUTINE) nit1run,NULL,0,&ThreadID); //kreira i startuje niti
 	//nit2=CreateThread(NULL, 0,(LPTHREAD_START_ROUTINE) nit2run,NULL,0,&ThreadID);
 
-	for(int i=0; i<2; i++) wait(semMain);//cekamo da se niti zavrse
+	for(int i=0; i<1; i++) wait(semMain);//cekamo da se niti zavrse, promeni na 2, kad ubacis nit2
 	delete [] ulazBuffer;
 	endTime=clock();
 	cout<<"Kraj test primera!"<<endl;

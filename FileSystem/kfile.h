@@ -23,7 +23,6 @@ public:
 	BytesCnt size;
 
 	//atributes
-	char buff[32];
 	char buffer[2 * 1024 * 1024];
 	char mode;
 

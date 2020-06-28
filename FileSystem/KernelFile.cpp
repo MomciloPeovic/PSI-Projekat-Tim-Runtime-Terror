@@ -25,7 +25,6 @@ char KernelFile::write(BytesCnt count, char *b) {
 					if (clusters[index1].level == 0) clusters[index1].level = 1;
 
 					clusters[index1].index[index3] = i;
-					if (index3 == ClusterSize / 4) index1++;
 					KernelFS::bitVector[i] = 1;
 				}
 				else {
@@ -33,17 +32,20 @@ char KernelFile::write(BytesCnt count, char *b) {
 
 					clusters[index2].index[index4] = i;
 					current = i;
-					if (index4 == ClusterSize / 4) index2++;
-					if (index2 == ClusterSize / 4) index3++;
 					KernelFS::bitVector[i] = 1;
 					break;
 				}
 			}
+
 	char buf[2048];
 	partition->readCluster(current, buf);
 	buf[position++ % 2048] = b[0];
 	if (position % 2048 == 0) index4++;
 	partition->writeCluster(current, buf);
+	if (index4 == ClusterSize / 4) {
+		index2++;
+		index4 = 0;
+	}
 	size++;
 
 	return '0';
@@ -51,16 +53,36 @@ char KernelFile::write(BytesCnt count, char *b) {
 
 BytesCnt KernelFile::read(BytesCnt count, char *buffer) {
 	if (position == size && mode != 'r') return 0;
+	
+	ClusterNo current2 = clusters[index1].index[index3];
+	current = clusters[index2].index[index4];
 
+	char buff[2048];
+	partition->readCluster(current, buff);
+	buffer[0] = buff[position++ % 2048];
+	if (position % 2048 == 0) index4++;
+	if (index4 == ClusterSize / 4) {
+		index2++;
+		index4 = 0;
+	}
 
-
-	return 0;
+	return count;
 }
 
-
 char KernelFile::seek(BytesCnt seek) {
+	index1 = index3 = index4 = 0;
+	index2 = 1;
 
-	return '0';
+	ClusterNo current2 = clusters[index1].index[index3];
+	current = clusters[index2].index[index4];
+	while (position < seek) {
+		if (position++ % 2048 == 0) index4++;
+		if (index4 == ClusterSize / 4) {
+			index2++;
+			index4 = 0;
+		}
+	}
+	return 0;
 }
 
 BytesCnt KernelFile::filePos() {

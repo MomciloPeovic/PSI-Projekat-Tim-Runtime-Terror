@@ -25,8 +25,6 @@ DWORD WINAPI nit1run(){
 		char filepath[]="/fajl1.dat";
 		File *f = FS::open(filepath, 'a');
 		char *buff = new char[2048];
-		partition->readCluster(3, buff);
-		cout << buff << "\n";
 		wait(mutex); cout<< threadName << ": Kreiran fajl '"<< filepath <<"'"<<endl; signal(mutex);
 		for (int i = 0; i < ulazSize; i++) {
 			f->write(ulazSize, &ulazBuffer[i]);
@@ -35,8 +33,23 @@ DWORD WINAPI nit1run(){
 		delete f;
 		wait(mutex); cout<< threadName << ": zatvoren fajl '" << filepath << "'"<<endl; signal(mutex);
 	}	
-	char filepath2[] = "/fajl1.dat";
-	File *f2 = FS::open(filepath2, 'r');
+
+	{
+		char filepath[] = "/fajl1.dat";
+		File *f = FS::open(filepath, 'r');
+		wait(mutex); cout << threadName << ": Otvoren fajl " << filepath << "" << endl; signal(mutex);
+		ofstream fout("izlaz1.dat", ios::out | ios::binary);
+		char *buff = new char[f->getFileSize()];
+		for (unsigned int i = 0; i < f->getFileSize(); i++) {
+			f->read(f->getFileSize(), &buff[i]);
+		}
+		fout.write(buff, f->getFileSize());
+		wait(mutex); cout << threadName << ": Upisan '" << filepath << "' u fajl os domacina 'izlaz1.dat'" << endl; signal(mutex);
+		delete[] buff;
+		fout.close();
+		delete f;
+		wait(mutex); cout << threadName << ": Zatvoren fajl " << filepath << "" << endl; signal(mutex);
+	}
 	/*
 	{
 		char filepath[]="/fajl1.dat";

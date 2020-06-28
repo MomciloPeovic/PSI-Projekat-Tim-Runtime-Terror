@@ -121,7 +121,7 @@ File *KernelFS::open(char *fname, char mode) {
 
 		char buffer[2048];
 		partition->readCluster(cluster, buffer);
-		for (int i = 0; i < 32; i++) buffer[seek++] = file->myImpl->buff[i] = buff[i];
+		for (int i = 0; i < 32; i++) buffer[seek++] = buff[i];
 		partition->writeCluster(cluster, buffer);
 
 		file->myImpl->mode = 'w';
@@ -160,9 +160,12 @@ File *KernelFS::open(char *fname, char mode) {
 				break;
 			}
 		}
-		//for (int i = 0; i < 32; i++) file->myImpl->buff[i] = buff[i];
 		file ->myImpl->mode = 'r';
 		file->myImpl->position = 0;
+		file->myImpl->index1 = 0;
+		file->myImpl->index2 = 1;
+		file->myImpl->index3 = 0;
+		file->myImpl->index4 = 0;
 
 		return file;
 	}
@@ -198,7 +201,6 @@ File *KernelFS::open(char *fname, char mode) {
 			}
 		}
 
-		//for (int i = 0; i < 32; i++) file->myImpl->buff[i] = buff[i];
 		file->myImpl->mode = 'a';
 
 		return file;
